@@ -1,0 +1,90 @@
+.main {
+  min-height: 100vh;
+}
+.register {
+  width: 100%;
+  height: 100vh;
+  background-image: url('/images/background2.jpeg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+}
+.register form {
+  width: 380px;
+  max-width: 90%;
+  height: fit-content;
+  padding: 20px;
+  background-color: white;
+  margin-top: 70px;
+  border-radius: 13px;
+}
+.header {
+  width: 100%;
+  margin-top: -40px;
+  margin-left: auto;
+  margin-right: auto;
+  height: 130px;
+  border-radius: 13px;
+  padding: 20px 30px;
+  color: white;
+  margin-bottom: 40px;
+  background: linear-gradient(90deg,#007bff,#0052ea);
+}
+.header h2, .header h4 {
+  text-align: center;
+  margin: 13px;
+}
+.formGroup {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  flex-flow: row wrap;
+  margin:25px auto;
+  font-size: 12px;
+}
+.formGroup> div:nth-child(1) {
+  width: 12%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background: linear-gradient(90deg,#007bff,#0052ea);
+}
+.formGroup> div:nth-child(2) {
+  width: 88%;
+  height: 100%;
+  margin-left: 0;
+}
+.formGroup> div:nth-child(1) i {
+  color: white;
+}
+.formGroup input {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  outline: none;
+  padding: 14px 15px;
+  font-size: 15px;
+  border: none;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.404);
+}
+.formGroup{
+  color: #8c8e90;
+  
+}
+.formGroup span {
+  color: #0052ea;
+}
+.formGroup button {
+  background: linear-gradient(90deg,#007bff,#0052ea);
+  height: 40px;
+  color: white;
+  border: none;
+  outline: none;
+  width: 100%;
+}
+
+@media screen and (max-width: 550px) {
+
+}
