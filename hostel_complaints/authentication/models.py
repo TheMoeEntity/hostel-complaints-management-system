@@ -26,7 +26,7 @@ class CustomUser(AbstractUser):
     is_student = models.BooleanField(default=False)
     is_porter = models.BooleanField(default=False)
     
-    USERNAME_FIELD = "matric_number"
+    USERNAME_FIELD = 'matric_number' 
     REQUIRED_FIELDS = ["first_name", "last_name", "hostel"]
     
     objects = CustomUserManager()
@@ -37,6 +37,8 @@ class CustomUser(AbstractUser):
 
 class StudentUser(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, primary_key=True)
+    room_no = models.CharField(max_length=5, null=True)
+    block_no = models.CharField(max_length=5, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):

@@ -35,11 +35,15 @@ class ChangePasswordSerializer(serializers.Serializer):
 
 class StudentTokenObtainPairSerializer(TokenObtainPairSerializer):
     
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['matric_number'] = serializers.CharField(required=True)
+        self.fields['password'] = PasswordField(trim_whitespace=False)
+        CustomUser.USERNAME_FIELD = "matric_number"
+        self.username_field = 'matric_number'
+        
     def validate(self, attrs):
         data = super().validate(attrs)
-        self.fields["matric_number"] = serializers.CharField(required=True)
-        self.username_field = "matric_number"
-        self.fields["password"] = PasswordField(trim_whitespace=False)
         
         data.update(
             {
@@ -54,18 +58,31 @@ class StudentTokenObtainPairSerializer(TokenObtainPairSerializer):
                 "is_staff": self.user.is_staff,
             }
         )
+        print(CustomUser.USERNAME_FIELD)
         return data
     
+    
+
+class CustomJWTSerializer(TokenObtainPairSerializer):
+    
+    def validate(self, attrs):
+        credentials = {
+            'username': '',
+            'password': attrs.get('password')
+        }
+        user_obj = CustomUser
+    
+    
+    
 class PorterTokenObtainPairSerializer(TokenObtainPairSerializer):   
-    CustomUser.USERNAME_FIELD = "email"
-    username_field = 'email'
-    auth_fields = ['email']
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['email'] = serializers.CharField(required=True)
         self.fields['password'] = PasswordField(trim_whitespace=False)
-
+        CustomUser.USERNAME_FIELD = "email"
+        self.username_field = 'email'
+    
     
     def validate(self, attrs):
         data = super().validate(attrs)
@@ -84,6 +101,7 @@ class PorterTokenObtainPairSerializer(TokenObtainPairSerializer):
                 "is_staff": self.user.is_staff,
             }
         )
+        print(CustomUser.USERNAME_FIELD)
         return data
         
 

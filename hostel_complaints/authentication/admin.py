@@ -1,9 +1,6 @@
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
 
 # Register your models here.
-
-from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import CustomUser, StudentUser, PorterUser
 
 @admin.register(CustomUser)

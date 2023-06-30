@@ -59,5 +59,6 @@ class ChangePasswordView(CreateAPIView):
 class StudentTokenObtainPairViewSet(TokenObtainPairView):
     serializer_class = StudentTokenObtainPairSerializer
     
+    
 class PorterTokenObtainPairViewSet(TokenObtainPairView):
     serializer_class = PorterTokenObtainPairSerializer
