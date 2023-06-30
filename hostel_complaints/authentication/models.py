@@ -21,11 +21,12 @@ class CustomUser(AbstractUser):
     email = models.EmailField(_('email address'), unique=True)
     first_name = models.CharField(max_length=50, null=True, blank=True) 
     last_name = models.CharField(max_length=50, null=True, blank=True)
+    matric_number = models.CharField(max_length=11, unique=True, null=True, blank=True)
     hostel = models.CharField(max_length=100, choices=HOSTELS, null=True, blank=True)
     is_student = models.BooleanField(default=False)
     is_porter = models.BooleanField(default=False)
     
-    USERNAME_FIELD = "email"
+    USERNAME_FIELD = "matric_number"
     REQUIRED_FIELDS = ["first_name", "last_name", "hostel"]
     
     objects = CustomUserManager()
@@ -36,7 +37,6 @@ class CustomUser(AbstractUser):
 
 class StudentUser(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, primary_key=True)
-    matric_number = models.CharField(max_length=10, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
