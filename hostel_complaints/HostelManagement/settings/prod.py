@@ -4,7 +4,7 @@ import dj_database_url
 DEBUG = True
 
 
-ALLOWED_HOSTS = ["eventmanagement-y16a.onrender.com"]
+ALLOWED_HOSTS = [""]
 
 
 # Render PostgreSQL live database
