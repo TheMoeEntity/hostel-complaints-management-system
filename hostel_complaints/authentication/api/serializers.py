@@ -1,15 +1,18 @@
 from ..models import *
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import PasswordField, TokenObtainPairSerializer
-from django.contrib.auth import authenticate
 
 
 class AccountSerializer(serializers.ModelSerializer):
     password2 = serializers.CharField(style={"input_type": "password"}, write_only=True)
+    hostel_name = serializers.SerializerMethodField()
+    
+    def get_hostel_name(self, obj):
+        return obj.hostel.name
     
     class Meta:
         model = CustomUser 
-        fields = ["id", "first_name", "last_name", "matric_number", "email", "hostel", "password", "password2"]
+        fields = ["id", "first_name", "last_name", "matric_number", "email", "hostel", "gender", "hostel_name", "password", "password2"]
         extra_kwargs = {
             "password": {"write_only": True}
         }
@@ -44,7 +47,6 @@ class StudentTokenObtainPairSerializer(TokenObtainPairSerializer):
         
     def validate(self, attrs):
         data = super().validate(attrs)
-        
         data.update(
             {
                 "id": self.user.id,
@@ -52,26 +54,14 @@ class StudentTokenObtainPairSerializer(TokenObtainPairSerializer):
                 "matric_number": self.user.matric_number,
                 "first_name": self.user.first_name,
                 "last_name": self.user.last_name,
+                "hostel": self.user.hostel.name,
                 "is_student": self.user.is_student,
                 "is_porter": self.user.is_porter,
                 "is_superuser": self.user.is_superuser,
                 "is_staff": self.user.is_staff,
             }
         )
-        print(CustomUser.USERNAME_FIELD)
         return data
-    
-    
-
-class CustomJWTSerializer(TokenObtainPairSerializer):
-    
-    def validate(self, attrs):
-        credentials = {
-            'username': '',
-            'password': attrs.get('password')
-        }
-        user_obj = CustomUser
-    
     
     
 class PorterTokenObtainPairSerializer(TokenObtainPairSerializer):   
@@ -95,13 +85,28 @@ class PorterTokenObtainPairSerializer(TokenObtainPairSerializer):
                 "matric_number": self.user.matric_number,
                 "first_name": self.user.first_name,
                 "last_name": self.user.last_name,
+                "hostel": self.user.hostel.name,
                 "is_student": self.user.is_student,
                 "is_porter": self.user.is_porter,
                 "is_superuser": self.user.is_superuser,
                 "is_staff": self.user.is_staff,
             }
         )
-        print(CustomUser.USERNAME_FIELD)
         return data
+        
+
+class StudentSerializer(serializers.ModelSerializer):
+    
+    
+    class Meta:
+        model = StudentUser
+        fields = "__all__"
+        
+class PorterSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = PorterUser
+        fields = "__all__"
+        
         
 

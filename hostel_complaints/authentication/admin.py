@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import CustomUser, StudentUser, PorterUser
+from .models import CustomUser, StudentUser, PorterUser, Hostel
 
 @admin.register(CustomUser)
 class CustomUserAdmin(admin.ModelAdmin):
@@ -17,6 +17,10 @@ class StudentUserAdmin(admin.ModelAdmin):
 @admin.register(PorterUser)
 class PorterUserAdmin(admin.ModelAdmin):
     pass
+
+@admin.register(Hostel)
+class HostelAdmin(admin.ModelAdmin):
+    list_display = ["name", "no_of_rooms", "gender"]
 
 
 

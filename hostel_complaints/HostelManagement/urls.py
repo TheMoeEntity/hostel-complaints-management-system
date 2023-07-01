@@ -21,9 +21,9 @@ from drf_yasg import openapi
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="Event Ticketing System",
+        title="Hostek Complaint Management System",
         default_version="v1",
-        description="An event ticketing system for event sellouts",
+        description="A hostel complaint management system for event crawford university final year project",
         terms_of_service="www.kerryonyeogoportfolio.netlify.app",
         contact=openapi.Contact(email="kerryonyeogo@gmail.com", name="Onyeogo Kerry"),
         license=openapi.License(name="Onyeogo Kerry")

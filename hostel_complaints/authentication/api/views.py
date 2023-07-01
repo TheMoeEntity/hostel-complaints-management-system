@@ -1,8 +1,9 @@
-from rest_framework.generics import CreateAPIView
+from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework import status 
 from django.contrib.auth.hashers import make_password
+
 
 
 from django.contrib.auth import get_user_model
@@ -10,10 +11,15 @@ from ..models import *
 from .serializers import AccountSerializer, ChangePasswordSerializer
 from dashboard.api.renderers import CustomRenderer
 from rest_framework_simplejwt.views import TokenObtainPairView
-from .serializers import StudentTokenObtainPairSerializer, PorterTokenObtainPairSerializer
+from .serializers import (
+StudentTokenObtainPairSerializer, 
+PorterTokenObtainPairSerializer,
+StudentSerializer,
+PorterSerializer
+)
 
 
-class AccountCreateView(CreateAPIView):
+class AccountCreateView(generics.CreateAPIView):
     '''
         API endpoint for creating an account 
     '''
@@ -36,7 +42,7 @@ class AccountCreateView(CreateAPIView):
         
             
 
-class ChangePasswordView(CreateAPIView):
+class ChangePasswordView(generics.CreateAPIView):
     queryset = get_user_model().objects.all()
     serializer_class = ChangePasswordSerializer
     permission_classes = [IsAuthenticated]
@@ -54,8 +60,8 @@ class ChangePasswordView(CreateAPIView):
         request.user.save()
         
         return Response({"message": "Password changed successfully"}, status=status.HTTP_200_OK)
+    
 
-            
 class StudentTokenObtainPairViewSet(TokenObtainPairView):
     serializer_class = StudentTokenObtainPairSerializer
     
