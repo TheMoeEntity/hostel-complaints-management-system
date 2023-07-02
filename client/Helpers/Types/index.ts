@@ -23,36 +23,36 @@ export const assets: { icon: string; title: string }[] = [
   },
   {
     icon: "fa-solid fa-user",
-    title: "Teacher",
+    title: "Complaints",
   },
   {
     icon: "fa-solid fa-person",
     title: "Porters",
   },
-  {
-    icon: "fa-solid fa-chart-simple",
-    title: "Chart",
-  },
-  {
-    icon: "fas fa-graduation-cap",
-    title: "Student",
-  },
-  {
-    icon: "fa-solid fa-user",
-    title: "Teacher",
-  },
-  {
-    icon: "fa-solid fa-user",
-    title: "Food",
-  },
-  {
-    icon: "fa fa-house",
-    title: "Apps",
-  },
-  {
-    icon: "fa fa-house",
-    title: "Chart",
-  },
+  // {
+  //   icon: "fa-solid fa-chart-simple",
+  //   title: "Chart",
+  // },
+  // {
+  //   icon: "fas fa-graduation-cap",
+  //   title: "Student",
+  // },
+  // {
+  //   icon: "fa-solid fa-user",
+  //   title: "Teacher",
+  // },
+  // {
+  //   icon: "fa-solid fa-user",
+  //   title: "Food",
+  // },
+  // {
+  //   icon: "fa fa-house",
+  //   title: "Apps",
+  // },
+  // {
+  //   icon: "fa fa-house",
+  //   title: "Chart",
+  // },
 ];
 export class Helpers {
   static async getHostels(url:string) {
