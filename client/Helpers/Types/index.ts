@@ -26,10 +26,6 @@ export const assets: { icon: string; title: string }[] = [
     title: "Teacher",
   },
   {
-    icon: "fa-solid fa-school",
-    title: "Classes",
-  },
-  {
     icon: "fa-solid fa-person",
     title: "Porters",
   },
