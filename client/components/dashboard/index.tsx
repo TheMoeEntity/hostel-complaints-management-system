@@ -64,7 +64,7 @@ const Dashboard = () => {
               </h3>
             </div>
             <div className={styles.currentNotice}>
-              <div>There's no light anywhere dawg [23rd May, 2023, 08:30pm].</div>
+              <div>{`There's`} no light anywhere dawg [23rd May, 2023, 08:30pm].</div>
               <div>Kerry keeps stealing my provisons [23rd May, 2023, 08:30pm].</div>
               <div>Moses carries olosho too much [23rd May, 2023, 08:30pm].</div>
             </div>
