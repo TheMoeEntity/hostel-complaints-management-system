@@ -1,13 +1,16 @@
 .main {
-  min-height: 100vh;
+  overflow: scroll;
+  max-height: auto;
+  height: auto;
 }
 .register {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background-image: url('/images/background2.jpeg');
   background-size: cover;
   background-position: center;
   display: flex;
+  background-repeat: no-repeat;
   justify-content: center;
 }
 .register form {
@@ -18,6 +21,7 @@
   background-color: white;
   margin-top: 70px;
   border-radius: 13px;
+  margin-bottom: 50px;
 }
 .header {
   width: 100%;
@@ -42,6 +46,7 @@
   flex-flow: row wrap;
   margin:25px auto;
   font-size: 12px;
+  align-items: center;
 }
 .formGroup> div:nth-child(1) {
   width: 12%;
@@ -73,8 +78,10 @@
   color: #8c8e90;
   
 }
+
 .formGroup span {
   color: #0052ea;
+  cursor: pointer;
 }
 .formGroup button {
   background: linear-gradient(90deg,#007bff,#0052ea);

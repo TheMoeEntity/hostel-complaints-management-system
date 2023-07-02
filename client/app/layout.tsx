@@ -21,7 +21,7 @@ export default function RootLayout({
         <Script
           src="https://kit.fontawesome.com/4ef8c63dd7.js"
           crossOrigin="anonymous"
-        ></Script>
+        />
       </body>
     </html>
   );
