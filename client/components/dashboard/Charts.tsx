@@ -1,8 +1,10 @@
 "use client";
 import { useState } from "react";
-import Chart from "react-apexcharts";
+import dynamic from 'next/dynamic';
+const Chart = dynamic(() => import('react-apexcharts'), { ssr: false });
 
-const Charts = (props:{types:string}) => {
+
+const Charts = () => {
   const [data, setData] = useState({
     options: {
       chart: {
@@ -35,4 +37,4 @@ const Charts = (props:{types:string}) => {
   );
 };
 
-export { Charts };
+export default Charts;

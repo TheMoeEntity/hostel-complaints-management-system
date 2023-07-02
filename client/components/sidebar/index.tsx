@@ -3,6 +3,7 @@ import { assets } from "@/Helpers/Types";
 import { Profile } from "../dashboard/Profile";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 const Sidebar = () => {
   const [profileOpen, setProfileOpen] = useState<boolean>(false);
@@ -11,7 +12,9 @@ const Sidebar = () => {
   return (
     <div>
       <div className={styles.sidebar}>
-        <h2>Crawford Uni</h2>
+        <Link href={"/"}>
+          <h2>Crawford Uni</h2>
+        </Link>
         <ul>
           {assets.map((x, i) => (
             <li className={styles.dash} key={i}>
@@ -31,13 +34,14 @@ const Sidebar = () => {
       <div className={styles.titlebar}>
         <div>
           <h2>
-            {
-             pathname === '/account' ? 'Edit Profile ':'Dashboard ' 
-            }
-            {
-             pathname === '/account' ? (<i className="fa-solid fa-pen"></i>):(<i className="fa-solid fa-gauge"></i>) 
-            }
-           
+            {pathname === "/account" ? "Edit Profile " : "Biobaku Hall "}
+            {pathname === "/account" ? (
+              <i className="fa-solid fa-pen"></i>
+            ) : (
+              <span>
+                &#160;&#160;<i className="fa-solid fa-building"></i>
+              </span>
+            )}
           </h2>
         </div>
         <div style={{ position: "relative" }}>

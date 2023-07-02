@@ -23,6 +23,8 @@ const Account = () => {
           </div>
           <div>
             <span>Moses Nwigberi</span>
+            <span>Lerryonyeogo@gmail.com</span>
+            <span>180401007</span>
             <strong>BIOBAKU HALL</strong>
           </div>
           <ul>
@@ -31,12 +33,20 @@ const Account = () => {
               <span>43</span>
             </li>
             <li>
-              <span>Messages</span>
+              <span>Complaints (resolved)</span>
               <span>10</span>
             </li>
             <li>
-              <span>Responses</span>
-              <span>4</span>
+              <span>Complaints (unresolved)</span>
+              <span>6</span>
+            </li>
+            <li>
+              <span>Block</span>
+              <span>Block C</span>
+            </li>
+            <li>
+              <span>Room number</span>
+              <span>B312</span>
             </li>
           </ul>
         </div>
@@ -71,8 +81,8 @@ const Account = () => {
                 <input type="tel" name="" id="" />
               </div>
               <div className={styles.formGroup}>
-                <label htmlFor="">Surname</label>
-                <input type="text" name="" id="" />
+                <label htmlFor="">Matric number</label>
+                <input defaultValue={'18040117'} type="text" name="" id="" />
               </div>
             </div>
             <div>

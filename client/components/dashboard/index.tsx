@@ -1,50 +1,12 @@
-'use client'
+"use client";
 import styles from "../index.module.css";
 import CalendarComponent from "./Calendar";
-import { Charts } from "./Charts";
-import { Profile } from "./Profile";
-import { useState } from "react";
+import Charts from "./Charts";
 
 const Dashboard = () => {
-  const [profileOpen, setProfileOpen] = useState<boolean>(false);
   return (
     <div className={styles.dashboard}>
       <div className={styles.main}>
-        {/* <div className={styles.titlebar}>
-          <div>
-            <h2>
-              Dashboard <i className="fa-solid fa-gauge"></i>
-            </h2>
-          </div>
-          <div style={{ position: "relative" }}>
-            <Profile
-              profileOpen={profileOpen}
-              forceClose={() => setProfileOpen(false)}
-            />
-            <div>
-              <i className="fa-solid fa-magnifying-glass"></i>
-            </div>
-            <div>
-              <i className="fa-regular fa-moon"></i>
-            </div>
-            <div>
-              <i className="fa-regular fa-bell"></i>
-            </div>
-            <div>
-              <i className="fa-regular fa-message"></i>
-            </div>
-            <div>
-              <i className="fa-solid fa-gear"></i>
-            </div>
-            <div>
-              <i className="fa-regular fa-image"></i>
-            </div>
-            <div onClick={()=> setProfileOpen(!profileOpen)}>
-              <i className="fas fa-user"></i>
-            </div>
-          </div>
-        </div> */}
-
         <div className={styles.bar}>
           <div className={styles.first}>
             <div>
@@ -57,28 +19,28 @@ const Dashboard = () => {
           </div>
           <div className={styles.second}>
             <div>
-              <i className="fa-solid fa-house"></i>
+              <i className="fa-solid fa-building"></i>
             </div>
             <div>
-              <div>Hostels</div>
+              <div>Rooms</div>
               <strong>235</strong>
             </div>
           </div>
           <div className={styles.third}>
             <div>
-              <i className="fa-solid fa-user"></i>
+              <i className="fa-solid fa-person"></i>
             </div>
             <div>
-              <div>Events</div>
-              <strong>235</strong>
+              <div>Porters</div>
+              <strong>29</strong>
             </div>
           </div>
           <div className={styles.fourth}>
             <div>
-              <i className="fa-solid fa-user"></i>
+              <i className="fa-solid fa-person-harassing"></i>
             </div>
             <div>
-              <div>students</div>
+              <div>Complaints</div>
               <strong>235</strong>
             </div>
           </div>
@@ -90,27 +52,27 @@ const Dashboard = () => {
             <CalendarComponent />
           </div>
           <div>
-            <Charts types="bar" />
+            <Charts />
           </div>
         </div>
         <div className={styles.notice}>
           <div>
             <div className={styles.noticeHeader}>
               <h3>
-                <i className="fa-solid fa-calendar"></i> Notice Board
+                <i className="fa-solid fa-person-harassing"></i>&#160; Top
+                Complaints
               </h3>
             </div>
             <div className={styles.currentNotice}>
-              <div>GEG 322 Operational Anal. [23rd May, 2023, 08:30pm].</div>
-              <div>Testing [23rd May, 2023, 08:30pm].</div>
-              <div>Testing [23rd May, 2023, 08:30pm].</div>
+              <div>There's no light anywhere dawg [23rd May, 2023, 08:30pm].</div>
+              <div>Kerry keeps stealing my provisons [23rd May, 2023, 08:30pm].</div>
+              <div>Moses carries olosho too much [23rd May, 2023, 08:30pm].</div>
             </div>
             <div className={styles.noticeHeader}>
               <h3>
-                <i className="fa-solid fa-warning"></i> &#160;&#160;&#160;Meet
-                the deadline
+                <i className="fa-solid fa-building"></i> &#160;&#160;&#160;Biobaku
               </h3>
-              <h3>View all</h3>
+              <h3 style={{color: '#33A0FC'}}>View all complaints</h3>
             </div>
           </div>
           <div>
@@ -126,4 +88,4 @@ const Dashboard = () => {
   );
 };
 
-export { Dashboard };
+export default Dashboard;

@@ -39,23 +39,11 @@ const Profile = (props:{profileOpen:boolean, forceClose:() => void}) => {
             </Link>
           </li>
           <li>
-            <Link href={`/account?link=order`}>
-              <div>
-                <i className="fas fa-envelope"></i> Messages
-              </div>
-            </Link>
-          </li>
-          <li>
             <Link href={`/account?link=wishlist`}>
               <div>
                 <i className="fas fa-pen"></i> Lodge Complaint
               </div>
             </Link>
-          </li>
-          <li>
-            <div>
-              <i className="fa-solid fa-chart-simple"></i> Charts
-            </div>
           </li>
         </ul>
       </div>
@@ -68,7 +56,7 @@ const Profile = (props:{profileOpen:boolean, forceClose:() => void}) => {
           </li>
           <li>
             <div>
-              <i className="fa-solid fa-gear"></i>Settings
+              <i className="fa-solid fa-person-harassing"></i>Complaints
             </div>
           </li>
 

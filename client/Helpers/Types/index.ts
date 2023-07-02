@@ -30,8 +30,8 @@ export const assets: { icon: string; title: string }[] = [
     title: "Classes",
   },
   {
-    icon: "fa-solid fa-book",
-    title: "Subjects",
+    icon: "fa-solid fa-person",
+    title: "Porters",
   },
   {
     icon: "fa-solid fa-chart-simple",
