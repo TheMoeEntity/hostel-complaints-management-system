@@ -13,8 +13,9 @@ const Sidebar = () => {
     <div>
       <div className={styles.sidebar}>
         <Link href={"/"}>
-          <h2>Crawford Uni</h2>
+          <h2>Crawford University</h2>
         </Link>
+        <h4>hostel management</h4>
         <ul>
           {assets.map((x, i) => (
             <li className={styles.dash} key={i}>

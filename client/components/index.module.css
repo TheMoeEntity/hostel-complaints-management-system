@@ -25,10 +25,16 @@
   color: white;
   margin: 0;
   padding: 0;
+  font-size: 19px;
+}
+.sidebar h4 {
+  text-align: center;
+  font-weight: 200;
+  margin-top: 20px;
 }
 .sidebar ul {
   width: 70%;
-  margin: 70px auto;
+  margin: 100px auto;
 }
 .sidebar ul li {
   list-style-type: none;

@@ -59,7 +59,7 @@ const Dashboard = () => {
           <div>
             <div className={styles.noticeHeader}>
               <h3>
-                <i className="fa-solid fa-person-harassing"></i>&#160; Top
+                <i className="fa-solid fa-person-harassing"></i>&#160; Latest
                 Complaints
               </h3>
             </div>
