@@ -13,7 +13,7 @@
   -ms-overflow-style: none;  /* Internet Explorer 10+ */
   scrollbar-width: none;
 }
-.sidebar::-webkit-scrollbar { 
+.sidebar::-webkit-scrollbar,.profileModal::-webkit-scrollbar  { 
   display: none;  /* Safari and Chrome */
 }
 .sidebarcontent::-webkit-scrollbar { 
@@ -62,21 +62,30 @@
   height: auto;
   transition: 0.5s;
   margin-left: 20%;
+  margin-top: 80px;
   color: black;
   background-color: #e6ebee;
   padding: 10px 35px;
+  position: relative;
 }
 .main > div {
   width: 100%;
 }
 .titlebar {
-  width: 100%;
-  height: 60px;
+  width: 80%;
+  height: 80px;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
   color: black;
   align-items: center;
+  position: relative;
+  position: fixed;
+  margin-left: 20%;
+  z-index: 1000;
+  margin-bottom: 50px;
+  padding-left: 30px;
+  background-color: #e6ebee;
 }
 .titlebar h2 {
   color: #303973;
@@ -87,6 +96,7 @@
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
+  position: relative;
 }
 .titlebar > div:nth-child(2) > div {
   display: flex;
@@ -167,13 +177,253 @@
 }
 .calendar > div {
   height: fit-content;
-  padding-bottom: 30px;
-  width:40%;
   background-color: white;
   border-radius: 10px;
+  flex: 40%;
+  margin: 0 20px;
+}
+.calendar > div:nth-child(1) {
+  /* width:46%; */
+  margin-left: 0;
+  padding-bottom: 30px;
+}
+.calendar > div:nth-child(2) {
+  /* width:50%; */
+  margin-right: 0;
+  padding-bottom: 18px;
 }
 .calendar > div h3 {
   margin: 25px 20px;
   font-size: 17px;
   color: #303973;
+}
+
+.notice {
+  height:auto;
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+.notice > div {
+  height: fit-content;
+  background-color: white;
+  border-radius: 10px;
+  /* flex: 35%; */
+  /* margin: 0 40px; */
+}
+.notice > div:nth-child(1) {
+  margin-left: 0;
+  width: 40%;
+}
+.notice > div:nth-child(2) {
+  margin-right: 0;
+  width: 57%;
+  visibility: hidden;
+}
+.noticeHeader {
+  width: 100%;
+  background: linear-gradient(90deg, #303973, #20285c);
+  color: white;
+  padding: 15px 15px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+.noticeHeader h3 {
+  font-size: 16px;
+  font-weight: 300;
+}
+.currentNotice {
+  /* border: 1px solid #20285c; */
+  padding: 15px 15px;
+  display: flex;
+  flex-flow: column wrap;
+  /* align-items: center; */
+  justify-content: center;
+  font-size: small;
+}
+.currentNotice > div {
+  background-color: #33A0FC;
+  padding: 9px 15px;
+  color: #fff;
+  margin: 10px 0;
+  font-weight: 200;
+  border-radius: 5px;
+}
+.noticeBottom {
+
+}
+
+
+
+/* PROFILE  */
+.profileModal {
+  position: absolute;
+  width: 270px;
+  height: 380px;
+  background-color: white;
+  right: 0px;
+  color: #303973;
+  transition: 0.6s;
+  bottom: -390px;
+  z-index: 999;
+  box-shadow: 5px 9px 30px 0 rgb(0 0 0 / 20%);
+  border-radius: 25px;
+  overflow: scroll;
+  padding: 0;
+  margin: 0;
+  padding: 30px 25px;
+}
+.profileModal img {
+  object-fit: cover;
+  border-radius: 50%;
+}
+.userheader {
+  width: 100%;
+  min-height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: row wrap;
+  border-bottom: 1px solid #cccc;
+  padding-bottom: 20px;
+}
+.userheader > div:nth-child(1) {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    position: relative;
+}
+.userheader > div:nth-child(2) {
+  margin-left: 15px;
+  height: 100%;
+}
+.details {
+  height: 50px;
+  display: flex;
+  flex-flow: column;
+  font-weight: 200;
+  font-size: 16px;
+  justify-content: space-between;
+}
+.profileModal ul {
+  margin: 0 20px;
+  padding: 0;
+}
+.profileModal ul li {
+  list-style-type: none;
+  cursor: pointer;
+  margin:20px 0;
+}
+.profileModal ul li i {
+  margin-right: 15px;
+  color: #33A0FC;
+}
+.profileModal > div:nth-child(2) {
+  border-bottom: 1px solid #cccc;
+}
+
+
+
+/* -----------------EDIT PROFILE SECTION  ----------------------------*/
+.editProfile {
+  height: auto;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  margin-bottom: 100px;
+}
+.editProfile > div:nth-child(1) {
+  width: 21%;
+  height: 450px;
+  background-color: white;
+  border-radius: 10px;
+  padding:10px 0px;
+  color: #303973;
+}
+.editProfile > div:nth-child(1) ul {
+  width: 100%;
+  height: auto;
+  margin-top: 50px;
+}
+.editProfile > div:nth-child(1) ul li {
+  list-style: none;
+  width: 100%;
+  height: 50px;
+  border-top: 0.09px solid #30397329;
+  padding: 0px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-flow: row wrap;
+}
+.editProfile > div:nth-child(1) ul li span:nth-child(2) {
+  color: #A099AF;
+}
+.editProfile > div:nth-child(1) span, .editProfile > div:nth-child(1) strong {
+  display: block;
+  margin: 8px 0;
+  text-align: center;
+  color: #303973;
+}
+.editProfile > div:nth-child(1) > div {
+  margin: 20px auto;
+  font-size: small;
+}
+.editProfile > div:nth-child(2) {
+  width: 75%;
+  height: auto;
+  background-color: white;
+  border-radius: 10px;
+}
+.editProfile >div:nth-child(2) form {
+  padding: 30px 0;
+}
+.editProfile >div:nth-child(2) form > div{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  width: 100%;
+  height: auto;
+  margin: 10px 0;
+  padding: 10px 30px;
+}
+.setupHeader {
+  height: auto;
+  border-bottom: 0.09px solid #30397329;
+  padding: 0px 30px;
+  display: flex;
+  align-items: center;
+  padding: 20px 30px;
+}
+.setupHeader button {
+  background-color: #20285c;
+  color: white;
+  padding: 12px 15px;
+  border-radius: 9px;
+  border: none;
+}
+.setupHeader h3 {
+  color: #20285c;
+  font-weight: 500;
+}
+.formGroup {
+  width: 48%;
+  height: 70px;
+}
+.formGroup label {
+  color: #A099AF;
+  display: block;
+  margin-bottom: 10px;
+}
+.formGroup input {
+  width: 100%;
+  background: none;
+  border: 1px solid #DDDDDD;
+  color: #20285c;
+  padding: 15px 20px;
+  border-radius: 9px;
+  
 }

@@ -1,42 +1,31 @@
+'use client'
 import styles from "../index.module.css";
-import { assets } from "@/Helpers/Types";
-import Image from "next/image";
-import count1 from '../../public/images/user.jpeg'
 import CalendarComponent from "./Calendar";
-
+import { Charts } from "./Charts";
+import { Profile } from "./Profile";
+import { useState } from "react";
 
 const Dashboard = () => {
+  const [profileOpen, setProfileOpen] = useState<boolean>(false);
   return (
     <div className={styles.dashboard}>
-      <div className={styles.sidebar}>
-        <h2>Crawford Uni</h2>
-        <ul>
-          {assets.map((x, i) => (
-            <li className={styles.dash} key={i}>
-              <div>
-                <div>
-                  <i className={x.icon}></i>
-                  <div className={styles.tit}>{x.title}</div>
-                </div>
-                <div>
-                  <i className="fa fa-angle-right"></i>
-                </div>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
       <div className={styles.main}>
-        <div className={styles.titlebar}>
+        {/* <div className={styles.titlebar}>
           <div>
-            <h2>Dashboard</h2>
+            <h2>
+              Dashboard <i className="fa-solid fa-gauge"></i>
+            </h2>
           </div>
-          <div>
+          <div style={{ position: "relative" }}>
+            <Profile
+              profileOpen={profileOpen}
+              forceClose={() => setProfileOpen(false)}
+            />
             <div>
               <i className="fa-solid fa-magnifying-glass"></i>
             </div>
             <div>
-            <i className="fa-regular fa-moon"></i>
+              <i className="fa-regular fa-moon"></i>
             </div>
             <div>
               <i className="fa-regular fa-bell"></i>
@@ -50,49 +39,49 @@ const Dashboard = () => {
             <div>
               <i className="fa-regular fa-image"></i>
             </div>
-            <div>
-            <Image
-                src={count1}
-                alt="user-profile"
-                fill
-                quality={100}
-                priority={true}
-                style={{borderRadius:'6px', objectFit:"cover"}}
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              />
+            <div onClick={()=> setProfileOpen(!profileOpen)}>
+              <i className="fas fa-user"></i>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className={styles.bar}>
-            <div className={styles .first}>
-              <div><i className='fa-solid fa-user'></i></div>
-              <div>
-                <div>Students</div>
-                <strong>235</strong>
-              </div>
+          <div className={styles.first}>
+            <div>
+              <i className="fa-solid fa-user"></i>
             </div>
-            <div className={styles.second}>
-              <div><i className='fa-solid fa-house'></i></div>
-              <div>
-                <div>Hostels</div>
-                <strong>235</strong>
-              </div>
+            <div>
+              <div>Students</div>
+              <strong>235</strong>
             </div>
-            <div className={styles.third}>
-              <div><i className='fa-solid fa-user'></i></div>
-              <div>
-                <div>Events</div>
-                <strong>235</strong>
-              </div>
+          </div>
+          <div className={styles.second}>
+            <div>
+              <i className="fa-solid fa-house"></i>
             </div>
-            <div className={styles.fourth}>
-              <div><i className='fa-solid fa-user'></i></div>
-              <div>
-                <div>students</div>
-                <strong>235</strong>
-              </div>
+            <div>
+              <div>Hostels</div>
+              <strong>235</strong>
             </div>
+          </div>
+          <div className={styles.third}>
+            <div>
+              <i className="fa-solid fa-user"></i>
+            </div>
+            <div>
+              <div>Events</div>
+              <strong>235</strong>
+            </div>
+          </div>
+          <div className={styles.fourth}>
+            <div>
+              <i className="fa-solid fa-user"></i>
+            </div>
+            <div>
+              <div>students</div>
+              <strong>235</strong>
+            </div>
+          </div>
         </div>
 
         <div className={styles.calendar}>
@@ -100,7 +89,37 @@ const Dashboard = () => {
             <h3>School Calendar: </h3>
             <CalendarComponent />
           </div>
-          <div></div>
+          <div>
+            <Charts types="bar" />
+          </div>
+        </div>
+        <div className={styles.notice}>
+          <div>
+            <div className={styles.noticeHeader}>
+              <h3>
+                <i className="fa-solid fa-calendar"></i> Notice Board
+              </h3>
+            </div>
+            <div className={styles.currentNotice}>
+              <div>GEG 322 Operational Anal. [23rd May, 2023, 08:30pm].</div>
+              <div>Testing [23rd May, 2023, 08:30pm].</div>
+              <div>Testing [23rd May, 2023, 08:30pm].</div>
+            </div>
+            <div className={styles.noticeHeader}>
+              <h3>
+                <i className="fa-solid fa-warning"></i> &#160;&#160;&#160;Meet
+                the deadline
+              </h3>
+              <h3>View all</h3>
+            </div>
+          </div>
+          <div>
+            <div className={styles.noticeHeader}>
+              <h3>
+                <i className="fa-solid fa-warning"></i> Notice Board
+              </h3>
+            </div>
+          </div>
         </div>
       </div>
     </div>
