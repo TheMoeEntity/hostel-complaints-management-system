@@ -11,6 +11,7 @@ export async function POST(req: Request, res: Response) {
     password,
     password2,
     gender,
+    porter
   } = await req.json();
 
   const userDetails = JSON.stringify({
@@ -23,10 +24,11 @@ export async function POST(req: Request, res: Response) {
     password2,
     gender,
   });
-
+  const url:string  = porter === 'true' ? "https://hostelcomplaintsmanagementsystem.onrender.com/api/auth/porter-sign-up/":
+  "https://hostelcomplaintsmanagementsystem.onrender.com/api/auth/student-sign-up/"
   try {
     const apiRes = await fetch(
-      "https://hostelcomplaintsmanagementsystem.onrender.com/api/auth/sign-up/", {
+      url, {
         method:'POST',
         headers:{
           'Accept':'application/json',

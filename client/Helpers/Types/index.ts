@@ -79,4 +79,14 @@ export class Helpers {
 		})
     return hostels
   }
+  static showError(type:string) {
+    switch (type) {
+      case 'email':
+        
+        break;
+    
+      default:
+        break;
+    }
+  } 
 }

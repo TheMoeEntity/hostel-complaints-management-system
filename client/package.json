@@ -16,6 +16,7 @@
     "apexcharts": "^3.41.0",
     "axios": "^1.4.0",
     "chartjs": "^0.3.24",
+    "cookie": "^0.5.0",
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.7",
     "next": "13.4.7",
@@ -25,5 +26,8 @@
     "react-calendar": "^4.3.0",
     "react-dom": "18.2.0",
     "typescript": "5.1.5"
+  },
+  "devDependencies": {
+    "@types/cookie": "^0.5.1"
   }
 }
