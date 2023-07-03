@@ -39,7 +39,7 @@ export async function POST(req: Request, res: Response) {
     if (apiRes.status === 201|| apiRes.status === 200) {
       return NextResponse.json({ error: "All Done: "+data.success }, { status: 200 })
     } else {
-      return NextResponse.json({ error: "Error occured: " +apiRes.statusText }, { status: apiRes.status })
+      return NextResponse.json(JSON.stringify(data) , { status: apiRes.status })
     }
   } catch (error) {
     NextResponse.json({ error: "Something went wrong while creating user"+error }, { status: 500 })

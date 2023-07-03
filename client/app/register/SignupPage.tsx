@@ -25,8 +25,7 @@ const SignupPage = ({ hostels }: propType) => {
       gender:hostelGender,
       hostel:hostelID,
     }
-    console.log(userDetails)
-    fetch('./api/register/', {
+    await fetch('./api/register/', {
 			method: 'POST',
 			headers: {
 				'Accept': 'application/json, text/plain, */*',
@@ -39,15 +38,17 @@ const SignupPage = ({ hostels }: propType) => {
 			const data = isJson ? await res.json() : null
 	  
 			if (!res.ok) {
+        let stuff = data
+        const msg = JSON.parse(stuff)
 				
-			  const error = (data && data.message) || res.status;
-        enqueueSnackbar('There was an error registering user: ', {variant:'error'})
-        console.log(data)
+			  const error = (data && data.message) || res.statusText;
+        enqueueSnackbar('There was an error registering user: '+stuff, {variant:'error'})
+        console.log(msg.data)
 			  return Promise.reject(error)
 			
 			} else if (res.ok || res.status === 201 || res.status === 200) {
 				console.log('new user created successfully')
-        enqueueSnackbar('User successfully created', {variant:'success'})
+        enqueueSnackbar('User successfully created'+ res.statusText, {variant:'success'})
 
 			}
 		})
