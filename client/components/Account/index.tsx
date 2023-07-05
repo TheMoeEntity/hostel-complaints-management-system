@@ -7,7 +7,7 @@ const Account = () => {
   return (
     <div className={styles.main}>
       <div className={styles.editProfile}>
-        <div>
+        <div className={styles.firstDiv}>
           <div
             style={{ position: "relative", width: "120px", height: "120px" }}
           >

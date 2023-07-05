@@ -16,7 +16,7 @@ const StudentsPage = () => {
     <div className={styles.main}>
       <div className={styles.search}>
           <div><input type="search" placeholder="Search here..."/></div>
-          <div><button> + New Student</button></div>
+          <div><button>Student's list</button></div>
       </div>
       <table id="customers">
         <thead>

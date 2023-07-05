@@ -47,9 +47,9 @@ const Dashboard = () => {
         </div>
 
         <div className={styles.calendar}>
-          <div>
+          <div className={styles.calendarContainer}>
             <h3>School Calendar: </h3>
-            <CalendarComponent />
+            <CalendarComponent  />
           </div>
           <div>
             <Charts />

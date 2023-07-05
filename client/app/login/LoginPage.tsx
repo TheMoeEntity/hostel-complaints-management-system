@@ -94,7 +94,8 @@ const LoginPage = () => {
             variant: "success",
           });
           setTimeout(() => {
-            router.push('/')
+            let params = isPorter === true ? '/?porter=true' : '/'
+            router.push(params)
           }, 800);
         }
       })

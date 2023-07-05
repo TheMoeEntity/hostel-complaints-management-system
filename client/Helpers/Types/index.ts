@@ -12,22 +12,26 @@ export const options: string[] = [
   "SODEINDE HALL",
   "EL-KANEMI HALL"
 ];
-export const assets: { icon: string; title: string }[] = [
+export const assets: { icon: string; title: string, link?:string }[] = [
   {
     icon: "fa-solid fa-gauge",
     title: "Dashboard",
+    link:'/'
   },
   {
     icon: "fas fa-graduation-cap",
     title: "Students",
+    link:'/students'
   },
   {
     icon: "fa-solid fa-user",
     title: "Complaints",
+    link:'/complaints'
   },
   {
     icon: "fa-solid fa-person",
     title: "Porters",
+    link:'/porters'
   },
   // {
   //   icon: "fa-solid fa-chart-simple",

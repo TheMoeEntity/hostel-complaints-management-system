@@ -1,14 +1,35 @@
 import styles from "../index.module.css";
 import { assets } from "@/Helpers/Types";
 import { Profile } from "../dashboard/Profile";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 const Sidebar = () => {
-  const [profileOpen, setProfileOpen] = useState<boolean>(false);
-
+  const searchparams = useSearchParams()
   const pathname = usePathname();
+  const [profileOpen, setProfileOpen] = useState<boolean>(false);
+  const [isPorter, setPorter] = useState<boolean>(false)
+  const [filteredAssets, setFiltered] = useState<{title:string,icon:string}[]>(assets)
+
+  const checkPorter = ():{title:string,icon:string}[] => {
+
+    isPorter || pathname === '/porters' ? setFiltered(assets.filter(x => x.title !== 'Students')):setFiltered(assets.filter(x => x.title !== 'Porters'))
+
+    return filteredAssets
+  }
+  useEffect(() => {
+    const search = searchparams.get("porter");
+    if (search == "true") {
+      setPorter(true);
+    } else if (search === "false" || !search) {
+      setPorter(false);
+    }
+    checkPorter()
+  }, []);
+
+
   return (
     <div>
       <div className={styles.sidebar}>
@@ -17,7 +38,8 @@ const Sidebar = () => {
         </Link>
         <h4>hostel management</h4>
         <ul>
-          {assets.map((x, i) => (
+          {
+          filteredAssets.map((x, i) => (
             <li className={styles.dash} key={i}>
               <div>
                 <div>
