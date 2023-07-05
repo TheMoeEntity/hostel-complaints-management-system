@@ -16,7 +16,7 @@ const Profile = (props:{profileOpen:boolean, forceClose:() => void}) => {
           <Image
             src={count1}
             alt="user image"
-            layout="fill"
+            fill={true}
             quality={100}
             priority={true}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

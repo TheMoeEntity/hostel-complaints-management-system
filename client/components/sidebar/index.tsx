@@ -24,7 +24,7 @@ const Sidebar = () => {
                   <i className={x.icon}></i>
                   <div className={styles.tit}>{x.title}</div>
                 </div>
-                <div>
+                <div className={styles.tits}>
                   <i className="fa fa-angle-right"></i>
                 </div>
               </div>

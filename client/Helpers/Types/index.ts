@@ -19,7 +19,7 @@ export const assets: { icon: string; title: string }[] = [
   },
   {
     icon: "fas fa-graduation-cap",
-    title: "Student",
+    title: "Students",
   },
   {
     icon: "fa-solid fa-user",

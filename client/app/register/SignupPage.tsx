@@ -15,6 +15,7 @@ const SignupPage = ({ hostels }: propType) => {
   const [isPorter, setPorter] = useState<boolean>(false);
   const { enqueueSnackbar } = useSnackbar();
   const [status, setStatus] = useState("Register");
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const hostelID = hostels.find((x) => x.name === selectedOption)?.id;
@@ -95,7 +96,7 @@ const SignupPage = ({ hostels }: propType) => {
           return Promise.reject(error);
         } else if (res.ok || res.status === 201 || res.status === 200) {
           console.log("new user created successfully");
-          enqueueSnackbar("User successfully created, status code: " + res.statusText, {
+          enqueueSnackbar("User successfully created ", {
             variant: "success",
           });
         }
