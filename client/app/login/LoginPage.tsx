@@ -51,39 +51,6 @@ const LoginPage = () => {
           const msg = JSON.parse(stuff);
           // const responseMsg = msg;
           const error = (data && data.message) || res.statusText;
-          // for (const key in responseMsg) {
- 
-          //   setTimeout(() => {
-          //     switch (key) {
-          //       case "email":
-          //         enqueueSnackbar(responseMsg[key][0], {
-          //           variant: "error",
-          //         });
-          //         break;
-          //       case "matric_number":
-          //         enqueueSnackbar(
-          //           "Invalid field: " + key + ". " + responseMsg[key][0],
-          //           {
-          //             variant: "error",
-          //           }
-          //         );
-          //         break;
-          //         case "non_field_errors":
-          //           enqueueSnackbar(responseMsg[key][0], {
-          //             variant: "error",
-          //           });
-          //           break
-          //         case "detail":
-          //           enqueueSnackbar(responseMsg[key][0], {
-          //             variant: "error",
-          //           });
-          //           break;
-
-          //       default:
-          //         break;
-          //     }
-          //   }, 1300);
-          // }
           console.log(stuff);
           return Promise.reject(error);
         } else if (res.ok || res.status === 201 || res.status === 200) {

@@ -39,7 +39,7 @@ const Profile = (props:{profileOpen:boolean, forceClose:() => void}) => {
             </Link>
           </li>
           <li>
-            <Link href={`/account?link=wishlist`}>
+            <Link href={`/lodge-complaint`}>
               <div>
                 <i className="fas fa-pen"></i> Lodge Complaint
               </div>

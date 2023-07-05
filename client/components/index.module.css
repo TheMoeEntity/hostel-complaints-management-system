@@ -10,9 +10,11 @@
   color: white;
   overflow: scroll;
   background: linear-gradient(90deg, #4985ed, #538cef);
-  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
   scrollbar-width: none;
   z-index: 1000;
+  transition: 0.5s;
+  transform: none;
 }
 .main {
   width: 80%;
@@ -27,13 +29,12 @@
   /* overflow-x: scroll; */
 }
 
-
-
-.sidebar::-webkit-scrollbar,.profileModal::-webkit-scrollbar  { 
-  display: none;  /* Safari and Chrome */
+.sidebar::-webkit-scrollbar,
+.profileModal::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
 }
-.sidebarcontent::-webkit-scrollbar { 
-  display: none;  /* Safari and Chrome */
+.sidebarcontent::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
 }
 
 .sidebar h2 {
@@ -79,7 +80,6 @@
   height: 15px;
 }
 
-
 .main > div {
   width: 100%;
 }
@@ -101,6 +101,28 @@
 }
 .titlebar h2 {
   color: #303973;
+}
+.one {
+  position: relative;
+}
+.logo {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 20px;
+  left: 15px;
+  left:50%;
+  transform: translateX(-50%);
+  display: none;
+}
+/* .close {
+  position: absolute;
+  right: 0px;
+  top: 20px;
+} */
+.logo img {
+  border-radius: 50%;
 }
 .titlebar > div:nth-child(2) {
   width: fit-content;
@@ -124,8 +146,15 @@
   height: 45px;
   position: relative;
 }
+.sect {
+  position: absolute;
+  left: -15px;
+  z-index: 20;
+  top: -15px;
+  display: none;
+}
 .bar {
-  height:auto;
+  height: auto;
   background-color: white;
   border-radius: 10px;
   margin-top: 30px;
@@ -138,7 +167,7 @@
 .bar > div {
   width: fit-content;
   height: 80px;
-  margin:0px 17px;
+  margin: 0px 17px;
   display: flex;
   flex-flow: row wrap;
   align-items: center;
@@ -147,30 +176,30 @@
   margin-left: 0px;
 }
 .bar > div > div:nth-child(1) {
-    width: 55px;
-    height: 55px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 22px;
-    margin-right: 10px;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 22px;
+  margin-right: 10px;
 }
 .first > div:nth-child(1) {
   background: linear-gradient(90deg, #4985ed, #538cef);
 }
-.second > div:nth-child(1){
-  background: linear-gradient(90deg, #FB7E5B, #f48d71);
+.second > div:nth-child(1) {
+  background: linear-gradient(90deg, #fb7e5b, #f48d71);
 }
-.third > div:nth-child(1){
-  background: linear-gradient(90deg, #FCC43E, #dcaf45);
+.third > div:nth-child(1) {
+  background: linear-gradient(90deg, #fcc43e, #dcaf45);
 }
-.fourth > div:nth-child(1){
+.fourth > div:nth-child(1) {
   background: linear-gradient(90deg, #303973, #20285c);
 }
-.bar > div > div:nth-child(2){
-  color: #A099AF;
+.bar > div > div:nth-child(2) {
+  color: #a099af;
   font-size: smaller;
 }
 .bar > div > div:nth-child(2) strong {
@@ -181,7 +210,7 @@
 }
 
 .calendar {
-  height:auto;
+  height: auto;
   width: 100%;
   display: flex;
   flex-flow: row wrap;
@@ -212,7 +241,7 @@
 }
 
 .notice {
-  height:auto;
+  height: auto;
   width: 100%;
   display: flex;
   flex-flow: row wrap;
@@ -259,7 +288,7 @@
   font-size: small;
 }
 .currentNotice > div {
-  background-color: #33A0FC;
+  background-color: #33a0fc;
   padding: 9px 15px;
   color: #fff;
   margin: 10px 0;
@@ -300,10 +329,10 @@
   padding-bottom: 20px;
 }
 .userheader > div:nth-child(1) {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  position: relative;
 }
 .userheader > div:nth-child(2) {
   margin-left: 15px;
@@ -324,17 +353,15 @@
 .profileModal ul li {
   list-style-type: none;
   cursor: pointer;
-  margin:20px 0;
+  margin: 20px 0;
 }
 .profileModal ul li i {
   margin-right: 15px;
-  color: #33A0FC;
+  color: #33a0fc;
 }
 .profileModal > div:nth-child(2) {
   border-bottom: 1px solid #cccc;
 }
-
-
 
 /* -----------------EDIT PROFILE SECTION  ----------------------------*/
 .editProfile {
@@ -349,7 +376,7 @@
   height: fit-content;
   background-color: white;
   border-radius: 10px;
-  padding:10px 0px;
+  padding: 10px 0px;
   color: #303973;
 }
 .firstDiv ul {
@@ -367,12 +394,13 @@
   justify-content: space-between;
   align-items: center;
   flex-flow: row wrap;
-  font-size:12px;
+  font-size: 12px;
 }
 .firstDiv ul li span:nth-child(2) {
-  color: #A099AF;
+  color: #a099af;
 }
-.firstDiv span, .firstDiv strong {
+.firstDiv span,
+.firstDiv strong {
   display: block;
   margin: 8px 0;
   text-align: center;
@@ -388,10 +416,10 @@
   background-color: white;
   border-radius: 10px;
 }
-.editProfile >div:nth-child(2) form {
+.editProfile > div:nth-child(2) form {
   padding: 30px 0;
 }
-.editProfile >div:nth-child(2) form > div{
+.editProfile > div:nth-child(2) form > div {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
@@ -424,80 +452,177 @@
   height: 70px;
 }
 .formGroup label {
-  color: #A099AF;
+  color: #a099af;
   display: block;
   margin-bottom: 10px;
 }
 .formGroup input {
   width: 100%;
   background: none;
-  border: 1px solid #DDDDDD;
+  border: 1px solid #dddddd;
   color: #20285c;
   padding: 15px 20px;
   border-radius: 9px;
-  
 }
 
-  /* ------------ STUDENTS PAGE ------------ */
-  .search {
-    height: 70px ;
-    background-color: white;
-    border-radius: 7px;
-    margin: 15px 0 20px 0;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 30px;
-  }
-  .search > div {
-    width: fit-content;
-    height: 40px;
-    display: flex;
-    align-items: center;
-  }
-  .search > div input {
-    width: 210px;
-    height: 100%;
-    border-radius: 7px;
-    border: 1px solid #EEEEEE;
-    padding: 0 15px;
-    outline: none;
-  }
-  .search > div button {
-    width: 120px;
-    height: 100%;
-    outline: none;
-    border: none;
-    background: linear-gradient(90deg, #4985ed, #538cef);
-    color: white;
-    border-radius: 7px;
-  }
+/* ------------ STUDENTS PAGE ------------ */
+.search {
+  height: 70px;
+  background-color: white;
+  border-radius: 7px;
+  margin: 15px 0 20px 0;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+}
+.search > div {
+  width: fit-content;
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+.search > div input {
+  width: 210px;
+  height: 100%;
+  border-radius: 7px;
+  border: 1px solid #eeeeee;
+  padding: 0 15px;
+  outline: none;
+}
+.search > div button {
+  width: 120px;
+  height: 100%;
+  outline: none;
+  border: none;
+  background: linear-gradient(90deg, #4985ed, #538cef);
+  color: white;
+  border-radius: 7px;
+}
 
-  /* porterscard */
-  .porterCard {
-    width: 100%;
-    height: auto;
-    padding: 0px 0;
-    display: flex;
-    justify-content: space-between;
-    flex-flow: row wrap;
-  }
-  .porterCard > div {
-    width: 220px;
-    height: auto;
-    border-radius: 7px;
-    background-color: white;
-    margin: 15px 0;
-  }
+/* porterscard */
+.porterCard {
+  width: 100%;
+  height: auto;
+  padding: 0px 0;
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row wrap;
+}
+.porterCard > div {
+  width: 220px;
+  height: auto;
+  border-radius: 7px;
+  background-color: white;
+  margin: 15px 0;
+}
+
+/* -----------------------Lodge Complaints Section -------------------------------------*/
+.lodge {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+.lodge button {
+  margin: auto auto;
+  background: linear-gradient(90deg, #4985ed, #538cef);
+  color: white;
+  padding: 12px 15px;
+  border-radius: 7px;
+  width: 100%;
+}
+.lodge b {
+  color: #20285c;
+}
+.lodge > div:nth-child(1) {
+  width: 25%;
+  height: fit-content;
+  background-color: white;
+  padding: 0px 20px;
+  display: flex;
+  flex-flow: column wrap;
+  border-radius: 10px;
+  transition: 0.4s;
+}
+.lodge > div:nth-child(1) ul {
+  color: #20285c;
+  margin-top: 20px;
+}
+.lodge > div:nth-child(1) ul li {
+  margin: 20px 0;
+  color: #666666;
+  border-bottom: 1px solid #66666612;
+  padding-bottom: 10px;
+  cursor: pointer;
+}
+.lodge > div:nth-child(1) ul li i {
+  margin-right: 18px;
+  color: #A099AF;
+  width: 10px;
+  height: 10px;
+}
+.lodge > div:nth-child(1) > div {
+  margin: 20px 0;
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-flow: column wrap;
+}
+.lodge > div:nth-child(2) {
+  width: 72%;
+  border-radius: 10px;
+  height: fit-content;
+  background-color: white;
+}
+.lodge > div:nth-child(2) form {
+  width:100%;
+  height: auto;
+  padding: 20px 15px;
+}
+.lodge > div:nth-child(2) form input {
+  width: 100%;
+  height: 50px;
+  border: 1px solid #DDDDDD;
+  margin: 10px 0;
+  outline: #33a0fc;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+.lodge > div:nth-child(2) form textarea {
+  width: 100%;
+  height: auto;
+  border: 1px solid #DDDDDD;
+  margin: 10px 0;
+  outline: #33a0fc;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+.lodge > div:nth-child(2) form i {
+  margin-right: 15px;
+}
+.attach {
+  width: 100%;
+  height: 200px;
+  margin: 20px 0;
+  border-radius: 10px;
+  background-color: #F5F5F5;
+  color: #A099AF;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.lodge > div:nth-child(2) form button {
+  width: fit-content;
+}
 @media screen and (max-width: 1202px) {
   .bar {
     padding: 20px 15px !important;
   }
 }
 
-
-@media screen and (max-width: 1126px)  {
+@media screen and (max-width: 1126px) {
   .sidebar {
     width: 16%;
     padding: 30px 5px;
@@ -511,13 +636,10 @@
   .titlebar {
     width: 83%;
     margin-left: 16%;
-   
   }
   .calendar > div {
     margin: 0 10px;
   }
-
-
 }
 @media screen and (max-width: 999px) {
   .tit {
@@ -527,9 +649,26 @@
     display: none;
   }
   .sidebar {
-    width: 10% ;
+    width: 10%;
   }
-  .main, .titlebar {
+  .sidebar h2 {
+    display: none;
+  }
+  .logo {
+    display: block;
+  }
+  .sidebar ul li > div {
+    justify-content: center;
+  }
+  .sidebar ul li > div i {
+    transform: translateX(20px);
+  }
+  .sidebar h4 {
+    margin-top: 60px;
+    font-size: 10px;
+  }
+  .main,
+  .titlebar {
     width: 90%;
     margin-left: 10%;
   }
@@ -558,12 +697,23 @@
   }
 }
 
-@media screen and (max-width:800px) {
+@media screen and (max-width: 800px) {
   .sidebar {
-    width: 16%;
-    left: -16%;
+    width: 25%;
+    transform: translateX(-100%);
+    z-index: 10000;
     padding: 30px 5px;
     font-size: 0.8rem;
+    box-shadow: 5px 9px 10px 0 rgb(0 0 0 / 20%);
+  }
+  .sect {
+    display: block;
+    font-size: 20px;
+    top: -5px;
+    left: 10px;
+  }
+  .titlebar h2 {
+    visibility: hidden;
   }
   .main {
     width: 100%;
@@ -573,6 +723,58 @@
   .titlebar {
     width: 100%;
     margin-left: 0%;
-   
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .lodge {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-between;
+  }
+  .lodge > div:nth-child(1),  .lodge > div:nth-child(2){
+    width: 100%;
+    margin: 20px 0;
+  }
+  .collapse {
+    transition: 0.4s;
+    max-height: 0px;
+    padding:0;
+    overflow: hidden;
+    margin: 20px 0;
+  }
+  .titlebar > div:nth-child(2) > div  {
+    width:30px;
+    height: 30px;
+    font-size: 13px;
+  }
+  .titlebar h2 {
+    font-size: 17px;
+  }
+}
+@media screen and (max-width: 450px) {
+  .main {
+    margin-top: 100px;
+  }
+  .titlebar {
+    flex-flow: column wrap;
+    align-items: center;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+    padding-left: 0;
+    padding-bottom: 20px;
+  }
+  .titlebar h2 {
+    visibility: visible;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  .sect {
+    left: 20px;
+  }
+  .titlebar > div {
+    width: 100%;
   }
 }

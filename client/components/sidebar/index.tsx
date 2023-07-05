@@ -1,24 +1,29 @@
 import styles from "../index.module.css";
 import { assets } from "@/Helpers/Types";
 import { Profile } from "../dashboard/Profile";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import logo from "../../public/images/crawford-logo.png";
 import { useSearchParams } from "next/navigation";
-
+import Image from "next/image";
 const Sidebar = () => {
-  const searchparams = useSearchParams()
+  const searchparams = useSearchParams();
   const pathname = usePathname();
   const [profileOpen, setProfileOpen] = useState<boolean>(false);
-  const [isPorter, setPorter] = useState<boolean>(false)
-  const [filteredAssets, setFiltered] = useState<{title:string,icon:string}[]>(assets)
+  const sideBarRef = useRef<null | HTMLInputElement>(null)
+  const [isPorter, setPorter] = useState<boolean>(false);
+  const [sidebar, setSideBar] = useState<boolean>(false)
+  const [filteredAssets, setFiltered] =
+    useState<{ title: string; icon: string }[]>(assets);
 
-  const checkPorter = ():{title:string,icon:string}[] => {
+  const checkPorter = (): { title: string; icon: string }[] => {
+    isPorter || pathname === "/porters"
+      ? setFiltered(assets.filter((x) => x.title !== "Students"))
+      : setFiltered(assets.filter((x) => x.title !== "Porters"));
 
-    isPorter || pathname === '/porters' ? setFiltered(assets.filter(x => x.title !== 'Students')):setFiltered(assets.filter(x => x.title !== 'Porters'))
-
-    return filteredAssets
-  }
+    return filteredAssets;
+  };
   useEffect(() => {
     const search = searchparams.get("porter");
     if (search == "true") {
@@ -26,20 +31,43 @@ const Sidebar = () => {
     } else if (search === "false" || !search) {
       setPorter(false);
     }
-    checkPorter()
+    checkPorter();
   }, []);
+
+  const showSideBar = (show:string)=> {
+    if (sideBarRef.current) {
+      sideBarRef.current.style.transform = show
+    }
+    
+  }
+  const open = ()=> {
+    setSideBar(true)
+  }
+ 
 
 
   return (
     <div>
-      <div className={styles.sidebar}>
+      <div ref={sideBarRef} className={styles.sidebar}>
+        {/* <div className={styles.close}>
+          &times;
+        </div> */}
+        <section className={styles.logo}>
+          <Image
+            src={logo}
+            alt="School logo image"
+            fill={true}
+            quality={100}
+            priority={true}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
+        </section>
         <Link href={"/"}>
           <h2>Crawford University</h2>
         </Link>
         <h4>hostel management</h4>
         <ul>
-          {
-          filteredAssets.map((x, i) => (
+          {filteredAssets.map((x, i) => (
             <li className={styles.dash} key={i}>
               <div>
                 <div>
@@ -55,7 +83,10 @@ const Sidebar = () => {
         </ul>
       </div>
       <div className={styles.titlebar}>
-        <div>
+        <div className={styles.one}>
+        <section onClick={open} className={styles.sect}>
+          <i className="fa-solid fa-bars"></i>
+        </section>
           <h2>
             {pathname === "/account" ? "Edit Profile " : "Biobaku Hall "}
             {pathname === "/account" ? (
