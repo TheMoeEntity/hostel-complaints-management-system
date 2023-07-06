@@ -1,23 +1,26 @@
+"use client";
 import styles from "../index.module.css";
 import { assets } from "@/Helpers/Types";
 import { Profile } from "../dashboard/Profile";
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import logo from "../../public/images/crawford-logo.png";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 const Sidebar = () => {
   const searchparams = useSearchParams();
+  const router = useRouter();
   const pathname = usePathname();
   const [profileOpen, setProfileOpen] = useState<boolean>(false);
-  const sideBarRef = useRef<null | HTMLInputElement>(null)
+  const sideBarRef = useRef<null | HTMLInputElement>(null);
   const [isPorter, setPorter] = useState<boolean>(false);
-  const [sidebar, setSideBar] = useState<boolean>(false)
+  const [sidebar, setSideBar] = useState<boolean>(false);
   const [filteredAssets, setFiltered] =
-    useState<{ title: string; icon: string }[]>(assets);
+    useState<{ title: string; icon: string; link: string }[]>(assets);
 
-  const checkPorter = (): { title: string; icon: string }[] => {
+  const checkPorter = (): { title: string; icon: string; link: string }[] => {
     isPorter || pathname === "/porters"
       ? setFiltered(assets.filter((x) => x.title !== "Students"))
       : setFiltered(assets.filter((x) => x.title !== "Porters"));
@@ -34,17 +37,14 @@ const Sidebar = () => {
     checkPorter();
   }, []);
 
-  const showSideBar = (show:string)=> {
+  const showSideBar = (show: string) => {
     if (sideBarRef.current) {
-      sideBarRef.current.style.transform = show
+      sideBarRef.current.style.transform = show;
     }
-    
-  }
-  const open = ()=> {
-    setSideBar(true)
-  }
- 
-
+  };
+  const open = () => {
+    setSideBar(true);
+  };
 
   return (
     <div>
@@ -72,7 +72,11 @@ const Sidebar = () => {
               <div>
                 <div>
                   <i className={x.icon}></i>
-                  <div className={styles.tit}>{x.title}</div>
+                  <div className={styles.tit}>
+                    <Link passHref href={`/${x.link}`} >
+                      {x.title}
+                    </Link>
+                  </div>
                 </div>
                 <div className={styles.tits}>
                   <i className="fa fa-angle-right"></i>
@@ -84,9 +88,9 @@ const Sidebar = () => {
       </div>
       <div className={styles.titlebar}>
         <div className={styles.one}>
-        <section onClick={open} className={styles.sect}>
-          <i className="fa-solid fa-bars"></i>
-        </section>
+          <section onClick={open} className={styles.sect}>
+            <i className="fa-solid fa-bars"></i>
+          </section>
           <h2>
             {pathname === "/account" ? "Edit Profile " : "Biobaku Hall "}
             {pathname === "/account" ? (

@@ -55,11 +55,12 @@ const Profile = (props:{profileOpen:boolean, forceClose:() => void}) => {
             </div>
           </li>
           <li>
-            <div>
-              <i className="fa-solid fa-person-harassing"></i>Complaints
-            </div>
+            <Link href={`/complaints`}>
+              <div>
+                <i className="fa-solid fa-person-harassing"></i>Complaints
+              </div>
+            </Link>
           </li>
-
           <li>
             <div>
               <i className="fa-solid fa-arrow-right-from-bracket"></i> Log out

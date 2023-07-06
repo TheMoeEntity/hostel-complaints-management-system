@@ -12,11 +12,11 @@ export const options: string[] = [
   "SODEINDE HALL",
   "EL-KANEMI HALL"
 ];
-export const assets: { icon: string; title: string, link?:string }[] = [
+export const assets: { icon: string; title: string, link:``|'/students'|'/complaints'|'/porters' }[] = [
   {
     icon: "fa-solid fa-gauge",
     title: "Dashboard",
-    link:'/'
+    link:''
   },
   {
     icon: "fas fa-graduation-cap",
@@ -24,39 +24,10 @@ export const assets: { icon: string; title: string, link?:string }[] = [
     link:'/students'
   },
   {
-    icon: "fa-solid fa-user",
-    title: "Complaints",
-    link:'/complaints'
-  },
-  {
     icon: "fa-solid fa-person",
     title: "Porters",
     link:'/porters'
   },
-  // {
-  //   icon: "fa-solid fa-chart-simple",
-  //   title: "Chart",
-  // },
-  // {
-  //   icon: "fas fa-graduation-cap",
-  //   title: "Student",
-  // },
-  // {
-  //   icon: "fa-solid fa-user",
-  //   title: "Teacher",
-  // },
-  // {
-  //   icon: "fa-solid fa-user",
-  //   title: "Food",
-  // },
-  // {
-  //   icon: "fa fa-house",
-  //   title: "Apps",
-  // },
-  // {
-  //   icon: "fa fa-house",
-  //   title: "Chart",
-  // },
 ];
 export class Helpers {
   static async getHostels(url:string) {

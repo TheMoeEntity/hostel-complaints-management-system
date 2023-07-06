@@ -1,7 +1,7 @@
 import styles from '../page.module.css'
 import LodgePage from "./LodgePage";
 
-const Index = () => {
+export default function Lodge() {
   return (
     <main className={styles.main}>
       <LodgePage />
@@ -9,4 +9,3 @@ const Index = () => {
   )
 };
 
-export default Index;
