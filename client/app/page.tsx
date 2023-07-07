@@ -1,11 +1,11 @@
 import Dashboard from '@/components/dashboard'
 import styles from './page.module.css'
-import { cookies } from 'next/headers'
-import cookie from "next-cookies";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 
-export default function Home() {
-  const cookie = cookies().get('cookieName1')?.value
-  // console.log(cookie)
+export default async function Home() {
+  const session = await getServerSession(authOptions);
+  const user = session?.user;
 
   return (
     <main className={styles.main}>

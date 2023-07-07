@@ -3,7 +3,9 @@ import styles from "../index.module.css";
 import CalendarComponent from "./Calendar";
 import Charts from "./Charts";
 
+
 const Dashboard = () => {
+  
   return (
     <div className={styles.dashboard}>
       <div className={styles.main}>

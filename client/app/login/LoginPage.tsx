@@ -2,76 +2,96 @@
 import Link from "next/link";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import styles from "../page.module.css";
-import { useSearchParams, useRouter } from "next/navigation"
+import { useSearchParams, useRouter } from "next/navigation";
 import { useSnackbar } from "notistack";
+import { signIn } from "next-auth/react";
 
 const LoginPage = () => {
-  const router = useRouter()
+  const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
   const [status, setStatus] = useState<string>("Login");
   const searchparams = useSearchParams();
   const [isPorter, setPorter] = useState<boolean>(false);
-  const matricRef = useRef<null | HTMLInputElement>(null)
-  const mailRef = useRef<null | HTMLInputElement>(null)
-  const passRef = useRef<null | HTMLInputElement>(null)
+  const matricRef = useRef<null | HTMLInputElement>(null);
+  const mailRef = useRef<null | HTMLInputElement>(null);
+  const passRef = useRef<null | HTMLInputElement>(null);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
- 
+    const callbackUrl = "/";
     const userDetails = {
       matric_number: matricRef.current?.value,
-      password:passRef.current?.value,
+      password: passRef.current?.value,
       porter: "false",
     };
     const porterDetails = {
-      matric_number: 'null',
-      email:mailRef.current?.value,
-      password:passRef.current?.value,
+      matric_number: "null",
+      email: mailRef.current?.value,
+      password: passRef.current?.value,
       porter: "true",
     };
     setStatus("Loggin in....");
-
-
-    await fetch("./api/login/", {
-      method: "POST",
-      headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(isPorter ? porterDetails:userDetails),
-    })
-      .then(async (res) => {
-        const isJson = res.headers
-          .get("content-type")
-          ?.includes("application/json");
-        const data = isJson ? await res.json() : null;
-
-        if (!res.ok) {
-          let stuff = data;
-          const msg = JSON.parse(stuff);
-          // const responseMsg = msg;
-          const error = (data && data.message) || res.statusText;
-          console.log(stuff);
-          return Promise.reject(error);
-        } else if (res.ok || res.status === 201 || res.status === 200) {
-          let stuff = data;
-          const msg = JSON.parse(stuff);
-          console.log("Login successful: "+ msg);
-          enqueueSnackbar("Login successful", {
-            variant: "success",
-          });
-          setTimeout(() => {
-            let params = isPorter === true ? '/?porter=true' : '/'
-            router.push(params)
-          }, 800);
-        }
-      })
-      .catch((err) => {
-        enqueueSnackbar("Failed to login: " + err, { variant: "error" });
+    console.log(porterDetails)
+    try {
+      const res = await signIn("credentials", {
+        redirect: false,
+        email: porterDetails.email,
+        matric:isPorter? "null":userDetails.matric_number,
+        password: isPorter ? porterDetails.password: userDetails.password,
+        callbackUrl,
       });
+
+      console.log(res);
+      if (!res?.error) {
+        router.push(callbackUrl);
+        enqueueSnackbar("Login success", { variant:'success'})
+      } else {
+        enqueueSnackbar("Invalid credentials", { variant: "error" });
+      }
+    } catch (error) {
+      enqueueSnackbar("Failed to login: " + error, { variant: "error" });
+    }
+
+    // await fetch("./api/login/", {
+    //   method: "POST",
+    //   headers: {
+    //     Accept: "application/json, text/plain, */*",
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(isPorter ? porterDetails:userDetails),
+    // })
+    //   .then(async (res) => {
+    //     const isJson = res.headers
+    //       .get("content-type")
+    //       ?.includes("application/json");
+    //     const data = isJson ? await res.json() : null;
+
+    //     if (!res.ok) {
+    //       let stuff = data;
+    //       const msg = JSON.parse(stuff);
+    //       // const responseMsg = msg;
+    //       const error = (data && data.message) || res.statusText;
+    //       console.log(stuff);
+    //       return Promise.reject(error);
+    //     } else if (res.ok || res.status === 201 || res.status === 200) {
+    //       let stuff = data;
+    //       const msg = JSON.parse(stuff);
+    //       console.log("Login successful: "+ msg);
+    //       enqueueSnackbar("Login successful", {
+    //         variant: "success",
+    //       });
+    //       setTimeout(() => {
+    //         let params = isPorter === true ? '/?porter=true' : '/'
+    //         router.push(params)
+    //       }, 800);
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     enqueueSnackbar("Failed to login: " + err, { variant: "error" });
+    //   });
     setStatus("Login");
   };
- 
+
   useEffect(() => {
     const search = searchparams.get("porter");
     if (search == "true") {
@@ -106,7 +126,7 @@ const LoginPage = () => {
             </div>
             <div>
               <input
-              ref={mailRef}
+                ref={mailRef}
                 // defaultValue={"komodo@icloud.com"}
                 // value={data.email}
                 // onChange={(e) =>
@@ -128,7 +148,6 @@ const LoginPage = () => {
             </div>
             <div>
               <input
-          
                 // value={data.matric_number}
                 // onChange={(e) =>
                 //   setData((x) => {
@@ -140,7 +159,6 @@ const LoginPage = () => {
                 type="text"
                 name=""
                 id=""
-               
               />
             </div>
           </div>
@@ -168,7 +186,15 @@ const LoginPage = () => {
         </div>
         <div className={styles.formGroup}>
           {" "}
-          <button type="submit">{status}</button>
+          <button type="submit">
+            {status !== "Login" && (
+              <i
+                className={`fa fa-spinner ${styles.rotate}`}
+                aria-hidden="true"
+              ></i>
+            )}{" "}
+            {status}
+          </button>
         </div>
         <div className={styles.formGroup}>
           {`Don't`} have an account? &#160;{" "}

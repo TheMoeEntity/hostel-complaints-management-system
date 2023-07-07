@@ -2,7 +2,11 @@ import styles from '../../index.module.css'
 import Image from 'next/image'
 import count1 from "../../../public/images/user.jpeg";
 import Link from 'next/link';
+import { useSession, getSession } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
 const Profile = (props:{profileOpen:boolean, forceClose:() => void}) => {
+  const {data:session} = useSession()
+  console.log(session)
   return (
     <section
       style={{
@@ -61,7 +65,7 @@ const Profile = (props:{profileOpen:boolean, forceClose:() => void}) => {
               </div>
             </Link>
           </li>
-          <li>
+          <li onClick={()=> signOut()}>
             <div>
               <i className="fa-solid fa-arrow-right-from-bracket"></i> Log out
             </div>

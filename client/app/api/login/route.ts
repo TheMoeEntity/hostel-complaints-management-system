@@ -34,25 +34,6 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
     const data = await apiRes.json();
     console.log(data); 
     if (apiRes.status === 201 || apiRes.status === 200) {
-      // res.setHeader('Set-Cookie', [
-      //   'cookieName1=cookieValue1; Path=/; Max-Age=3600',
-      //   'cookieName2=cookieValue2; Path=/; Max-Age=3600',
-      // ]);
-    
-      // req.headers.set(
-      //   "Set-Cookie",
-      //   cookie.serialize(
-      //     'refresh',
-      //     data.refresh,
-      //     {
-      //       httpOnly: true,
-      //       secure: process.env.NODE_ENV !== "development",
-      //       maxAge: 60 * 60 * 24,
-      //       sameSite: "strict",
-      //       path: "/api/",
-      //     }
-      //   )
-      // );
 
       return NextResponse.json(
         { error: "All Done: " +JSON.stringify(data)},
