@@ -4,9 +4,16 @@ import count1 from "../../../public/images/user.jpeg";
 import Link from 'next/link';
 import { useSession, getSession } from 'next-auth/react';
 import { signOut } from 'next-auth/react';
+import { useState } from 'react';
+import { payload } from '@/Helpers/Types';
 const Profile = (props:{profileOpen:boolean, forceClose:() => void}) => {
   const {data:session} = useSession()
   console.log(session)
+  const [cred,setCred] = useState(()=> {
+    if (session) {
+      return session
+    }
+  })
   return (
     <section
       style={{
@@ -28,9 +35,9 @@ const Profile = (props:{profileOpen:boolean, forceClose:() => void}) => {
         </div>
         <div className={styles.details}>
           <div>
-            <b>Moses</b>
+            <b>{cred?.user.first_name}</b>
           </div>
-          <div>Biobaku Hall</div>
+          <div>{cred?.user.hostel}</div>
         </div>
       </div>
       <div className="">

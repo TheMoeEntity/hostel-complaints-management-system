@@ -31,7 +31,7 @@ const LoginPage = () => {
       porter: "true",
     };
     setStatus("Loggin in....");
-    console.log(porterDetails)
+ 
     try {
       const res = await signIn("credentials", {
         redirect: false,
@@ -40,60 +40,23 @@ const LoginPage = () => {
         password: isPorter ? porterDetails.password: userDetails.password,
         callbackUrl,
       });
-
-      console.log(res);
+      // const parsed = JSON.parse(res)
+      console.log(JSON.parse(res?.error as string));
       if (!res?.error) {
         router.push(callbackUrl);
         enqueueSnackbar("Login success", { variant:'success'})
       } else {
-        enqueueSnackbar("Invalid credentials", { variant: "error" });
+        enqueueSnackbar("Invalid credentials: "+res?.error, { variant: "error" });
       }
     } catch (error) {
       enqueueSnackbar("Failed to login: " + error, { variant: "error" });
     }
-
-    // await fetch("./api/login/", {
-    //   method: "POST",
-    //   headers: {
-    //     Accept: "application/json, text/plain, */*",
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(isPorter ? porterDetails:userDetails),
-    // })
-    //   .then(async (res) => {
-    //     const isJson = res.headers
-    //       .get("content-type")
-    //       ?.includes("application/json");
-    //     const data = isJson ? await res.json() : null;
-
-    //     if (!res.ok) {
-    //       let stuff = data;
-    //       const msg = JSON.parse(stuff);
-    //       // const responseMsg = msg;
-    //       const error = (data && data.message) || res.statusText;
-    //       console.log(stuff);
-    //       return Promise.reject(error);
-    //     } else if (res.ok || res.status === 201 || res.status === 200) {
-    //       let stuff = data;
-    //       const msg = JSON.parse(stuff);
-    //       console.log("Login successful: "+ msg);
-    //       enqueueSnackbar("Login successful", {
-    //         variant: "success",
-    //       });
-    //       setTimeout(() => {
-    //         let params = isPorter === true ? '/?porter=true' : '/'
-    //         router.push(params)
-    //       }, 800);
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     enqueueSnackbar("Failed to login: " + err, { variant: "error" });
-    //   });
     setStatus("Login");
   };
 
   useEffect(() => {
     const search = searchparams.get("porter");
+    console.log("porter?",isPorter)
     if (search == "true") {
       setPorter(true);
     } else {

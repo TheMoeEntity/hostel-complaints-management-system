@@ -2,6 +2,7 @@
 // import { compare } from "bcryptjs";
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import axios from "axios";
 
 export const authOptions: NextAuthOptions = {
   pages: {
@@ -30,71 +31,97 @@ export const authOptions: NextAuthOptions = {
         if (!credentials?.email || !credentials.password) {
           return null;
         }
-        const porter = credentials?.matric === "" ? false : true;
+        const porter = credentials?.matric === "null" ? true : false;
 
-    
         const url: string =
           porter === true
             ? "https://hostelcomplaintsmanagementsystem.onrender.com/api/auth/porters/login/"
             : "https://hostelcomplaintsmanagementsystem.onrender.com/api/auth/students/login/";
         const userDetails = JSON.stringify({
-          matric_number:credentials?.matric,
-          password:credentials?.password,
+          matric_number: credentials?.matric,
+          password: credentials?.password,
         });
         const porterDetails = JSON.stringify({
-          email:credentials?.email,
-          matric_number:'null',
-          password:credentials?.password,
+          email: credentials?.email,
+          matric_number: "null",
+          password: credentials?.password,
         });
-    
-  
-        try {
-          const user = await fetch(url, {
-            method: "POST",
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-            },
-            body: porter === true ? porterDetails : userDetails,
+        let responseData:any
+        const { user, jwtz } = await axios
+          .post(
+            url,
+            porter
+              ? {
+                  email: credentials?.email,
+                  matric_number: "null",
+                  password: credentials?.password,
+                }
+              : {
+                  matric_number: credentials?.matric,
+                  password: credentials?.password,
+                }
+          )
+          .then(({ data }) => {
+            
+            responseData = data
+            return data;
+          })
+          .catch((error) => {
+            throw new Error(JSON.stringify(error.response.data));
           });
+        if (responseData) {
+          return { jwtz, ...user, ...responseData };
+        } else {
 
-          const data = await user.json();
-          console.log(data);
-          const {
-            access,
-            refresh,
-            id,
-            email,
-            matric_number,
-            hostel,
-            first_name,
-            last_name,
-            is_student,
-            is_porter,
-            is_superuser,
-            is_staff,
-          } = data;
-          if (user.status === 201 || user.status === 200) {
-            return {
-                access,
-                id,
-                email,
-                matric_number,
-                hostel,
-                first_name,
-                last_name,
-                is_student,
-                is_porter,
-                is_superuser,
-                is_staff,
-                refresh
-            };
-          } else {
-            return data.detail;
-          }
-        } catch (error) {
-          return null;
-        }
+        } 
+
+        // try {
+        //   const user = await fetch(url, {
+        //     method: "POST",
+        //     headers: {
+        //       Accept: "application/json",
+        //       "Content-Type": "application/json",
+        //     },
+        //     body: porter === true ? porterDetails : userDetails,
+        //   });
+
+        //   const data = await user.json();
+        //   console.log(data);
+        //   const {
+        //     access,
+        //     refresh,
+        //     id,
+        //     email,
+        //     matric_number,
+        //     hostel,
+        //     first_name,
+        //     last_name,
+        //     is_student,
+        //     is_porter,
+        //     is_superuser,
+        //     is_staff,
+        //   } = data;
+        //   if (user.status === 201 || user.status === 200) {
+        //     return {
+        //         access,
+        //         id,
+        //         email,
+        //         matric_number,
+        //         hostel,
+        //         first_name,
+        //         last_name,
+        //         is_student,
+        //         is_porter,
+        //         is_superuser,
+        //         is_staff,
+        //         refresh
+        //     };
+        //   } else {
+        //     return data.detail;
+        //   }
+        // } catch (error) {
+        //   return null;
+        // }
       },
     }),
   ],
@@ -103,16 +130,16 @@ export const authOptions: NextAuthOptions = {
       return {
         ...session,
         user: {
-          ...token
+          ...token,
         },
       };
     },
-    
+
     jwt: ({ token, user }) => {
       if (user) {
         return {
           ...token,
-            ...user
+          ...user,
         };
       }
       return token;

@@ -4,6 +4,20 @@ export type postTypes = {
   body: string;
   id: number;
 };
+export type payload = {
+  access:string,
+  id:string,
+  email:string,
+  matric_number:string,
+  hostel:string,
+  first_name:string,
+  last_name:string,
+  is_student:boolean,
+  is_porter:boolean,
+  is_superuser:boolean,
+  is_staff:boolean,
+  refresh:string
+}
 export const options: string[] = [
   "KING-JAJA HOSTEL",
   "BIOBAKU HALL",
