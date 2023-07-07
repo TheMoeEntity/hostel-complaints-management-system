@@ -74,54 +74,6 @@ export const authOptions: NextAuthOptions = {
         } else {
 
         } 
-
-        // try {
-        //   const user = await fetch(url, {
-        //     method: "POST",
-        //     headers: {
-        //       Accept: "application/json",
-        //       "Content-Type": "application/json",
-        //     },
-        //     body: porter === true ? porterDetails : userDetails,
-        //   });
-
-        //   const data = await user.json();
-        //   console.log(data);
-        //   const {
-        //     access,
-        //     refresh,
-        //     id,
-        //     email,
-        //     matric_number,
-        //     hostel,
-        //     first_name,
-        //     last_name,
-        //     is_student,
-        //     is_porter,
-        //     is_superuser,
-        //     is_staff,
-        //   } = data;
-        //   if (user.status === 201 || user.status === 200) {
-        //     return {
-        //         access,
-        //         id,
-        //         email,
-        //         matric_number,
-        //         hostel,
-        //         first_name,
-        //         last_name,
-        //         is_student,
-        //         is_porter,
-        //         is_superuser,
-        //         is_staff,
-        //         refresh
-        //     };
-        //   } else {
-        //     return data.detail;
-        //   }
-        // } catch (error) {
-        //   return null;
-        // }
       },
     }),
   ],

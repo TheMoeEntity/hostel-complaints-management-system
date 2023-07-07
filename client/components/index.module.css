@@ -10,6 +10,7 @@
   color: white;
   overflow: scroll;
   background: linear-gradient(90deg, #4985ed, #538cef);
+  /* background: linear-gradient(90deg, #4E44B5, #3a3192); */
   -ms-overflow-style: none; /* Internet Explorer 10+ */
   scrollbar-width: none;
   z-index: 1000;
@@ -329,8 +330,8 @@
   padding-bottom: 20px;
 }
 .userheader > div:nth-child(1) {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   position: relative;
 }
@@ -343,7 +344,7 @@
   display: flex;
   flex-flow: column;
   font-weight: 200;
-  font-size: 16px;
+  font-size: 14px;
   justify-content: space-between;
 }
 .profileModal ul {

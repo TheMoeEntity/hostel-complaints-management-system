@@ -9,7 +9,14 @@ import Link from "next/link";
 import logo from "../../public/images/crawford-logo.png";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 const Sidebar = () => {
+  const { data: session } = useSession();
+  const backgroundMode:string = session?.user.is_porter
+    ? "linear-gradient(90deg, #4E44B5, #3a3192)"
+    : "linear-gradient(90deg, #4985ed, #538cef)";
+  const text:string = session?.user.is_porter ? "Porters" : "Students"
+  const iconClass:string = session?.user.is_porter ? "fa-solid fa-person":"fas fa-graduation-cap"
   const searchparams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -48,7 +55,11 @@ const Sidebar = () => {
 
   return (
     <div>
-      <div ref={sideBarRef} className={styles.sidebar}>
+      <div
+        style={{ background: backgroundMode }}
+        ref={sideBarRef}
+        className={styles.sidebar}
+      >
         {/* <div className={styles.close}>
           &times;
         </div> */}
@@ -67,23 +78,27 @@ const Sidebar = () => {
         </Link>
         <h4>hostel management</h4>
         <ul>
-          {filteredAssets.map((x, i) => (
-            <li className={styles.dash} key={i}>
-              <div>
-                <div>
-                  <i className={x.icon}></i>
-                  <div className={styles.tit}>
-                    <Link passHref href={`/${x.link}`} >
-                      {x.title}
-                    </Link>
+          {assets.map((x, i) =>
+            i === 1 ? (
+              <li key={i}>
+                <Link href={`${x.link}`}>
+                  <div>
+                    <i style={{ marginRight: "10px" }} className={iconClass}></i>
+                    {text}
                   </div>
-                </div>
-                <div className={styles.tits}>
-                  <i className="fa fa-angle-right"></i>
-                </div>
-              </div>
-            </li>
-          ))}
+                </Link>
+              </li>
+            ) : (
+              <li key={i}>
+                <Link href={`${x.link}`}>
+                  <div>
+                    <i style={{ marginRight: "10px" }} className={x.icon}></i>
+                    {x.title}
+                  </div>
+                </Link>
+              </li>
+            )
+          )}
         </ul>
       </div>
       <div className={styles.titlebar}>

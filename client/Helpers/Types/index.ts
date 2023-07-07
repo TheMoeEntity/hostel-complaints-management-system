@@ -26,22 +26,22 @@ export const options: string[] = [
   "SODEINDE HALL",
   "EL-KANEMI HALL"
 ];
-export const assets: { icon: string; title: string, link:``|'/students'|'/complaints'|'/porters' }[] = [
+export const assets: { icon: string; title: string, link:`/`|'/students'|'/complaints'|'/porters' }[] = [
   {
     icon: "fa-solid fa-gauge",
     title: "Dashboard",
-    link:''
+    link:'/'
   },
   {
     icon: "fas fa-graduation-cap",
     title: "Students",
     link:'/students'
   },
-  {
-    icon: "fa-solid fa-person",
-    title: "Porters",
-    link:'/porters'
-  },
+  // {
+  //   icon: "fa-solid fa-person",
+  //   title: "Porters",
+  //   link:'/porters'
+  // },
 ];
 export class Helpers {
   static async getHostels(url:string) {

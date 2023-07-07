@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useSession, getSession } from 'next-auth/react';
 import { signOut } from 'next-auth/react';
 import { useState } from 'react';
-import { payload } from '@/Helpers/Types';
+
 const Profile = (props:{profileOpen:boolean, forceClose:() => void}) => {
   const {data:session} = useSession()
   console.log(session)
@@ -35,9 +35,9 @@ const Profile = (props:{profileOpen:boolean, forceClose:() => void}) => {
         </div>
         <div className={styles.details}>
           <div>
-            <b>{cred?.user.first_name}</b>
+            <b>{session?.user.first_name}</b>
           </div>
-          <div>{cred?.user.hostel}</div>
+          <div>{session?.user.hostel}</div>
         </div>
       </div>
       <div className="">
