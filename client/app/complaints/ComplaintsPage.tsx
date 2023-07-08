@@ -1,15 +1,63 @@
 "use client";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { AnimatePresence, motion } from "framer-motion";
 import styles from "../../components/index.module.css";
-// enum categories {
-//   light_issues:''
-// }
+import { catIcons } from "@/Helpers/Types";
+import { useState } from "react";
+
 const ComplaintsPage = ({ comps }: any) => {
-  const router = useRouter();
-  const linkAction = (to: string) => {
-    router.push("/" + to);
+  const title = (): { title: string }[] => {
+    const arr = comps;
+    return arr.map((x: { title: string }) => {
+      const obj = {
+        title: x.title,
+      };
+      return obj;
+    });
   };
+
+  const compList = (): { title: string; time: string; detail: string }[] => {
+    const data = comps.map(
+      (x: {
+        title: string;
+        student_first_name: string;
+        student_last_name: string;
+        time: string;
+        description: string;
+        date_filed: string;
+      }) => {
+        const xx = {
+          title: x.title,
+          name: `${x.student_first_name} ${x.student_last_name}`,
+          time: x.date_filed,
+          detail: x.description,
+        };
+        return xx;
+      }
+    );
+    return data;
+  };
+  const [active, setActive] = useState(compList()[0].title);
+  const [displayData, setDisplayData] = useState<
+    { title: string; detail: string; time: string }[]
+  >(compList());
+  const handleFilter = (category: string) => {
+    // if (category === active) return;
+    setActive(category);
+    setDisplayData([]);
+
+    // if (category === "all") {
+    //   setDisplayData(data);
+    //   return;
+
+    const filteredData = compList().filter((item) => item.title === category);
+
+    setTimeout(() => {
+      setDisplayData(filteredData);
+    }, 300);
+  };
+
+  console.log(compList());
   console.log("comps", comps);
   return (
     <div className={styles.main}>
@@ -21,7 +69,17 @@ const ComplaintsPage = ({ comps }: any) => {
           <div>
             <b>Categories</b>
             <ul className={styles.collapse}>
-              <li>
+              {title().map((x, i) => (
+                <li onClick={() => handleFilter(x.title)}>
+                  <i
+                    className={
+                      catIcons.find((xx) => xx.title === x.title)?.icon
+                    }
+                  ></i>{" "}
+                  <span>{x.title}</span>
+                </li>
+              ))}
+              {/* <li>
                 <i className="fa-solid fa-droplet"></i> <span>Water</span>
               </li>
               <li>
@@ -36,7 +94,7 @@ const ComplaintsPage = ({ comps }: any) => {
               </li>
               <li>
                 <i className="fa-solid fa-circle-info"></i> <span>Others</span>
-              </li>
+              </li> */}
             </ul>
           </div>
           <div></div>
@@ -46,91 +104,26 @@ const ComplaintsPage = ({ comps }: any) => {
             <thead>
               <tr>
                 <th>Name</th>
-                <th>Details</th>
-                <th>Time</th>
+                <th>Description</th>
+                <th>Date filed</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Kerry Wanker</td>
-                <td>
-                  <Link href={`/details`}>
-                    <div>The main issue is that whenever we say...</div>
-                  </Link>
-                </td>
-                <td>11:30AM </td>
-              </tr>
-              <tr>
-                <td>Nigeria</td>
-                <td>Berglunds snabbköp</td>
-                <td>Christina Berglund</td>
-              </tr>
-              <tr>
-                <td>Nigeria</td>
-                <td>Centro comercial Moctezuma</td>
-                <td>Francisco Chang</td>
-              </tr>
-              <tr>
-                <td>Ernst Handel</td>
-                <td>Roland Mendel</td>
-                <td>Austria</td>
-              </tr>
-              <tr>
-                <td>Island Trading</td>
-                <td>Helen Bennett</td>
-                <td>UK</td>
-              </tr>
-              <tr>
-                <td>Königlich Essen</td>
-                <td>Philip Cramer</td>
-                <td>Germany</td>
-              </tr>
-              <tr>
-                <td>Nigeria</td>
-                <td>Laughing Bacchus Winecellars</td>
-                <td>Yoshi Tannamuri</td>
-              </tr>
-              <tr>
-                <td>Magazzini Alimentari Riuniti</td>
-                <td>Giovanni Rovelli</td>
-                <td>Italy</td>
-              </tr>
-              <tr>
-                <td>North/South</td>
-                <td>Simon Crowther</td>
-                <td>Nigeria</td>
-              </tr>
-              <tr>
-                <td>Paris spécialités</td>
-                <td>Marie Bertrand</td>
-                <td>France</td>
-              </tr>
-              <tr>
-                <td>Paris spécialités</td>
-                <td>Marie Bertrand</td>
-                <td>France</td>
-              </tr>
-              <tr>
-                <td>Paris spécialités</td>
-                <td>Marie Bertrand</td>
-                <td>France</td>
-              </tr>
-              <tr>
-                <td>Paris spécialités</td>
-                <td>Marie Bertrand</td>
-                <td>France</td>
-              </tr>
-              <tr>
-                <td>Paris spécialités</td>
-                <td>Marie Bertrand</td>
-                <td>France</td>
-              </tr>
-              <tr>
-                <td>Paris spécialités</td>
-                <td>Marie Bertrand</td>
-                <td>France</td>
-              </tr>
+              {displayData.map((x, i) => (
+                <tr key={i}>
+                  <td>{x.title}</td>
+                  <td>{x.detail}</td>
+                  <td>{x.time}</td>
+                </tr>
+              ))}
             </tbody>
+            <thead>
+              <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
           </table>
         </div>
       </div>
