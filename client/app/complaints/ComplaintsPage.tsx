@@ -64,7 +64,7 @@ const ComplaintsPage = ({ comps }: any) => {
       <div className={styles.lodge}>
         <div>
           <div>
-            <button>Complaints for Biobaku </button>
+            <button>Complaints for {comps[0].hostel} </button>
           </div>
           <div>
             <b>Categories</b>
