@@ -70,7 +70,7 @@ const ComplaintsPage = ({ comps }: any) => {
             <b>Categories</b>
             <ul className={styles.collapse}>
               {title().map((x, i) => (
-                <li onClick={() => handleFilter(x.title)}>
+                <li key={i} onClick={() => handleFilter(x.title)}>
                   <i
                     className={
                       catIcons.find((xx) => xx.title === x.title)?.icon
