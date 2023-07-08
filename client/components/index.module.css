@@ -315,9 +315,18 @@
   background-color: #33a0fc;
   padding: 9px 15px;
   color: #fff;
+  position: relative;
   margin: 10px 0;
   font-weight: 200;
   border-radius: 5px;
+  line-height: 1.8;
+}
+.currentNotice > div > i {
+  position: absolute;
+  left: -6px;
+  top: -2px;
+  color: #33a0fc;
+  font-size: 25px;
 }
 
 /* PROFILE  */

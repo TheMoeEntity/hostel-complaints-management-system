@@ -1,17 +1,19 @@
 "use client";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 import styles from "../index.module.css";
 import CalendarComponent from "./Calendar";
 import Charts from "./Charts";
 
-
-const Dashboard = ({dashCount}:any) => {
+const Dashboard = ({ dashCount, comps }: any) => {
   const { data: session } = useSession();
-  console.log(session)
+  console.log(comps);
   return (
     <div className={styles.dashboard}>
       <div className={styles.main}>
-        <h2 style={{color:'#303973'}}>{`Welcome, ${session?.user.first_name}`} </h2>
+        <h2 style={{ color: "#303973" }}>
+          {`Welcome, ${session?.user.first_name}`}{" "}
+        </h2>
         <div className={styles.bar}>
           <div className={styles.first}>
             <div>
@@ -54,7 +56,7 @@ const Dashboard = ({dashCount}:any) => {
         <div className={styles.calendar}>
           <div className={styles.calendarContainer}>
             <h3>School Calendar: </h3>
-            <CalendarComponent  />
+            <CalendarComponent />
           </div>
           <div>
             <Charts />
@@ -69,15 +71,23 @@ const Dashboard = ({dashCount}:any) => {
               </h3>
             </div>
             <div className={styles.currentNotice}>
-              <div>{`There's`} no light anywhere dawg [23rd May, 2023, 08:30pm].</div>
-              <div>Kerry keeps stealing my provisons [23rd May, 2023, 08:30pm].</div>
-              <div>Moses carries olosho too much [23rd May, 2023, 08:30pm].</div>
+              {comps.map(
+                (x: { description: string; date_filed: string }, i: number) => (
+                  <div key={i}>
+                    <i className="fa-solid fa-caret-left"></i>
+                    {x.description} [{x.date_filed}]
+                  </div>
+                )
+              )}
             </div>
             <div className={styles.noticeHeader}>
               <h3>
-                <i className="fa-solid fa-building"></i> &#160;&#160;&#160;Biobaku
+                <i className="fa-solid fa-building"></i> &#160;
+                {session?.user.hostel}
               </h3>
-              <h3 style={{color: '#33A0FC'}}>View all complaints</h3>
+              <Link href={`/complaints`}>
+                <h3 style={{ color: "#33A0FC" }}>all complaints</h3>
+              </Link>
             </div>
           </div>
           <div>

@@ -7,42 +7,56 @@ const getResources = async () => {
   const session = await getServerSession(authOptions);
   const url =
     "https://hostelcomplaintsmanagementsystem.onrender.com/api/auth/login/refresh/";
-    const res =     await fetch(url, {
-      method: "POST",
-      headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({refresh:session?.user.refresh}),
-    })
+  const res = await fetch(url, {
+    method: "POST",
+    headers: {
+      Accept: "application/json, text/plain, */*",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ refresh: session?.user.refresh }),
+  });
 
-    return res.json()
+  return res.json();
+};
+const getComplaints = async (resr: any) => {
+  const url =
+    "https://hostelcomplaintsmanagementsystem.onrender.com/api/dashboard/complaints/";
+  const res = await fetch(url, {
+    method: "GET",
+    headers: {
+      Accept: "application/json, text/plain, */*",
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + resr,
+    },
+  });
+
+  return res.json();
 };
 
-const getDashCount = async (resr:any) => {
+const getDashCount = async (resr: any) => {
   const url =
     "https://hostelcomplaintsmanagementsystem.onrender.com/api/dashboard/dashboard-count/";
-    const res = await fetch(url, {
-      method: "GET",
-      headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-Type": "application/json",
-        Authorization:"Bearer "+resr
-      },
-    })
+  const res = await fetch(url, {
+    method: "GET",
+    headers: {
+      Accept: "application/json, text/plain, */*",
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + resr,
+    },
+  });
 
-    return res.json()
+  return res.json();
 };
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
   // const newToken = await getResources();
-  const dashCount = await getDashCount(session?.user.access)
-  
+  const dashCount = await getDashCount(session?.user.access);
+  const comps = await getComplaints(session?.user.access);
 
   return (
     <main className={styles.main}>
-      <Dashboard dashCount={dashCount} />
+      <Dashboard dashCount={dashCount} comps={comps.data} />
     </main>
   );
 }
