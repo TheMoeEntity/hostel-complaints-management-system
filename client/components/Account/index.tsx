@@ -38,15 +38,19 @@ const Account = (details: any) => {
           <ul>
             <li>
               <span>Complaints</span>
-              <span>0</span>
+              <span>{details.details.students_details.all_complaints}</span>
             </li>
             <li>
               <span>Complaints (resolved)</span>
-              <span>0</span>
+              <span>
+                {details.details.students_details.resolved_complaints}
+              </span>
             </li>
             <li>
               <span>Complaints (unresolved)</span>
-              <span>0</span>
+              <span>
+                {details.details.students_details.unresolved_complaint}
+              </span>
             </li>
             <li>
               <span>Block</span>

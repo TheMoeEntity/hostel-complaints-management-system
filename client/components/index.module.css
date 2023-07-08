@@ -10,6 +10,7 @@
   color: white;
   overflow: scroll;
   background: linear-gradient(90deg, #4985ed, #538cef);
+  box-shadow: 5px 9px 30px 0 rgb(0 0 0 / 20%);
   /* background: linear-gradient(90deg, #4E44B5, #3a3192); */
   -ms-overflow-style: none; /* Internet Explorer 10+ */
   scrollbar-width: none;
@@ -21,6 +22,7 @@
   width: 20%;
   height: 100%;
   padding: 30px 10px;
+  box-shadow: 5px 9px 30px 0 rgba(0, 0, 0, 0.34);
   position: fixed;
   color: white;
   overflow: scroll;
@@ -53,23 +55,27 @@
   display: none; /* Safari and Chrome */
 }
 
-.sidebar h2, .sidebar2 h2 {
+.sidebar h2,
+.sidebar2 h2 {
   text-align: center;
   color: white;
   margin: 0;
   padding: 0;
   font-size: 19px;
 }
-.sidebar h4, .sidebar2 h4  {
+.sidebar h4,
+.sidebar2 h4 {
   text-align: center;
   font-weight: 200;
   margin-top: 20px;
 }
-.sidebar ul, .sidebar2 ul {
+.sidebar ul,
+.sidebar2 ul {
   width: 70%;
   margin: 100px auto;
 }
-.sidebar ul li, .sidebar2 ul li {
+.sidebar ul li,
+.sidebar2 ul li {
   list-style-type: none;
   margin: 40px 0;
   font-size: smaller;
@@ -78,7 +84,8 @@
   padding-bottom: 14px;
 }
 
-.sidebar ul li > div, .sidebar2 ul li > div {
+.sidebar ul li > div,
+.sidebar2 ul li > div {
   display: flex;
   justify-content: space-between;
   flex-flow: row wrap;
@@ -128,7 +135,7 @@
   position: absolute;
   top: 20px;
   left: 15px;
-  left:50%;
+  left: 50%;
   transform: translateX(-50%);
   display: none;
 }
@@ -562,7 +569,6 @@
   border-radius: 10px;
   transition: 0.4s;
   font-size: 13px;
-
 }
 .lodge > div:nth-child(1) ul {
   color: #20285c;
@@ -577,7 +583,7 @@
 }
 .lodge > div:nth-child(1) ul li i {
   margin-right: 18px;
-  color: #A099AF;
+  color: #a099af;
   width: 10px;
   height: 10px;
 }
@@ -595,14 +601,14 @@
   background-color: white;
 }
 .lodge > div:nth-child(2) form {
-  width:100%;
+  width: 100%;
   height: auto;
   padding: 20px 15px;
 }
 .lodge > div:nth-child(2) form input {
   width: 100%;
   height: 50px;
-  border: 1px solid #DDDDDD;
+  border: 1px solid #dddddd;
   margin: 10px 0;
   outline: #33a0fc;
   padding: 10px 20px;
@@ -611,7 +617,7 @@
 .lodge > div:nth-child(2) form textarea {
   width: 100%;
   height: auto;
-  border: 1px solid #DDDDDD;
+  border: 1px solid #dddddd;
   margin: 10px 0;
   outline: #33a0fc;
   padding: 10px 20px;
@@ -625,8 +631,8 @@
   height: 200px;
   margin: 20px 0;
   border-radius: 10px;
-  background-color: #F5F5F5;
-  color: #A099AF;
+  background-color: #f5f5f5;
+  color: #a099af;
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -637,7 +643,7 @@
 }
 @media screen and (max-width: 1022px) {
   .firstDiv {
-      width: 24%;
+    width: 24%;
   }
 }
 @media screen and (max-width: 1202px) {
@@ -666,7 +672,7 @@
   }
 }
 @media screen and (max-width: 886px) {
-  .firstDiv ul li span{
+  .firstDiv ul li span {
     font-size: 12px !important;
   }
 }
@@ -755,13 +761,13 @@
   }
 }
 .compHeader {
-  width:100%;
+  width: 100%;
   height: 120px;
   display: flex;
   justify-content: space-between;
   padding: 10px;
   flex-flow: row wrap;
-  border-bottom: 1px solid #E7E5EA;
+  border-bottom: 1px solid #e7e5ea;
 }
 .image {
   width: fit-content;
@@ -777,8 +783,8 @@
   font-size: small;
 }
 .name span {
-  display:block;
-  margin:10px 0 ;
+  display: block;
+  margin: 10px 0;
 }
 .compTitle {
   padding: 20px 10px;
@@ -792,10 +798,10 @@
 .comp {
   padding: 0px 10px;
   font-size: small;
-  color: #A099AF;
+  color: #a099af;
   line-height: 2.1;
   font-weight: 400;
-  border-bottom: 1px solid #E7E5EA;
+  border-bottom: 1px solid #e7e5ea;
   padding-bottom: 20px;
 }
 .compTitle h3 {
@@ -807,7 +813,8 @@
   .editProfile {
     flex-flow: column wrap;
   }
-  .editProfile > div:nth-child(2), .firstDiv {
+  .editProfile > div:nth-child(2),
+  .firstDiv {
     margin: 20px 0;
     width: 100%;
   }
@@ -818,10 +825,11 @@
     flex-flow: column wrap;
     justify-content: space-between;
   }
-  .lodge > div:nth-child(1) ul  {
+  .lodge > div:nth-child(1) ul {
     margin-bottom: 0;
   }
-  .lodge > div:nth-child(1),  .lodge > div:nth-child(2){
+  .lodge > div:nth-child(1),
+  .lodge > div:nth-child(2) {
     width: 100%;
     margin: 20px 0;
   }
@@ -840,8 +848,8 @@
     /* overflow: hidden; */
     margin: 20px 0;
   }
-  .titlebar > div:nth-child(2) > div  {
-    width:30px;
+  .titlebar > div:nth-child(2) > div {
+    width: 30px;
     height: 30px;
     font-size: 13px;
   }

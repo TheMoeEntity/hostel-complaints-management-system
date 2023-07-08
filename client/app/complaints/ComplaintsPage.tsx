@@ -2,13 +2,15 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import styles from "../../components/index.module.css";
-
-const ComplaintsPage = ({comps}:any) => {
+// enum categories {
+//   light_issues:''
+// }
+const ComplaintsPage = ({ comps }: any) => {
   const router = useRouter();
   const linkAction = (to: string) => {
     router.push("/" + to);
   };
-  console.log("comps",comps)
+  console.log("comps", comps);
   return (
     <div className={styles.main}>
       <div className={styles.lodge}>
