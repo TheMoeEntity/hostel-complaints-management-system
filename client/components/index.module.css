@@ -117,11 +117,12 @@
   transform: translateX(-50%);
   display: none;
 }
-/* .close {
+.close {
   position: absolute;
-  right: 0px;
-  top: 20px;
-} */
+  left: 10px;
+  top: 1px;
+  font-size: 20px;
+}
 .logo img {
   border-radius: 50%;
 }
@@ -619,6 +620,11 @@
 .lodge > div:nth-child(2) form button {
   width: fit-content;
 }
+@media screen and (max-width: 1022px) {
+  .firstDiv {
+      width: 24%;
+  }
+}
 @media screen and (max-width: 1202px) {
   .bar {
     padding: 20px 15px !important;
@@ -642,6 +648,11 @@
   }
   .calendar > div {
     margin: 0 10px;
+  }
+}
+@media screen and (max-width: 886px) {
+  .firstDiv ul li span{
+    font-size: 12px !important;
   }
 }
 @media screen and (max-width: 999px) {
@@ -777,6 +788,15 @@
   font-weight: 500;
   margin: 0 !important;
 }
+@media screen and (max-width: 700px) {
+  .editProfile {
+    flex-flow: column wrap;
+  }
+  .editProfile > div:nth-child(2), .firstDiv {
+    margin: 20px 0;
+    width: 100%;
+  }
+}
 @media screen and (max-width: 640px) {
   .lodge {
     display: flex;
@@ -789,6 +809,14 @@
   .lodge > div:nth-child(1),  .lodge > div:nth-child(2){
     width: 100%;
     margin: 20px 0;
+  }
+  .editProfile > div:nth-child(2) form > div {
+    flex-flow: column wrap;
+    margin: 0px 0;
+  }
+  .editProfile > div:nth-child(2) form > div .formGroup {
+    margin: 25px 0;
+    width: 100%;
   }
   .collapse {
     /* transition: 0.4s;

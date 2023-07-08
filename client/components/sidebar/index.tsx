@@ -44,6 +44,15 @@ const Sidebar = () => {
     checkPorter();
   }, []);
 
+  useEffect(()=> {
+    console.log(sideBarRef.current?.style.width)
+      // if (sidebar === true) {
+      //   showSideBar('none')
+      // } else {
+      //   showSideBar('translateX(-100%)')
+      // }
+  },[sidebar])
+
   const showSideBar = (show: string) => {
     if (sideBarRef.current) {
       sideBarRef.current.style.transform = show;
@@ -56,11 +65,11 @@ const Sidebar = () => {
   return (
     <div>
       <div
-        style={{ background: backgroundMode }}
+        style={{ background: backgroundMode, width:sidebar ? '425%':'20%' }}
         ref={sideBarRef}
         className={styles.sidebar}
       >
-        {/* <div className={styles.close}>
+        {/* <div onClick={()=> setSideBar(false)} className={styles.close}>
           &times;
         </div> */}
         <section className={styles.logo}>

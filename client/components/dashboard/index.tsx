@@ -1,14 +1,16 @@
 "use client";
+import { useSession } from "next-auth/react";
 import styles from "../index.module.css";
 import CalendarComponent from "./Calendar";
 import Charts from "./Charts";
 
 
-const Dashboard = () => {
-  
+const Dashboard = ({dashCount}:any) => {
+  const { data: session } = useSession();
   return (
     <div className={styles.dashboard}>
       <div className={styles.main}>
+        <h2 style={{color:'#303973'}}>{`Welcome, ${session?.user.first_name}`} </h2>
         <div className={styles.bar}>
           <div className={styles.first}>
             <div>
@@ -16,7 +18,7 @@ const Dashboard = () => {
             </div>
             <div>
               <div>Students</div>
-              <strong>235</strong>
+              <strong>{dashCount.data.student_count}</strong>
             </div>
           </div>
           <div className={styles.second}>
@@ -25,7 +27,7 @@ const Dashboard = () => {
             </div>
             <div>
               <div>Rooms</div>
-              <strong>235</strong>
+              <strong>{dashCount.data.hostel_room_count}</strong>
             </div>
           </div>
           <div className={styles.third}>
@@ -34,7 +36,7 @@ const Dashboard = () => {
             </div>
             <div>
               <div>Porters</div>
-              <strong>29</strong>
+              <strong>{dashCount.data.porter_count}</strong>
             </div>
           </div>
           <div className={styles.fourth}>
@@ -43,7 +45,7 @@ const Dashboard = () => {
             </div>
             <div>
               <div>Complaints</div>
-              <strong>235</strong>
+              <strong>{dashCount.data.complaints_count}</strong>
             </div>
           </div>
         </div>

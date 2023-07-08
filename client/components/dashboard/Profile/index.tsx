@@ -8,12 +8,7 @@ import { useState } from 'react';
 
 const Profile = (props:{profileOpen:boolean, forceClose:() => void}) => {
   const {data:session} = useSession()
-  console.log(session)
-  const [cred,setCred] = useState(()=> {
-    if (session) {
-      return session
-    }
-  })
+
   return (
     <section
       style={{
