@@ -37,15 +37,7 @@ export const authOptions: NextAuthOptions = {
           porter === true
             ? "https://hostelcomplaintsmanagementsystem.onrender.com/api/auth/porters/login/"
             : "https://hostelcomplaintsmanagementsystem.onrender.com/api/auth/students/login/";
-        const userDetails = JSON.stringify({
-          matric_number: credentials?.matric,
-          password: credentials?.password,
-        });
-        const porterDetails = JSON.stringify({
-          email: credentials?.email,
-          matric_number: "null",
-          password: credentials?.password,
-        });
+
         let responseData:any
         const { user, jwtz } = await axios
           .post(
@@ -74,6 +66,8 @@ export const authOptions: NextAuthOptions = {
         } else {
 
         } 
+        console.log("user",user)
+        console.log("other,",jwtz)
       },
     }),
   ],

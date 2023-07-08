@@ -30,7 +30,7 @@ const Sidebar = () => {
     useState<{ title: string; icon: string; link: string }[]>(assets);
 
   const checkPorter = (): { title: string; icon: string; link: string }[] => {
-    session?.user.is_student
+    session?.user.is_student === true
       ? setFiltered(assets.filter((x) => x.title !== "Students"))
       : setFiltered(assets);
 

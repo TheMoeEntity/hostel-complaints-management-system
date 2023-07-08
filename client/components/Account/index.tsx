@@ -2,8 +2,12 @@
 import styles from "../index.module.css";
 import Image from "next/image";
 import count1 from "../../public/images/user.jpeg";
+import { useSession } from "next-auth/react";
 
-const Account = () => {
+const Account = (details: any) => {
+  const { data: session } = useSession();
+  console.log(details.details);
+
   return (
     <div className={styles.main}>
       <div className={styles.editProfile}>
@@ -22,31 +26,35 @@ const Account = () => {
             />
           </div>
           <div>
-            <span>Moses Nwigberi</span>
-            <span>Lerryonyeogo@gmail.com</span>
-            <span>180401007</span>
-            <strong>BIOBAKU HALL</strong>
+            <span>
+              {(details.details.students_details.first_name as string) +
+                " " +
+                details.details.students_details.last_name}
+            </span>
+            <span>{details.details.students_details.email}</span>
+            <span>{details.details.students_details.matric_number}</span>
+            <strong>{session?.user.hostel}</strong>
           </div>
           <ul>
             <li>
               <span>Complaints</span>
-              <span>43</span>
+              <span>0</span>
             </li>
             <li>
               <span>Complaints (resolved)</span>
-              <span>10</span>
+              <span>0</span>
             </li>
             <li>
               <span>Complaints (unresolved)</span>
-              <span>6</span>
+              <span>0</span>
             </li>
             <li>
               <span>Block</span>
-              <span>Block C</span>
+              <span>{details.details.block_no}</span>
             </li>
             <li>
               <span>Room number</span>
-              <span>B312</span>
+              <span>{details.details.room_no}</span>
             </li>
           </ul>
         </div>
@@ -58,21 +66,41 @@ const Account = () => {
             <div>
               <div className={styles.formGroup}>
                 <label htmlFor="">First Name</label>
-                <input defaultValue={'Moses'} type="text" name="" id="" />
+                <input
+                  defaultValue={details.details.students_details.first_name}
+                  type="text"
+                  name=""
+                  id=""
+                />
               </div>
               <div className={styles.formGroup}>
                 <label htmlFor="">Last Name</label>
-                <input defaultValue={'Nwigberi'} type="text" name="" id="" />
+                <input
+                  defaultValue={details.details.students_details.last_name}
+                  type="text"
+                  name=""
+                  id=""
+                />
               </div>
             </div>
             <div>
               <div className={styles.formGroup}>
                 <label htmlFor="">Email Address</label>
-                <input defaultValue={'mosesnwigberi@gmail.com'} type="email" name="" id="" />
+                <input
+                  defaultValue={details.details.students_details.email}
+                  type="email"
+                  name=""
+                  id=""
+                />
               </div>
               <div className={styles.formGroup}>
                 <label htmlFor="">Hostel</label>
-                <input defaultValue={'BIOBAKU HALL'} type="text" name="" id="" />
+                <input
+                  defaultValue={session?.user.hostel}
+                  type="text"
+                  name=""
+                  id=""
+                />
               </div>
             </div>
             <div>
@@ -82,21 +110,39 @@ const Account = () => {
               </div>
               <div className={styles.formGroup}>
                 <label htmlFor="">Matric number</label>
-                <input defaultValue={'18040117'} type="text" name="" id="" />
+                <input
+                  defaultValue={details.details.students_details.matric_number}
+                  type="text"
+                  name=""
+                  id=""
+                />
               </div>
             </div>
             <div>
               <div className={styles.formGroup}>
                 <label htmlFor="">Department:</label>
-                <input defaultValue={'Chemical Engineering'} type="tel" name="" id="" />
+                <input
+                  defaultValue={details.details.department}
+                  type="tel"
+                  name=""
+                  id=""
+                />
               </div>
               <div className={styles.formGroup}>
                 <label htmlFor="">Faculty: </label>
-                <input defaultValue={'Engineering'} type="text" name="" id="" />
+                <input
+                  defaultValue={details.details.faculty}
+                  type="text"
+                  name=""
+                  id=""
+                />
               </div>
             </div>
           </form>
-          <div style={{borderTop:'0.09px solid #30397329'}} className={styles.setupHeader}>
+          <div
+            style={{ borderTop: "0.09px solid #30397329" }}
+            className={styles.setupHeader}
+          >
             <button>UPDATE</button>
           </div>
         </div>

@@ -2,7 +2,7 @@
 import Link from "next/link";
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import styles from "../page.module.css";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useSnackbar } from "notistack";
 import axios from "axios";
 
@@ -15,6 +15,7 @@ const SignupPage = ({ hostels }: propType) => {
   const [isPorter, setPorter] = useState<boolean>(false);
   const { enqueueSnackbar } = useSnackbar();
   const [status, setStatus] = useState("Register");
+    const router = useRouter()
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -99,6 +100,7 @@ const SignupPage = ({ hostels }: propType) => {
           enqueueSnackbar("User successfully created ", {
             variant: "success",
           });
+          router.push(`/login${isPorter?'?porter=true':''}`)
         }
       })
       .catch((err) => {

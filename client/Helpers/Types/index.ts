@@ -20,6 +20,9 @@ export type payload = {
   is_staff:boolean,
   refresh:string
 }
+export type profileDetails = {
+  
+}
 export const options: string[] = [
   "KING-JAJA HOSTEL",
   "BIOBAKU HALL",

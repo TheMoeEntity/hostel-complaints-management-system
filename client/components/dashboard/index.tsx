@@ -7,6 +7,7 @@ import Charts from "./Charts";
 
 const Dashboard = ({dashCount}:any) => {
   const { data: session } = useSession();
+  console.log(session)
   return (
     <div className={styles.dashboard}>
       <div className={styles.main}>

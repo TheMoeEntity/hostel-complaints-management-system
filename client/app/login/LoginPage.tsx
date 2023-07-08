@@ -43,6 +43,7 @@ const LoginPage = () => {
       // const parsed = JSON.parse(res)
       console.log(JSON.parse(res?.error as string));
       if (!res?.error) {
+        console.log(res)
         router.push(callbackUrl);
         enqueueSnackbar("Login success", { variant:'success'})
       } else {
