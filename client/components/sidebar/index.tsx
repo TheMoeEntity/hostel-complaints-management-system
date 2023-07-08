@@ -77,7 +77,7 @@ const Sidebar = () => {
         </ul>
       </div>
       <div
-        style={{ background: backgroundMode, width: sidebar ? "425%" : "20%" }}
+        style={{ background: backgroundMode,}}
         ref={sideBarRef}
         className={styles.sidebar}
       >
@@ -117,7 +117,7 @@ const Sidebar = () => {
             <i className="fa-solid fa-bars"></i>
           </section>
           <h2>
-            {pathname === "/account" ? "Edit Profile " : "Biobaku Hall "}
+            {pathname === "/account" ? "Edit Profile " : session?.user.hostel}
             {pathname === "/account" ? (
               <i className="fa-solid fa-pen"></i>
             ) : (

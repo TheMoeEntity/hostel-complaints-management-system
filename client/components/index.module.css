@@ -110,7 +110,7 @@
   position: relative;
   position: fixed;
   margin-left: 20%;
-  z-index: 1000;
+  z-index: 998;
   margin-bottom: 50px;
   padding-left: 30px;
   background-color: #e6ebee;
