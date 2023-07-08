@@ -209,7 +209,7 @@ a {
 }
 @media screen and (max-width: 600px) {
 
-#customers td {
+#customers td, #customers th {
   white-space: nowrap;
   overflow: scroll;
   text-overflow: clip;

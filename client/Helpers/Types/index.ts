@@ -1,4 +1,6 @@
+import { authOptions } from "@/lib/auth";
 import axios from "axios";
+import { getServerSession } from "next-auth";
 export type postTypes = {
   title: string;
   body: string;
@@ -26,6 +28,25 @@ export const options: string[] = [
   "SODEINDE HALL",
   "EL-KANEMI HALL"
 ];
+export type studType ={
+
+  faculty: string | null | undefined
+  department: string| null,
+  students_details: {
+    first_name: string | null,
+    last_name?: string | null,
+    matric_number?: string | null
+  },
+  block_no: string | null,
+  room_no:string | null
+}
+export type porterType = {
+  porter_details: {
+    email:string | null,
+    first_name: string | null,
+    last_name: string | null
+  }
+}
 export const assets: { icon: string; title: string, link:`/`|'/students'|'/complaints'|'/porters' }[] = [
   {
     icon: "fa-solid fa-gauge",
@@ -68,6 +89,19 @@ export class Helpers {
 		})
     return hostels
   }
+  static fetchData = async ( url:string) => {
+    const session = await getServerSession(authOptions);
+      const res = await fetch(url, {
+        method: "GET",
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+          Authorization:"Bearer "+session?.user.access
+        },
+      })
+  
+      return res.json()
+  };
   static showError(type:string) {
     switch (type) {
       case 'email':

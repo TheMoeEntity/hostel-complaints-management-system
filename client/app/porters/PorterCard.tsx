@@ -1,7 +1,7 @@
 import Image from "next/image"
 import count1 from '../../public/images/user.jpeg'
 import styles from "../../components/index.module.css";
-const PorterCard = () => {
+const PorterCard = ({email, first, last}:{last:string|null, first:string|null, email:string|null}) => {
   return (
     <div style={{height:'auto'}} className={styles.firstDiv}>
     <div
@@ -18,8 +18,8 @@ const PorterCard = () => {
       />
     </div>
     <div>
-      <span>Moses Nwigberi</span>
-      <span>Lerryonyeogo@gmail.com</span>
+      <span>{first+" "+last}</span>
+      <span>{email}</span>
       <strong>Porter</strong>
     </div>
     {/* <ul>
