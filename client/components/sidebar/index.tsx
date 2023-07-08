@@ -12,11 +12,13 @@ import Image from "next/image";
 import { useSession } from "next-auth/react";
 const Sidebar = () => {
   const { data: session } = useSession();
-  const backgroundMode:string = session?.user.is_porter
+  const backgroundMode: string = session?.user.is_porter
     ? "linear-gradient(90deg, #4E44B5, #3a3192)"
     : "linear-gradient(90deg, #4985ed, #538cef)";
-  const text:string = session?.user.is_porter ? "Porters" : "Students"
-  const iconClass:string = session?.user.is_porter ? "fa-solid fa-person":"fas fa-graduation-cap"
+  const text: string = session?.user.is_porter ? "Porters" : "Students";
+  const iconClass: string = session?.user.is_porter
+    ? "fa-solid fa-person"
+    : "fas fa-graduation-cap";
   const searchparams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -44,28 +46,52 @@ const Sidebar = () => {
     checkPorter();
   }, []);
 
-  useEffect(()=> {
-    console.log(sideBarRef.current?.style.width)
-      // if (sidebar === true) {
-      //   showSideBar('none')
-      // } else {
-      //   showSideBar('translateX(-100%)')
-      // }
-  },[sidebar])
-
-  const showSideBar = (show: string) => {
-    if (sideBarRef.current) {
-      sideBarRef.current.style.transform = show;
-    }
-  };
-  const open = () => {
-    setSideBar(true);
-  };
-
   return (
     <div>
       <div
-        style={{ background: backgroundMode, width:sidebar ? '425%':'20%' }}
+        style={{
+          background: backgroundMode,
+          transform: sidebar ? "none" : " translateX(-100%)",
+          width: sidebar ? "45%" : "20%",
+        }}
+        className={styles.sidebar2}
+      >
+        <div onClick={() => setSideBar(false)} className={styles.close}>
+          &times;
+        </div>
+        <Link href={"/"}>
+          <h2>Crawford University</h2>
+        </Link>
+        <h4>hostel management</h4>
+        <ul>
+          {assets.map((x, i) =>
+            i === 1 ? (
+              <li key={i}>
+                <Link href={`${x.link}`}>
+                  <div>
+                    <i
+                      style={{ marginRight: "10px" }}
+                      className={iconClass}
+                    ></i>
+                    {text}
+                  </div>
+                </Link>
+              </li>
+            ) : (
+              <li key={i}>
+                <Link href={`${x.link}`}>
+                  <div>
+                    <i style={{ marginRight: "10px" }} className={x.icon}></i>
+                    {x.title}
+                  </div>
+                </Link>
+              </li>
+            )
+          )}
+        </ul>
+      </div>
+      <div
+        style={{ background: backgroundMode, width: sidebar ? "425%" : "20%" }}
         ref={sideBarRef}
         className={styles.sidebar}
       >
@@ -92,7 +118,10 @@ const Sidebar = () => {
               <li key={i}>
                 <Link href={`${x.link}`}>
                   <div>
-                    <i style={{ marginRight: "10px" }} className={iconClass}></i>
+                    <i
+                      style={{ marginRight: "10px" }}
+                      className={iconClass}
+                    ></i>
                     {text}
                   </div>
                 </Link>
@@ -112,7 +141,7 @@ const Sidebar = () => {
       </div>
       <div className={styles.titlebar}>
         <div className={styles.one}>
-          <section onClick={open} className={styles.sect}>
+          <section onClick={() => setSideBar(true)} className={styles.sect}>
             <i className="fa-solid fa-bars"></i>
           </section>
           <h2>
