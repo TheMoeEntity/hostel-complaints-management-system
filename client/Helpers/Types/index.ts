@@ -33,15 +33,15 @@ export const assets: { icon: string; title: string, link:`/`|'/students'|'/compl
     link:'/'
   },
   {
+    icon: "fa-solid fa-person",
+    title: "Porters",
+    link:'/porters'
+  },
+  {
     icon: "fas fa-graduation-cap",
     title: "Students",
     link:'/students'
   },
-  // {
-  //   icon: "fa-solid fa-person",
-  //   title: "Porters",
-  //   link:'/porters'
-  // },
 ];
 export class Helpers {
   static async getHostels(url:string) {

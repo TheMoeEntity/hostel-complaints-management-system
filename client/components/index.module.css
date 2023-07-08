@@ -524,7 +524,7 @@
   height: auto;
   padding: 0px 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-flow: row wrap;
 }
 .porterCard > div {
@@ -850,6 +850,19 @@
   }
 }
 @media screen and (max-width: 450px) {
+  .bar {
+    justify-content: space-between;
+  }
+  .bar > div:nth-child(odd) {
+    margin-left: 0 !important;
+  }
+  .bar > div:nth-child(even) {
+    margin-right: 0 !important;
+  }
+  .bar > div:last-child {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+  }
   .main {
     margin-top: 100px;
   }

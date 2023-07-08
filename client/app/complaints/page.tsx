@@ -1,10 +1,28 @@
+import { authOptions } from "@/lib/auth";
+import { getServerSession } from "next-auth";
 import styles from "../page.module.css";
 import ComplaintsPage from "./ComplaintsPage";
+const getComplaints = async (resr:any) => {
+  const url =
+    "https://hostelcomplaintsmanagementsystem.onrender.com/api/dashboard/complaints/";
+    const res = await fetch(url, {
+      method: "GET",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+        Authorization:"Bearer "+resr
+      },
+    })
 
-const Complaints = () => {
+    return res.json()
+};
+const Complaints = async() => {
+  const session = await getServerSession(authOptions);
+  // const newToken = await getResources();
+  const comps = await getComplaints(session?.user.access)
   return (
     <main className={styles.main}>
-      <ComplaintsPage />
+      <ComplaintsPage comps={comps} />
     </main>
   );
 };

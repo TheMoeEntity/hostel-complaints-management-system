@@ -2,26 +2,18 @@
 import styles from "../../components/index.module.css";
 
 const StudentsPage = () => {
-  // const styless = {
-  //   marginLeft: "20%",
-  //   marginTop: "80px",
-  //   width: "80%",
-  //   height: "auto",
-  //   transition: "0.5s",
-  //   padding: "10px 0px",
-  //   overflowX: "auto",
-  //   minWidth:
-  // }
+
   return (
-    <div className={styles.main}>
-      <div className={styles.search}>
+    <div style={{overflowX:'auto'}} className={styles.main}>
+      {/* <div className={styles.search}>
         <div>
           <input type="search" placeholder="Search here..." />
         </div>
         <div>
           <button>Students list</button>
         </div>
-      </div>
+      </div> */}
+      <h2>List of Students in hostel</h2> <br />
       <table id="customers">
         <thead>
           <tr>

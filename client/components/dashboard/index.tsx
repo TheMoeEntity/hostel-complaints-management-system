@@ -32,20 +32,20 @@ const Dashboard = ({dashCount}:any) => {
           </div>
           <div className={styles.third}>
             <div>
-              <i className="fa-solid fa-person"></i>
-            </div>
-            <div>
-              <div>Porters</div>
-              <strong>{dashCount.data.porter_count}</strong>
-            </div>
-          </div>
-          <div className={styles.fourth}>
-            <div>
               <i className="fa-solid fa-person-harassing"></i>
             </div>
             <div>
               <div>Complaints</div>
               <strong>{dashCount.data.complaints_count}</strong>
+            </div>
+          </div>
+          <div className={styles.fourth}>
+            <div>
+              <i className="fa-solid fa-person"></i>
+            </div>
+            <div>
+              <div>Porter</div>
+              <strong>{dashCount.data.porter_count}</strong>
             </div>
           </div>
         </div>

@@ -15,10 +15,11 @@ const PortersPage = () => {
   // }
   return (
     <div className={styles.main}>
-      <div className={styles.search}>
+      {/* <div className={styles.search}>
           <div><input type="search" placeholder="Search here..."/></div>
           <div><button>Porters list</button></div>
-      </div>
+      </div> */}
+      <h2 style={{textAlign:'center'}}>List of Porters in hostel</h2> <br />
         <div className={styles.porterCard}>
             {
                 [...Array(8)].map((_x,i)=> (

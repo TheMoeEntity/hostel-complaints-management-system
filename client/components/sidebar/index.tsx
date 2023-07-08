@@ -15,10 +15,10 @@ const Sidebar = () => {
   const backgroundMode: string = session?.user.is_porter
     ? "linear-gradient(90deg, #4E44B5, #3a3192)"
     : "linear-gradient(90deg, #4985ed, #538cef)";
-  const text: string = session?.user.is_porter ? "Porters" : "Students";
+  const text: string = session?.user.is_porter ? "Students" : "Porters";
   const iconClass: string = session?.user.is_porter
-    ? "fa-solid fa-person"
-    : "fas fa-graduation-cap";
+    ? "fas fa-graduation-cap"
+    : "fa-solid fa-person";
   const searchparams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -30,9 +30,9 @@ const Sidebar = () => {
     useState<{ title: string; icon: string; link: string }[]>(assets);
 
   const checkPorter = (): { title: string; icon: string; link: string }[] => {
-    isPorter || pathname === "/porters"
+    session?.user.is_student
       ? setFiltered(assets.filter((x) => x.title !== "Students"))
-      : setFiltered(assets.filter((x) => x.title !== "Porters"));
+      : setFiltered(assets);
 
     return filteredAssets;
   };
@@ -64,30 +64,16 @@ const Sidebar = () => {
         </Link>
         <h4>hostel management</h4>
         <ul>
-          {assets.map((x, i) =>
-            i === 1 ? (
-              <li key={i}>
-                <Link href={`${x.link}`}>
-                  <div>
-                    <i
-                      style={{ marginRight: "10px" }}
-                      className={iconClass}
-                    ></i>
-                    {text}
-                  </div>
-                </Link>
-              </li>
-            ) : (
-              <li key={i}>
-                <Link href={`${x.link}`}>
-                  <div>
-                    <i style={{ marginRight: "10px" }} className={x.icon}></i>
-                    {x.title}
-                  </div>
-                </Link>
-              </li>
-            )
-          )}
+          {filteredAssets.map((x, i) => (
+            <li key={i}>
+              <Link href={`${x.link}`}>
+                <div>
+                  <i style={{ marginRight: "10px" }} className={x.icon}></i>
+                  {x.title}
+                </div>
+              </Link>
+            </li>
+          ))}
         </ul>
       </div>
       <div
@@ -113,30 +99,16 @@ const Sidebar = () => {
         </Link>
         <h4>hostel management</h4>
         <ul>
-          {assets.map((x, i) =>
-            i === 1 ? (
-              <li key={i}>
-                <Link href={`${x.link}`}>
-                  <div>
-                    <i
-                      style={{ marginRight: "10px" }}
-                      className={iconClass}
-                    ></i>
-                    {text}
-                  </div>
-                </Link>
-              </li>
-            ) : (
-              <li key={i}>
-                <Link href={`${x.link}`}>
-                  <div>
-                    <i style={{ marginRight: "10px" }} className={x.icon}></i>
-                    {x.title}
-                  </div>
-                </Link>
-              </li>
-            )
-          )}
+          {filteredAssets.map((x, i) => (
+            <li key={i}>
+              <Link href={`${x.link}`}>
+                <div>
+                  <i style={{ marginRight: "10px" }} className={x.icon}></i>
+                  {x.title}
+                </div>
+              </Link>
+            </li>
+          ))}
         </ul>
       </div>
       <div className={styles.titlebar}>
