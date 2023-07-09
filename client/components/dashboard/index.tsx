@@ -4,6 +4,7 @@ import Link from "next/link";
 import styles from "../index.module.css";
 import CalendarComponent from "./Calendar";
 import Charts from "./Charts";
+import { motion } from "framer-motion";
 
 const Dashboard = ({ dashCount, comps }: any) => {
   const { data: session } = useSession();
@@ -11,9 +12,28 @@ const Dashboard = ({ dashCount, comps }: any) => {
   return (
     <div className={styles.dashboard}>
       <div className={styles.main}>
-        <h2 style={{ color: "#303973" }}>
-          {`Welcome, ${session?.user.first_name}`}{" "}
-        </h2>
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: {
+              scale: 0,
+              opacity: 0,
+            },
+            visible: {
+              scale: 1,
+              opacity: 1,
+              transition: {
+                delay: 0.8,
+                duration: 1.4,
+              },
+            },
+          }}
+        >
+          <h2 style={{ color: "#303973" }}>
+            {`Welcome, ${session?.user.first_name}`}{" "}
+          </h2>
+        </motion.div>
         <div className={styles.bar}>
           <div className={styles.first}>
             <div>

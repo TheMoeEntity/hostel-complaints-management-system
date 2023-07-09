@@ -1,7 +1,8 @@
 "use client";
 import styles from "../index.module.css";
 import Image from "next/image";
-import count1 from "../../public/images/user.jpeg";
+import count1 from "../../public/images/avatar.png";
+import count2 from "../../public/images/avatar-stud.webp";
 import { useSession } from "next-auth/react";
 
 const Account = (details: any) => {
@@ -16,7 +17,7 @@ const Account = (details: any) => {
             style={{ position: "relative", width: "120px", height: "120px" }}
           >
             <Image
-              src={count1}
+              src={session?.user.is_porter ? count1:count2 ?? count1}
               alt="user image"
               layout="fill"
               quality={100}

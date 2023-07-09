@@ -1,27 +1,24 @@
 "use client";
-import { ChangeEvent, FormEvent, useRef } from "react";
+import { ChangeEvent, FormEvent, useRef, useState } from "react";
 import styles from "../../components/index.module.css";
+import Chatscreen from "@/components/Chatscreen/index.jsx";
 
 const LodgePage = () => {
-    const inputFile = useRef<null | HTMLInputElement>(null)
-    const handleSubmit = (e:FormEvent<HTMLFormElement>)=> {
-        e.preventDefault()
-    }
-    const handleFileSelected = (e:React.ChangeEvent<HTMLInputElement>) => {
-        // const files = Array.from(e.target.files)
-        // console.log(files[0])
-        // setCurrFile(files[0].name)
-        // setSize(formatBytes(files[0].size))
-      }
+  const inputFile = useRef<null | HTMLInputElement>(null);
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
+  const [show,setShow] = useState(false)
+  const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>) => {};
   return (
     <div className={styles.main}>
+      <Chatscreen close={()=> setShow(false)} show={show} />
       <div className={styles.lodge}>
         <div>
           <div>
             <button> + Make a complaint</button>
           </div>
           <div>
-            
             <ul>
               <li>
                 <i className="fa fa-envelope"></i> <span>Inbox</span>
@@ -61,26 +58,42 @@ const LodgePage = () => {
           <div></div>
         </div>
         <div>
-            <form action="" onSubmit={e => handleSubmit}>
-                <input placeholder="To:" type="text" />
-                <input placeholder="Subject" type="text" />
-                <input placeholder="Category: Light" type="text" readOnly />
-                <textarea placeholder="Enter text" name="" id="" cols={30} rows={10}></textarea>
-                <div>
-                <i className="fa-solid fa-paperclip"></i>
-                    <b>Attachment</b>
-                </div>
-                <div className={styles.attach}>
-                    <p>Click to upload extra files</p>
-                </div>
-                <input onChange={e => handleFileSelected(e)} type='file' id='file' ref={inputFile} style={{display: 'none'}}/>
-                <div>
-                    <button type="submit">
-                    <i className="fa-solid fa-paper-plane"></i> 
-                        Lodge Complaint
-                    </button>
-                </div>
-            </form>
+          <form action="" onSubmit={(e) => handleSubmit}>
+            <input placeholder="To:" type="text" />
+            <input placeholder="Subject" type="text" />
+            <input placeholder="Category: Light" type="text" readOnly />
+            <textarea
+              placeholder="Enter text"
+              name=""
+              id=""
+              cols={30}
+              rows={10}
+            ></textarea>
+            <div>
+              <i className="fa-solid fa-paperclip"></i>
+              <b>Attachment</b>
+            </div>
+            <div className={styles.attach}>
+              <p>Click to upload extra files</p>
+            </div>
+            <input
+              onChange={(e) => handleFileSelected(e)}
+              type="file"
+              id="file"
+              ref={inputFile}
+              style={{ display: "none" }}
+            />
+            <div>
+              <button type="submit">
+                <i className="fa-solid fa-paper-plane"></i>
+                Lodge Complaint
+              </button>
+              <button onClick={()=> setShow(true)} style={{ marginLeft: "20px" }} type="button">
+                <i className="fa-solid fa-robot"></i>
+                AI Assistant
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

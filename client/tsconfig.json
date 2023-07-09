@@ -23,6 +23,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/api/auth/[...nextauth].js", "app/students/StudentsPage.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/api/auth/[...nextauth].js", "app/students/StudentsPage.tsx", "components/Chatscreen/index.jsx"],
   "exclude": ["node_modules"]
 }

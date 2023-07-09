@@ -30,7 +30,7 @@ const Sidebar = () => {
     useState<{ title: string; icon: string; link: string }[]>(assets);
 
   const checkPorter = (): { title: string; icon: string; link: string }[] => {
-    session?.user.is_student === true
+    session?.user.is_student === true || session?.user.is_student === undefined
       ? setFiltered(assets.filter((x) => x.title !== "Students"))
       : setFiltered(assets);
 
@@ -52,7 +52,7 @@ const Sidebar = () => {
         style={{
           background: backgroundMode,
           transform: sidebar ? "none" : " translateX(-100%)",
-          width: sidebar ? "45%" : "20%",
+          width: sidebar ? "55%" : "20%",
         }}
         className={styles.sidebar2}
       >
@@ -77,7 +77,7 @@ const Sidebar = () => {
         </ul>
       </div>
       <div
-        style={{ background: backgroundMode,}}
+        style={{ background: backgroundMode }}
         ref={sideBarRef}
         className={styles.sidebar}
       >

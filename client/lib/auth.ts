@@ -38,7 +38,7 @@ export const authOptions: NextAuthOptions = {
             ? "https://hostelcomplaintsmanagementsystem.onrender.com/api/auth/porters/login/"
             : "https://hostelcomplaintsmanagementsystem.onrender.com/api/auth/students/login/";
 
-        let responseData:any
+        let responseData: any;
         const { user, jwtz } = await axios
           .post(
             url,
@@ -54,8 +54,7 @@ export const authOptions: NextAuthOptions = {
                 }
           )
           .then(({ data }) => {
-            
-            responseData = data
+            responseData = data;
             return data;
           })
           .catch((error) => {
@@ -64,10 +63,11 @@ export const authOptions: NextAuthOptions = {
         if (responseData) {
           return { jwtz, ...user, ...responseData };
         } else {
-
-        } 
-        console.log("user",user)
-        console.log("other,",jwtz)
+          console.log("user", user);
+          console.log("other,", jwtz);
+        }
+        console.log("user", user);
+        console.log("other,", jwtz);
       },
     }),
   ],

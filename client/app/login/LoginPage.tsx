@@ -31,23 +31,26 @@ const LoginPage = () => {
       porter: "true",
     };
     setStatus("Loggin in....");
- 
+
     try {
       const res = await signIn("credentials", {
         redirect: false,
         email: porterDetails.email,
-        matric:isPorter? "null":userDetails.matric_number,
-        password: isPorter ? porterDetails.password: userDetails.password,
+        matric: isPorter ? "null" : userDetails.matric_number,
+        password: isPorter ? porterDetails.password : userDetails.password,
         callbackUrl,
       });
       // const parsed = JSON.parse(res)
       console.log(JSON.parse(res?.error as string));
       if (!res?.error) {
-        console.log(res)
+        console.log(res);
         router.push(callbackUrl);
-        enqueueSnackbar("Login success", { variant:'success'})
+        enqueueSnackbar("Login success", { variant: "success" });
       } else {
-        enqueueSnackbar("Invalid credentials: "+res?.error, { variant: "error" });
+        console.log(res);
+        enqueueSnackbar("Invalid credentials: " + res?.error, {
+          variant: "error",
+        });
       }
     } catch (error) {
       enqueueSnackbar("Failed to login: " + error, { variant: "error" });
@@ -57,7 +60,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     const search = searchparams.get("porter");
-    console.log("porter?",isPorter)
+    console.log("porter?", isPorter);
     if (search == "true") {
       setPorter(true);
     } else {

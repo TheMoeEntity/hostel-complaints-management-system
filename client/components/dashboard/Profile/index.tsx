@@ -1,13 +1,13 @@
-import styles from '../../index.module.css'
-import Image from 'next/image'
-import count1 from "../../../public/images/user.jpeg";
-import Link from 'next/link';
-import { useSession, getSession } from 'next-auth/react';
-import { signOut } from 'next-auth/react';
-import { useState } from 'react';
+import styles from "../../index.module.css";
+import Image from "next/image";
+import count1 from "../../../public/images/avatar.png";
+import count2 from "../../../public/images/avatar-stud.webp";
+import Link from "next/link";
+import { useSession, getSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 
-const Profile = (props:{profileOpen:boolean, forceClose:() => void}) => {
-  const {data:session} = useSession()
+const Profile = (props: { profileOpen: boolean; forceClose: () => void }) => {
+  const { data: session } = useSession();
 
   return (
     <section
@@ -18,9 +18,9 @@ const Profile = (props:{profileOpen:boolean, forceClose:() => void}) => {
       className={styles.profileModal}
     >
       <div className={styles.userheader}>
-        <div style={{position:'relative'}}>
+        <div style={{ position: "relative" }}>
           <Image
-            src={count1}
+            src={session?.user.is_porter ? count1 : count2 ?? count1}
             alt="user image"
             fill={true}
             quality={100}
@@ -67,7 +67,7 @@ const Profile = (props:{profileOpen:boolean, forceClose:() => void}) => {
               </div>
             </Link>
           </li>
-          <li onClick={()=> signOut()}>
+          <li onClick={() => signOut()}>
             <div>
               <i className="fa-solid fa-arrow-right-from-bracket"></i> Log out
             </div>
@@ -75,7 +75,7 @@ const Profile = (props:{profileOpen:boolean, forceClose:() => void}) => {
         </ul>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export {Profile}
+export { Profile };
