@@ -1,8 +1,6 @@
 import { NextResponse } from "next/server";
 
 const OpenAI = require("openai");
-const dotenv = require("dotenv");
-dotenv.config();
 
 export async function POST(req: Request, res: Response) {
   const { message } = await req.json();
