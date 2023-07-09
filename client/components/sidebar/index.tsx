@@ -132,7 +132,7 @@ const Sidebar = () => {
             profileOpen={profileOpen}
             forceClose={() => setProfileOpen(false)}
           />
-          <div>
+          {/* <div>
             <i className="fa-solid fa-magnifying-glass"></i>
           </div>
           <div>
@@ -140,16 +140,18 @@ const Sidebar = () => {
           </div>
           <div>
             <i className="fa-regular fa-bell"></i>
-          </div>
+          </div> */}
           <div>
-            <i className="fa-regular fa-message"></i>
+            <Link href={`/lodge-complaint`}>
+              <i className="fa-regular fa-message"></i>
+            </Link>
           </div>
-          <div>
+          {/* <div>
             <i className="fa-solid fa-gear"></i>
           </div>
           <div>
             <i className="fa-regular fa-image"></i>
-          </div>
+          </div> */}
           <div onClick={() => setProfileOpen(!profileOpen)}>
             <i className="fas fa-user"></i>
           </div>

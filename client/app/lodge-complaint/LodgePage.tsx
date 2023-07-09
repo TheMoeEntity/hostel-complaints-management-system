@@ -8,11 +8,11 @@ const LodgePage = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
-  const [show,setShow] = useState(false)
+  const [show, setShow] = useState(false);
   const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>) => {};
   return (
     <div className={styles.main}>
-      <Chatscreen close={()=> setShow(false)} show={show} />
+      <Chatscreen close={() => setShow(false)} show={show} />
       <div className={styles.lodge}>
         <div>
           <div>
@@ -38,18 +38,19 @@ const LodgePage = () => {
             <b>Categories</b>
             <ul className={styles.collapse}>
               <li>
-                <i className="fa-solid fa-droplet"></i> <span>Water</span>
+                <i className="fa-solid fa-droplet"></i> <span>Plumbing</span>
               </li>
               <li>
                 <i className="fa-solid fa-person-through-window"></i>{" "}
                 <span>Theft</span>
               </li>
               <li>
-                <i className="fa-solid fa-lightbulb"></i> <span>No Light</span>
+                <i className="fa-solid fa-lightbulb"></i>{" "}
+                <span>Electricity</span>
               </li>
-              <li>
+              {/* <li>
                 <i className="fa-solid fa-bug"></i> <span>Bed bug</span>
-              </li>
+              </li> */}
               <li>
                 <i className="fa-solid fa-circle-info"></i> <span>Others</span>
               </li>
@@ -88,7 +89,11 @@ const LodgePage = () => {
                 <i className="fa-solid fa-paper-plane"></i>
                 Lodge Complaint
               </button>
-              <button onClick={()=> setShow(true)} style={{ marginLeft: "20px" }} type="button">
+              <button
+                onClick={() => setShow(true)}
+                style={{ marginLeft: "20px" }}
+                type="button"
+              >
                 <i className="fa-solid fa-robot"></i>
                 AI Assistant
               </button>

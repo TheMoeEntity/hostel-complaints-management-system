@@ -22,9 +22,9 @@ export async function POST(req: Request, res: Response) {
     
          Documentation:
             These are the categories of complaints you give a user:
-            1) Light issues.
-            2) Water issues.
-            3) Technical issues.
+            1) Electricity issues.
+            2) Plumbing issues.
+            3) Carpentry issues.
             4) Theft.
             5) Other personal issue  
            ${message} 

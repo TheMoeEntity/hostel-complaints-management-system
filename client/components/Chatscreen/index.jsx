@@ -3,7 +3,7 @@ import "./chat.css";
 import { useState, useRef } from "react";
 import { useSession } from "next-auth/react";
 
-const Chatscreen = ({show, close}) => {
+const Chatscreen = ({ show, close }) => {
   const { data: session } = useSession();
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
@@ -19,8 +19,8 @@ const Chatscreen = ({show, close}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(messages)
-    console.log(input)
+    console.log(messages);
+    console.log(input);
     if (input.trim() === "") {
       return;
     }
@@ -51,7 +51,10 @@ const Chatscreen = ({show, close}) => {
   };
 
   return (
-    <div style={{bottom: show? '0':'-100%'}} className="chat-container open">
+    <div
+      style={{ bottom: show ? "0" : "-100%" }}
+      className="chat-container open"
+    >
       <div onClick={close} className="close">
         &times;
       </div>
@@ -68,7 +71,12 @@ const Chatscreen = ({show, close}) => {
           >
             <div className="messsage-user-identification">
               <p>
-                <span style={{marginRight:'10px'}}>&#x1F7E2;</span>
+                {x.isUser ? (
+                  <span style={{ marginRight: "10px" }}>&#x1F7E2;</span>
+                ) : (
+                  <span style={{ marginRight: "10px" }}>&#x1F534;</span>
+                )}
+                <span style={{ marginRight: "10px" }}>&#x1F7E2;</span>
                 {x.isUser ? session.user.first_name : "AI Chat"}
               </p>
             </div>
