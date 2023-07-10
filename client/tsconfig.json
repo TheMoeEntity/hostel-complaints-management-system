@@ -30,7 +30,7 @@
     ".next/types/**/*.ts",
     "app/api/auth/[...nextauth].js",
     "app/students/StudentsPage.tsx",
-    "components/Chatscreen/index.tsx"
+    "components/Chatscreen/index.jsx"
   ],
   "exclude": ["node_modules"]
 }
