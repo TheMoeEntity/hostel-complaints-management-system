@@ -1,7 +1,7 @@
 "use client";
 import { ChangeEvent, FormEvent, useRef, useState } from "react";
 import styles from "../../components/index.module.css";
-import Chatscreen from "@/components/Chatscreen/index.jsx";
+import Chatscreen from "@/components/Chatscreen/";
 import { useSnackbar } from "notistack";
 import { useSession } from "next-auth/react";
 
