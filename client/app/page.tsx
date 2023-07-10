@@ -3,7 +3,7 @@ import styles from "./page.module.css";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 
-const getResources = async () => {
+const getRefresh = async () => {
   const session = await getServerSession(authOptions);
   const url =
     "https://hostelcomplaintsmanagementsystem.onrender.com/api/auth/login/refresh/";
@@ -17,7 +17,7 @@ const getResources = async () => {
   });
 
   return res.json();
-};
+}; 
 const getComplaints = async (resr: any) => {
   const url =
     "https://hostelcomplaintsmanagementsystem.onrender.com/api/dashboard/complaints/";
@@ -50,7 +50,6 @@ const getDashCount = async (resr: any) => {
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
-  // const newToken = await getResources();
   const dashCount = await getDashCount(session?.user.access);
   const comps = await getComplaints(session?.user.access);
 

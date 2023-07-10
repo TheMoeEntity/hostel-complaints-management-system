@@ -46,9 +46,10 @@ const ComplaintsPage = ({ comps }: any) => {
     setActive(category);
     setDisplayData([]);
 
-    // if (category === "all") {
-    //   setDisplayData(data);
-    //   return;
+    if (category === "all") {
+      setDisplayData(compList());
+      return;
+    }
 
     const filteredData = compList().filter((item) => item.title === category);
 
@@ -69,6 +70,7 @@ const ComplaintsPage = ({ comps }: any) => {
           <div>
             <b>Categories</b>
             <ul className={styles.collapse}>
+              <li onClick={() => handleFilter("all")}>All complaints</li>
               {title().map((x, i) => (
                 <li key={i} onClick={() => handleFilter(x.title)}>
                   <i

@@ -5,9 +5,11 @@ import styles from "../index.module.css";
 import CalendarComponent from "./Calendar";
 import Charts from "./Charts";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 const Dashboard = ({ dashCount, comps }: any) => {
   const { data: session } = useSession();
+  const [latest, setLatest] = useState(comps.slice(0, 3));
   console.log(comps);
   return (
     <div className={styles.dashboard}>
@@ -91,7 +93,7 @@ const Dashboard = ({ dashCount, comps }: any) => {
               </h3>
             </div>
             <div className={styles.currentNotice}>
-              {comps.map(
+              {latest.map(
                 (x: { description: string; date_filed: string }, i: number) => (
                   <div key={i}>
                     <i className="fa-solid fa-caret-left"></i>

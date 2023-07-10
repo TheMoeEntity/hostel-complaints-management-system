@@ -1,15 +1,86 @@
 "use client";
 import { ChangeEvent, FormEvent, useRef, useState } from "react";
 import styles from "../../components/index.module.css";
-import Chatscreen from "@/components/Chatscreen/index.jsx";
+import Chatscreen from "@/components/Chatscreen/";
+import { useSnackbar } from "notistack";
+import { useSession } from "next-auth/react";
 
 const LodgePage = () => {
+  const { data: session } = useSession();
   const inputFile = useRef<null | HTMLInputElement>(null);
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-  };
+  const { enqueueSnackbar } = useSnackbar();
   const [show, setShow] = useState(false);
+  const [cat, setCat] = useState("Category: ");
+  const [lodgeBtn, setLodgeBtn] = useState("Lodge Complaint");
+  const textarea = useRef<null | HTMLTextAreaElement>(null);
   const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>) => {};
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLodgeBtn("Sending...");
+    if (textarea.current) {
+      if (
+        textarea.current.value.trim() === "" ||
+        textarea.current.value.length < 10
+      ) {
+        enqueueSnackbar("Description cannot be empty or short", {
+          variant: "error",
+        });
+        setLodgeBtn("Lodge Complaint");
+        return;
+      } else if (cat.length === 10) {
+        enqueueSnackbar("Category cannot be empty: ", { variant: "error" });
+        setLodgeBtn("Lodge Complaint");
+        return;
+      }
+
+      try {
+        await fetch(
+          "https://hostelcomplaintsmanagementsystem.onrender.com/api/dashboard/complaints/create/",
+          {
+            method: "POST",
+            headers: {
+              Accept: "application/json, text/plain, */*",
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + session?.user.access,
+            },
+            body: JSON.stringify({
+              title: cat,
+              description: textarea.current.value.slice(0, 9),
+              is_resolved: false,
+            }),
+          }
+        ).then(async (res) => {
+          const isJson = res.headers
+            .get("content-type")
+            ?.includes("application/json");
+          const data = isJson ? await res.json() : null;
+          if (!res.ok) {
+            const error = (data && data.message) || res.statusText;
+            console.log(error);
+            enqueueSnackbar(
+              "Failed to send complaints: " + JSON.parse(data).message,
+              {
+                variant: "error",
+              }
+            );
+            return Promise.reject(error);
+          } else if (res.ok || res.status === 201 || res.status === 200) {
+            enqueueSnackbar(
+              "Your complaints have been successfully lodged and is being processed.",
+              {
+                variant: "success",
+              }
+            );
+          }
+        });
+      } catch (error) {
+        enqueueSnackbar("Failed to send complaints: " + error, {
+          variant: "error",
+        });
+      }
+      setLodgeBtn("Lodge Complaint");
+    }
+  };
   return (
     <div className={styles.main}>
       <Chatscreen close={() => setShow(false)} show={show} />
@@ -37,21 +108,49 @@ const LodgePage = () => {
           <div>
             <b>Categories</b>
             <ul className={styles.collapse}>
-              <li>
+              <li
+                onClick={() =>
+                  setCat((x) => {
+                    const newWord = x.slice(0, 9) + " plumbing";
+                    return newWord;
+                  })
+                }
+              >
                 <i className="fa-solid fa-droplet"></i> <span>Plumbing</span>
               </li>
-              <li>
+              <li
+                onClick={() =>
+                  setCat((x) => {
+                    const newWord = x.slice(0, 9) + " Theft";
+                    return newWord;
+                  })
+                }
+              >
                 <i className="fa-solid fa-person-through-window"></i>{" "}
                 <span>Theft</span>
               </li>
-              <li>
+              <li
+                onClick={() =>
+                  setCat((x) => {
+                    const newWord = x.slice(0, 9) + " Electricity";
+                    return newWord;
+                  })
+                }
+              >
                 <i className="fa-solid fa-lightbulb"></i>{" "}
                 <span>Electricity</span>
               </li>
               {/* <li>
                 <i className="fa-solid fa-bug"></i> <span>Bed bug</span>
               </li> */}
-              <li>
+              <li
+                onClick={() =>
+                  setCat((x) => {
+                    const newWord = x.slice(0, 9) + " others";
+                    return newWord;
+                  })
+                }
+              >
                 <i className="fa-solid fa-circle-info"></i> <span>Others</span>
               </li>
             </ul>
@@ -59,12 +158,21 @@ const LodgePage = () => {
           <div></div>
         </div>
         <div>
-          <form action="" onSubmit={(e) => handleSubmit}>
-            <input placeholder="To:" type="text" />
-            <input placeholder="Subject" type="text" />
-            <input placeholder="Category: Light" type="text" readOnly />
+          <form action="" onSubmit={handleSubmit}>
+            <input
+              placeholder="To: Crawford University Complaints Mgt"
+              type="text"
+              readOnly
+            />
+            <input
+              placeholder="Subject: Student complaint"
+              type="text"
+              readOnly
+            />
+            <input value={cat} type="text" readOnly />
             <textarea
-              placeholder="Enter text"
+              placeholder="Enter complaint description"
+              ref={textarea}
               name=""
               id=""
               cols={30}
@@ -86,8 +194,14 @@ const LodgePage = () => {
             />
             <div>
               <button type="submit">
-                <i className="fa-solid fa-paper-plane"></i>
-                Lodge Complaint
+                <i
+                  className={
+                    lodgeBtn !== "Lodge Complaint"
+                      ? `fa fa-spinner ${styles.rotate}`
+                      : `fa-solid fa-paper-plane`
+                  }
+                ></i>
+                {lodgeBtn}
               </button>
               <button
                 onClick={() => setShow(true)}
