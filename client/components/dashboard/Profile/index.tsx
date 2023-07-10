@@ -44,13 +44,18 @@ const Profile = (props: { profileOpen: boolean; forceClose: () => void }) => {
               </div>
             </Link>
           </li>
-          <li>
-            <Link href={`/lodge-complaint`}>
-              <div>
-                <i className="fas fa-pen"></i> Lodge Complaint
-              </div>
-            </Link>
-          </li>
+
+          {session?.user.is_porter === true ? (
+            <></>
+          ) : (
+            <li>
+              <Link href={`/lodge-complaint`}>
+                <div>
+                  <i className="fas fa-pen"></i> Lodge Complaint
+                </div>
+              </Link>
+            </li>
+          )}
         </ul>
       </div>
       <div className="">

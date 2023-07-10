@@ -15,10 +15,7 @@ const Sidebar = () => {
   const backgroundMode: string = session?.user.is_porter
     ? "linear-gradient(90deg, #4E44B5, #3a3192)"
     : "linear-gradient(90deg, #4985ed, #538cef)";
-  const text: string = session?.user.is_porter ? "Students" : "Porters";
-  const iconClass: string = session?.user.is_porter
-    ? "fas fa-graduation-cap"
-    : "fa-solid fa-person";
+
   const searchparams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -141,11 +138,16 @@ const Sidebar = () => {
           <div>
             <i className="fa-regular fa-bell"></i>
           </div> */}
-          <div>
-            <Link href={`/lodge-complaint`}>
-              <i className="fa-regular fa-message"></i>
-            </Link>
-          </div>
+          {session?.user.is_porter === true ? (
+            <></>
+          ) : (
+            <div>
+              <Link href={`/lodge-complaint`}>
+                <i className="fa-regular fa-message"></i>
+              </Link>
+            </div>
+          )}
+
           {/* <div>
             <i className="fa-solid fa-gear"></i>
           </div>
