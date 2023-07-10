@@ -350,7 +350,7 @@
   width: 270px;
   height: 380px;
   background-color: white;
-  right: -2px;
+  right: 10px;
   color: #303973;
   transition: 0.6s;
   bottom: -390px;
@@ -844,6 +844,9 @@
   }
 }
 @media screen and (max-width: 640px) {
+  .profileModal {
+    right: -40px;
+  }
   .lodge {
     display: flex;
     flex-flow: column wrap;
