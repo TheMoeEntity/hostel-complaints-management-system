@@ -4,8 +4,13 @@ import { AnimatePresence, motion } from "framer-motion";
 import styles from "../../components/index.module.css";
 import { catIcons } from "@/Helpers/Types";
 import { useState } from "react";
+import { useSession } from "next-auth/react";
 
 const ComplaintsPage = ({ comps }: any) => {
+  const { data: session } = useSession();
+  const backgroundMode: string = session?.user.is_porter
+    ? "linear-gradient(90deg, #4E44B5, #3a3192)"
+    : "linear-gradient(90deg, #4985ed, #538cef)";
   const title = (): { title: string }[] => {
     const arr = comps;
     return arr.map((x: { title: string }) => {
@@ -37,7 +42,7 @@ const ComplaintsPage = ({ comps }: any) => {
     );
     return data;
   };
-  const [active, setActive] = useState(compList()[0].title);
+  const [active, setActive] = useState(compList() ? compList()[0]?.title : []);
   const [displayData, setDisplayData] = useState<
     { title: string; detail: string; time: string }[]
   >(compList());
@@ -65,7 +70,9 @@ const ComplaintsPage = ({ comps }: any) => {
       <div className={styles.lodge}>
         <div>
           <div>
-            <button>Complaints for {comps[0].hostel} </button>
+            <button style={{ background: backgroundMode }}>
+              Complaints for {session?.user.hostel}
+            </button>
           </div>
           <div>
             <b>Categories</b>

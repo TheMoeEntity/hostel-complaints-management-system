@@ -9,7 +9,7 @@ import { useState } from "react";
 
 const Dashboard = ({ dashCount, comps }: any) => {
   const { data: session } = useSession();
-  const [latest, setLatest] = useState(comps.slice(0, 3));
+  const [latest, setLatest] = useState(comps ? comps.slice(0, 3) : comps);
   console.log(comps);
   return (
     <div className={styles.dashboard}>
