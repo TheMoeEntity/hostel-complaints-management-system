@@ -1,6 +1,7 @@
 import { authOptions } from "@/lib/auth";
 import axios from "axios";
 import { getServerSession } from "next-auth";
+import { signIn, useSession } from "next-auth/react";
 export type postTypes = {
   title: string;
   body: string;
@@ -118,7 +119,31 @@ export class Helpers {
       },
     });
 
+    if (res.status === 401) {
+      const refresh = await this.getRefresh(signIn());
+      this.setNewToken(refresh.access);
+      const res = await fetch(url, {
+        method: "GET",
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + refresh.access,
+        },
+      });
+      return res.json();
+    }
+
     return res.json();
+  };
+  static setNewToken = async (token: string) => {
+    const { data: session, update } = useSession();
+    await update({
+      ...session,
+      user: {
+        ...session?.user,
+        access: token,
+      },
+    });
   };
   static getRefresh = async (signIn: Promise<undefined>) => {
     const session = await getServerSession(authOptions);

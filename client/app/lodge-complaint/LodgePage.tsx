@@ -7,6 +7,7 @@ import { useSession } from "next-auth/react";
 
 const LodgePage = () => {
   const { data: session } = useSession();
+  console.log(session?.user.access);
   const inputFile = useRef<null | HTMLInputElement>(null);
   const { enqueueSnackbar } = useSnackbar();
   const [show, setShow] = useState(false);
@@ -32,24 +33,23 @@ const LodgePage = () => {
         setLodgeBtn("Lodge Complaint");
         return;
       }
-
+      let accessToken;
       try {
-        await fetch(
-          "https://hostelcomplaintsmanagementsystem.onrender.com/api/dashboard/complaints/create/",
-          {
-            method: "POST",
-            headers: {
-              Accept: "application/json, text/plain, */*",
-              "Content-Type": "application/json",
-              Authorization: "Bearer " + session?.user.access,
-            },
-            body: JSON.stringify({
-              title: cat,
-              description: textarea.current.value.slice(0, 9),
-              is_resolved: false,
-            }),
-          }
-        ).then(async (res) => {
+        accessToken = session?.user.access;
+        await fetch("./api/create/", {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + accessToken,
+          },
+          body: JSON.stringify({
+            title: cat,
+            description: textarea.current.value.slice(0, 9),
+            is_resolved: false,
+          }),
+        }).then(async (res) => {
           const isJson = res.headers
             .get("content-type")
             ?.includes("application/json");

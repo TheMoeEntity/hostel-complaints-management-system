@@ -82,8 +82,14 @@ export const authOptions: NextAuthOptions = {
       };
     },
 
-    jwt: ({ token, user }) => {
+    jwt: ({ token, user, trigger, session }) => {
       if (user) {
+        if (trigger === "update") {
+          return {
+            ...token,
+            ...session.user,
+          };
+        }
         return {
           ...token,
           ...user,

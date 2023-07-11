@@ -36,7 +36,7 @@ const Dashboard = ({ dashCount, comps, error }: any | undefined) => {
           }}
         >
           <h2 style={{ color: "#303973" }}>
-            {`Welcome, ${session?.user.first_name}`}{" "}
+            {`Welcome${", " + session?.user.first_name ?? ""}`}
           </h2>
         </motion.div>
         <div className={styles.bar}>
