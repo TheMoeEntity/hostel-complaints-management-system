@@ -47,7 +47,7 @@
   margin-top: -40px;
   margin-left: auto;
   margin-right: auto;
-  height: 130px;
+  height: fit-content;
   border-radius: 13px;
   padding: 20px 30px;
   color: white;
