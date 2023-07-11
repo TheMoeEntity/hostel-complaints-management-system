@@ -13,7 +13,7 @@ const Dashboard = ({ dashCount, comps, error }: any | undefined) => {
     comps.data ? comps.data.slice(0, 3) : comps.data
   );
 
-  console.log(comps);
+
   return (
     <div className={styles.dashboard}>
       <div className={styles.main}>

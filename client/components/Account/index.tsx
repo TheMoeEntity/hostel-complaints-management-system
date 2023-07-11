@@ -16,7 +16,7 @@ type detailType = {
 };
 const Account = (details: any | undefined) => {
   const { data: session } = useSession();
-  console.log(details.details);
+
 
   const isporter = (): detailType => {
     return session?.user.is_student

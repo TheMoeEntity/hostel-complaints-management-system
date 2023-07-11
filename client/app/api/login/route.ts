@@ -32,7 +32,7 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
     });
 
     const data = await apiRes.json();
-    console.log(data); 
+    
     if (apiRes.status === 201 || apiRes.status === 200) {
 
       return NextResponse.json(

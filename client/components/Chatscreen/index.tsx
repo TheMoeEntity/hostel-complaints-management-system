@@ -26,8 +26,8 @@ const Chatscreen = ({ show, close }: any) => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(messages);
-    console.log(input);
+   
+
     if (input.trim() === "") {
       return;
     }
@@ -42,7 +42,7 @@ const Chatscreen = ({ show, close }: any) => {
         body: JSON.stringify({ message: input, user: "Moses" }),
       });
       const data = await response.json();
-      console.log(data);
+
       const aiMessage =
         data.message || "Sorry, I couldn't understand your message";
       setMessages((prev) => [
@@ -53,7 +53,13 @@ const Chatscreen = ({ show, close }: any) => {
         },
       ]);
     } catch (error) {
-      console.error("error fetching AI Response");
+
+      enqueueSnackbar(
+        "Error fetching AI Response",
+        {
+          variant: "success",
+        }
+      );
     }
   };
 
@@ -64,7 +70,7 @@ const Chatscreen = ({ show, close }: any) => {
       const isFound = x.text.includes("Thank you for lodging");
       return isFound;
     });
-    console.log(found);
+
     if (!found) {
     }
     if (messages.length > 0 && found !== undefined) {
@@ -92,7 +98,7 @@ const Chatscreen = ({ show, close }: any) => {
           const data = isJson ? await res.json() : null;
           if (!res.ok) {
             const error = (data && data.message) || res.statusText;
-            console.log(error);
+            
             enqueueSnackbar(
               "Failed to send complaints: " + JSON.parse(data).message,
               {

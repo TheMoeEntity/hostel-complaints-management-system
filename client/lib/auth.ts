@@ -58,17 +58,15 @@ export const authOptions: NextAuthOptions = {
             return data;
           })
           .catch((error) => {
-            console.log(error);
+     
             throw new Error(JSON.stringify(error.response.data));
           });
         if (responseData) {
           return { jwtz, ...user, ...responseData };
         } else {
-          console.log("user", user);
-          console.log("other,", jwtz);
+          throw new Error(JSON.stringify({error:"Error signing in"}));
         }
-        console.log("user", user);
-        console.log("other,", jwtz);
+
       },
     }),
   ],

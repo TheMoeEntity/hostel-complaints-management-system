@@ -4,10 +4,11 @@ import styles from "../../components/index.module.css";
 import Chatscreen from "@/components/Chatscreen/";
 import { useSnackbar } from "notistack";
 import { useSession } from "next-auth/react";
+import { Helpers } from "@/Helpers/Types";
+import { Session } from "inspector";
 
 const LodgePage = () => {
-  const { data: session } = useSession();
-  console.log(session?.user.access);
+  const { data: session, update } = useSession();
   const inputFile = useRef<null | HTMLInputElement>(null);
   const { enqueueSnackbar } = useSnackbar();
   const [show, setShow] = useState(false);
@@ -34,6 +35,7 @@ const LodgePage = () => {
         return;
       }
       let accessToken;
+
       try {
         accessToken = session?.user.access;
         await fetch("./api/create/", {
@@ -54,9 +56,35 @@ const LodgePage = () => {
             .get("content-type")
             ?.includes("application/json");
           const data = isJson ? await res.json() : null;
+          if (res.status == 401) {
+            if (session) {
+              const newToken = await Helpers.getRefreshClient(session);
+
+              await update({
+                ...session,
+                user: {
+                  ...session?.user,
+                  access: newToken.access,
+                },
+              });
+              await fetch("./api/create/", {
+                method: "POST",
+                headers: {
+                  Accept: "application/json, text/plain, */*",
+                  "Content-Type": "application/json",
+                  Authorization: "Bearer " + newToken.access,
+                },
+                body: JSON.stringify({
+                  title: cat,
+                  description: textarea.current?.value.slice(0, 9),
+                  is_resolved: false,
+                }),
+              });
+            }
+          }
           if (!res.ok) {
             const error = (data && data.message) || res.statusText;
-            console.log(error);
+    
             enqueueSnackbar(
               "Failed to send complaints: " + JSON.parse(data).message,
               {

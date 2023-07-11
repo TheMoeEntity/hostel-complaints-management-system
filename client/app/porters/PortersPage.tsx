@@ -4,17 +4,6 @@ import styles from "../../components/index.module.css";
 import PorterCard from "./PorterCard";
 
 const PortersPage = ({ porters }: any) => {
-  console.log(porters);
-  // const styless = {
-  //   marginLeft: "20%",
-  //   marginTop: "80px",
-  //   width: "80%",
-  //   height: "auto",
-  //   transition: "0.5s",
-  //   padding: "10px 0px",
-  //   overflowX: "auto",
-  //   minWidth:
-  // }
   return (
     <div className={styles.main}>
       {/* <div className={styles.search}>

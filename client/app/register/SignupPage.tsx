@@ -29,7 +29,7 @@ const SignupPage = ({ hostels }: propType) => {
       matric_number: isPorter ? "" : data.matric_number,
       porter: isPorter ? "true" : "false",
     };
-    console.log(userDetails);
+
     if (userDetails.password !== userDetails.password2) {
       enqueueSnackbar("Passwords do not match", {
         variant: "error",
@@ -93,10 +93,10 @@ const SignupPage = ({ hostels }: propType) => {
               }
             }, 1300);
           }
-          console.log(msg.data);
+      
           return Promise.reject(error);
         } else if (res.ok || res.status === 201 || res.status === 200) {
-          console.log("new user created successfully");
+       
           enqueueSnackbar("User successfully created ", {
             variant: "success",
           });

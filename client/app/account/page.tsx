@@ -13,7 +13,7 @@ export default async function Profile() {
       session?.user.is_student ? "students" : "porters"
     }/${id}/`
   );
-  console.log(details);
+
 
   const user = session?.user;
   if (!user) {

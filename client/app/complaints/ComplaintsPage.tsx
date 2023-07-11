@@ -63,8 +63,6 @@ const ComplaintsPage = ({ comps }: any) => {
     }, 300);
   };
 
-  console.log(compList());
-  console.log("comps", comps);
   return (
     <div className={styles.main}>
       <div className={styles.lodge}>

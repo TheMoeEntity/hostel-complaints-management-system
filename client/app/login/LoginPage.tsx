@@ -40,14 +40,13 @@ const LoginPage = () => {
         password: isPorter ? porterDetails.password : userDetails.password,
         callbackUrl,
       });
-      // const parsed = JSON.parse(res)
-      console.log(JSON.parse(res?.error as string));
+
       if (!res?.error) {
-        console.log(res);
+     
         router.push(callbackUrl);
         enqueueSnackbar("Login success", { variant: "success" });
       } else {
-        console.log(res);
+       
         enqueueSnackbar("Invalid credentials: " + res?.error, {
           variant: "error",
         });
@@ -60,7 +59,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     const search = searchparams.get("porter");
-    console.log("porter?", isPorter);
+   
     if (search == "true") {
       setPorter(true);
     } else {

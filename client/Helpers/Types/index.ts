@@ -2,6 +2,22 @@ import { authOptions } from "@/lib/auth";
 import axios from "axios";
 import { getServerSession } from "next-auth";
 import { signIn, useSession } from "next-auth/react";
+export interface Session {
+  user: {
+    access: string;
+    id: string;
+    email: string;
+    matric_number: string;
+    hostel: string;
+    first_name: string;
+    last_name: string;
+    is_student: boolean;
+    is_porter: boolean;
+    is_superuser: boolean;
+    is_staff: boolean;
+    refresh: string;
+  };
+}
 export type postTypes = {
   title: string;
   body: string;
@@ -120,7 +136,7 @@ export class Helpers {
     });
 
     if (res.status === 401) {
-      const refresh = await this.getRefresh(signIn());
+      const refresh = await this.getRefresh();
       this.setNewToken(refresh.access);
       const res = await fetch(url, {
         method: "GET",
@@ -145,8 +161,7 @@ export class Helpers {
       },
     });
   };
-  static getRefresh = async (signIn: Promise<undefined>) => {
-    const session = await getServerSession(authOptions);
+  static getRefreshClient = async (session: Session) => {
     const url =
       "https://hostelcomplaintsmanagementsystem.onrender.com/api/auth/login/refresh/";
     const res = await fetch(url, {
@@ -158,8 +173,26 @@ export class Helpers {
       body: JSON.stringify({ refresh: session?.user.refresh }),
     });
     if (res.status === 401) {
-      signIn;
+      location.href = "/login";
     }
+
+    return res.json();
+  };
+  static getRefresh = async () => {
+    const session = await getServerSession(authOptions);
+    const url =
+      "https://hostelcomplaintsmanagementsystem.onrender.com/api/auth/login/refresh/";
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ refresh: session?.user.refresh }),
+    });
+    // if (res.status === 401) {
+    //   signIn;
+    // }
 
     return res.json();
   };
