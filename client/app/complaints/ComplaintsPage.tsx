@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import styles from "../../components/index.module.css";
-import { catIcons } from "@/Helpers/Types";
+import { catIcons, Helpers } from "@/Helpers/Types";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 
@@ -13,12 +13,19 @@ const ComplaintsPage = ({ comps }: any) => {
     : "linear-gradient(90deg, #4985ed, #538cef)";
   const title = (): { title: string }[] => {
     const arr = comps;
-    return arr.map((x: { title: string }) => {
+    let arr2 = arr.map((x: { title: string }) => {
       const obj = {
         title: x.title,
       };
       return obj;
     });
+    let unique = Helpers.unique(
+      arr2,
+      (a: { text: string }, b: { text: string }) => a.text === b.text
+    );
+
+    console.log(unique);
+    return arr2;
   };
 
   const compList = (): { title: string; time: string; detail: string }[] => {

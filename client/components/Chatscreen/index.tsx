@@ -3,12 +3,13 @@ import "./chat.css";
 import { useState, useRef, KeyboardEventHandler, FormEvent } from "react";
 import { useSession } from "next-auth/react";
 import { useSnackbar } from "notistack";
+import { Helpers } from "@/Helpers/Types";
 type messageType = {
   isUser: boolean;
   text: string;
 };
 const Chatscreen = ({ show, close }: any) => {
-  const { data: session } = useSession();
+  const { data: session, update } = useSession();
   const [messages, setMessages] = useState<messageType[]>([]);
   const [input, setInput] = useState("");
   const { enqueueSnackbar } = useSnackbar();
@@ -26,7 +27,6 @@ const Chatscreen = ({ show, close }: any) => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-   
 
     if (input.trim() === "") {
       return;
@@ -53,13 +53,9 @@ const Chatscreen = ({ show, close }: any) => {
         },
       ]);
     } catch (error) {
-
-      enqueueSnackbar(
-        "Error fetching AI Response",
-        {
-          variant: "success",
-        }
-      );
+      enqueueSnackbar("Error fetching AI Response", {
+        variant: "success",
+      });
     }
   };
 
@@ -75,30 +71,104 @@ const Chatscreen = ({ show, close }: any) => {
     }
     if (messages.length > 0 && found !== undefined) {
       close();
+      // try {
+      //   await fetch(
+      //     "https://hostelcomplaintsmanagementsystem.onrender.com/api/dashboard/complaints/create/",
+      //     {
+      //       method: "POST",
+      //       headers: {
+      //         Accept: "application/json, text/plain, */*",
+      //         "Content-Type": "application/json",
+      //         Authorization: "Bearer " + session?.user.access,
+      //       },
+      //       body: JSON.stringify({
+      //         title: "plumbing",
+      //         description: messages[messages.length - 2].text,
+      //         is_resolved: false,
+      //       }),
+      //     }
+      //   ).then(async (res) => {
+      //     const isJson = res.headers
+      //       .get("content-type")
+      //       ?.includes("application/json");
+      //     const data = isJson ? await res.json() : null;
+      //     if (!res.ok) {
+      //       const error = (data && data.message) || res.statusText;
+
+      //       enqueueSnackbar(
+      //         "Failed to send complaints: " + JSON.parse(data).message,
+      //         {
+      //           variant: "error",
+      //         }
+      //       );
+      //       return Promise.reject(error);
+      //     } else if (res.ok || res.status === 201 || res.status === 200) {
+      //       enqueueSnackbar(
+      //         "Your complaints have been successfully lodged and is being processed.",
+      //         {
+      //           variant: "success",
+      //         }
+      //       );
+      //       close();
+      //     }
+      //   });
+      // } catch (error) {
+      //   enqueueSnackbar("Failed to send complaints: " + error, {
+      //     variant: "error",
+      //   });
+      //   close();
+      // }
+      let accessToken;
+
       try {
-        await fetch(
-          "https://hostelcomplaintsmanagementsystem.onrender.com/api/dashboard/complaints/create/",
-          {
-            method: "POST",
-            headers: {
-              Accept: "application/json, text/plain, */*",
-              "Content-Type": "application/json",
-              Authorization: "Bearer " + session?.user.access,
-            },
-            body: JSON.stringify({
-              title: "plumbing",
-              description: messages[messages.length - 2].text,
-              is_resolved: false,
-            }),
-          }
-        ).then(async (res) => {
+        accessToken = session?.user.access;
+        await fetch("./api/create/", {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + accessToken,
+          },
+          body: JSON.stringify({
+            title: "AI response",
+            description: messages[messages.length - 2].text,
+            is_resolved: false,
+          }),
+        }).then(async (res) => {
           const isJson = res.headers
             .get("content-type")
             ?.includes("application/json");
           const data = isJson ? await res.json() : null;
+          if (res.status == 401) {
+            if (session) {
+              const newToken = await Helpers.getRefreshClient(session);
+
+              await update({
+                ...session,
+                user: {
+                  ...session?.user,
+                  access: newToken.access,
+                },
+              });
+              await fetch("./api/create/", {
+                method: "POST",
+                headers: {
+                  Accept: "application/json, text/plain, */*",
+                  "Content-Type": "application/json",
+                  Authorization: "Bearer " + newToken.access,
+                },
+                body: JSON.stringify({
+                  title: "plumbing",
+                  description: messages[messages.length - 2].text,
+                  is_resolved: false,
+                }),
+              });
+            }
+          }
           if (!res.ok) {
             const error = (data && data.message) || res.statusText;
-            
+
             enqueueSnackbar(
               "Failed to send complaints: " + JSON.parse(data).message,
               {
@@ -113,14 +183,12 @@ const Chatscreen = ({ show, close }: any) => {
                 variant: "success",
               }
             );
-            close();
           }
         });
       } catch (error) {
         enqueueSnackbar("Failed to send complaints: " + error, {
           variant: "error",
         });
-        close();
       }
     }
   };
@@ -154,7 +222,9 @@ const Chatscreen = ({ show, close }: any) => {
                 {x.isUser ? session?.user.first_name : "AI Chat"}
               </p>
             </div>
-            <p>{x.text}</p>
+            <p className="chatBox" style={{ paddingTop: "10px" }}>
+              {x.text}
+            </p>
           </div>
         ))}
       </div>

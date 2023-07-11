@@ -1,7 +1,9 @@
 import { authOptions } from "@/lib/auth";
 import axios from "axios";
 import { getServerSession } from "next-auth";
-import { signIn, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
+import { useSnackbar } from "notistack";
+type myFunc = (message: string, sucess: boolean) => void;
 export interface Session {
   user: {
     access: string;
@@ -196,6 +198,88 @@ export class Helpers {
 
     return res.json();
   };
+
+  static createComplaint = async (
+    session: Session | null,
+    body: { title: string; is_resolved: boolean; description: string },
+    update: any,
+    snackbar: myFunc
+  ) => {
+    let accessToken;
+    try {
+      accessToken = session?.user.access;
+      await fetch("./api/create/", {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + accessToken,
+        },
+        body: JSON.stringify(body),
+      }).then(async (res) => {
+        const isJson = res.headers
+          .get("content-type")
+          ?.includes("application/json");
+        const data = isJson ? await res.json() : null;
+        if (res.status == 401) {
+          if (session) {
+            const newToken = await this.getRefreshClient(session);
+
+            await update({
+              ...session,
+              user: {
+                ...session?.user,
+                access: newToken.access,
+              },
+            });
+            await fetch("./api/create/", {
+              method: "POST",
+              headers: {
+                Accept: "application/json, text/plain, */*",
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + newToken.access,
+              },
+              body: JSON.stringify(body),
+            });
+          }
+        }
+        if (!res.ok) {
+          const error = (data && data.message) || res.statusText;
+          snackbar(
+            "Failed to send complaints: " + JSON.parse(data).message,
+            false
+          );
+
+          return Promise.reject(error);
+        } else if (res.ok || res.status === 201 || res.status === 200) {
+          snackbar(
+            "Your complaints have been successfully lodged and is being processed.",
+            true
+          );
+        }
+      });
+    } catch (error) {
+      snackbar("Failed to send complaints: " + error, false);
+    }
+  };
+  static unique(a: any, fn: any) {
+    if (a.length === 0 || a.length === 1) {
+      return a;
+    }
+    if (!fn) {
+      return a;
+    }
+
+    for (let i = 0; i < a.length; i++) {
+      for (let j = i + 1; j < a.length; j++) {
+        if (fn(a[i], a[j])) {
+          a.splice(i, 1);
+        }
+      }
+    }
+    return a;
+  }
   static showError(type: string) {
     switch (type) {
       case "email":

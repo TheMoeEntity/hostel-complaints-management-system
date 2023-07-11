@@ -1,9 +1,9 @@
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
-    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
-    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+  --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
+    "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
+    "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
 
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -139,7 +139,8 @@ a {
 }
 
 /*style the items (options), including the selected item:*/
-.select-items div,.select-selected {
+.select-items div,
+.select-selected {
   color: #ffffff;
   padding: 8px 16px;
   border: 1px solid transparent;
@@ -163,7 +164,8 @@ a {
   display: none;
 }
 
-.select-items div:hover, .same-as-selected {
+.select-items div:hover,
+.same-as-selected {
   background-color: rgba(0, 0, 0, 0.1);
 }
 .calendar {
@@ -180,10 +182,10 @@ a {
   border-collapse: collapse;
   width: 100%;
   /* overflow-x: scroll; */
-  
 }
 
-#customers td, #customers th {
+#customers td,
+#customers th {
   /* border: 1px solid #ddd; */
   padding: 8px;
 }
@@ -193,12 +195,16 @@ a {
   width: 100% !important;
   border: 1px solid #ddd;
   cursor: pointer;
-  font-size: 13px;
+  font-size: 12.5px !important;
 }
 
-#customers tr:nth-child(even){background-color: #f2f2f2;}
+#customers tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
 
-#customers tr:hover {background-color: #ddd;}
+#customers tr:hover {
+  background-color: #ddd;
+}
 
 #customers th {
   padding-top: 12px;
@@ -208,10 +214,10 @@ a {
   color: white;
 }
 @media screen and (max-width: 600px) {
-
-#customers td, #customers th {
-  white-space: nowrap;
-  overflow: scroll;
-  text-overflow: clip;
-}
+  #customers td,
+  #customers th {
+    white-space: nowrap;
+    overflow: scroll;
+    text-overflow: clip;
+  }
 }

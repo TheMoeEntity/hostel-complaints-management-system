@@ -1,11 +1,10 @@
 "use client";
-import { ChangeEvent, FormEvent, useRef, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import styles from "../../components/index.module.css";
 import Chatscreen from "@/components/Chatscreen/";
 import { useSnackbar } from "notistack";
 import { useSession } from "next-auth/react";
 import { Helpers } from "@/Helpers/Types";
-import { Session } from "inspector";
 
 const LodgePage = () => {
   const { data: session, update } = useSession();
