@@ -76,7 +76,7 @@ const LoginPage = () => {
       <form action="" onSubmit={handleSubmit}>
         <div className={styles.header}>
           <h2>Login</h2>
-          <h4 style={{paddingBottom:'20px'}}>
+          <h4 style={{paddingBottom:'8px'}}>
             {isPorter ? "Login as porter" : "Login to your student portal"}
           </h4>
         </div>
