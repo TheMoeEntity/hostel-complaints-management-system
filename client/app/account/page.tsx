@@ -7,7 +7,6 @@ import { Helpers, studType } from "@/Helpers/Types";
 
 export default async function Profile() {
   const session = await getServerSession(authOptions);
-  const user = session?.user;
   const id = session?.user.id;
   const details = await Helpers.fetchData(
     `https://hostelcomplaintsmanagementsystem.onrender.com/api/dashboard/${
@@ -16,6 +15,7 @@ export default async function Profile() {
   );
   console.log(details);
 
+  const user = session?.user;
   if (!user) {
     redirect("/login");
   }

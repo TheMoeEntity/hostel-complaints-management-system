@@ -58,6 +58,7 @@ export const authOptions: NextAuthOptions = {
             return data;
           })
           .catch((error) => {
+            console.log(error);
             throw new Error(JSON.stringify(error.response.data));
           });
         if (responseData) {

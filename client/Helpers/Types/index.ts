@@ -120,6 +120,24 @@ export class Helpers {
 
     return res.json();
   };
+  static getRefresh = async (signIn: Promise<undefined>) => {
+    const session = await getServerSession(authOptions);
+    const url =
+      "https://hostelcomplaintsmanagementsystem.onrender.com/api/auth/login/refresh/";
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ refresh: session?.user.refresh }),
+    });
+    if (res.status === 401) {
+      signIn;
+    }
+
+    return res.json();
+  };
   static showError(type: string) {
     switch (type) {
       case "email":

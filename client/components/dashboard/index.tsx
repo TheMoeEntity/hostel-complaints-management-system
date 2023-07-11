@@ -7,9 +7,12 @@ import Charts from "./Charts";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
-const Dashboard = ({ dashCount, comps }: any) => {
+const Dashboard = ({ dashCount, comps, error }: any | undefined) => {
   const { data: session } = useSession();
-  const [latest, setLatest] = useState(comps ? comps.slice(0, 3) : comps);
+  const [latest, setLatest] = useState(
+    comps.data ? comps.data.slice(0, 3) : comps.data
+  );
+
   console.log(comps);
   return (
     <div className={styles.dashboard}>
@@ -43,7 +46,7 @@ const Dashboard = ({ dashCount, comps }: any) => {
             </div>
             <div>
               <div>Students</div>
-              <strong>{dashCount.data.student_count}</strong>
+              <strong>{dashCount.data?.student_count ?? "error"}</strong>
             </div>
           </div>
           <div className={styles.second}>
@@ -52,7 +55,7 @@ const Dashboard = ({ dashCount, comps }: any) => {
             </div>
             <div>
               <div>Rooms</div>
-              <strong>{dashCount.data.hostel_room_count}</strong>
+              <strong>{dashCount.data?.hostel_room_count ?? "error"}</strong>
             </div>
           </div>
           <div className={styles.third}>
@@ -61,7 +64,7 @@ const Dashboard = ({ dashCount, comps }: any) => {
             </div>
             <div>
               <div>Complaints</div>
-              <strong>{dashCount.data.complaints_count}</strong>
+              <strong>{dashCount.data?.complaints_count ?? "error"}</strong>
             </div>
           </div>
           <div className={styles.fourth}>
@@ -70,7 +73,7 @@ const Dashboard = ({ dashCount, comps }: any) => {
             </div>
             <div>
               <div>Porter</div>
-              <strong>{dashCount.data.porter_count}</strong>
+              <strong>{dashCount.data?.porter_count ?? "error"}</strong>
             </div>
           </div>
         </div>
@@ -93,12 +96,19 @@ const Dashboard = ({ dashCount, comps }: any) => {
               </h3>
             </div>
             <div className={styles.currentNotice}>
-              {latest.map(
-                (x: { description: string; date_filed: string }, i: number) => (
-                  <div key={i}>
-                    <i className="fa-solid fa-caret-left"></i>
-                    {x.description} [{x.date_filed}]
-                  </div>
+              {comps === "error" ? (
+                <span style={{ color: "red" }}>Error loading complaints</span>
+              ) : (
+                latest.map(
+                  (
+                    x: { description: string; date_filed: string },
+                    i: number
+                  ) => (
+                    <div key={i}>
+                      <i className="fa-solid fa-caret-left"></i>
+                      {x.description} [{x.date_filed}]
+                    </div>
+                  )
                 )
               )}
             </div>
