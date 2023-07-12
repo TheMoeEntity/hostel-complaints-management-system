@@ -5,9 +5,12 @@ import styles from "../../components/index.module.css";
 import { catIcons, Helpers } from "@/Helpers/Types";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const ComplaintsPage = ({ comps }: any) => {
+  const router = useRouter();
   const { data: session } = useSession();
+  console.log(comps);
   const backgroundMode: string = session?.user.is_porter
     ? "linear-gradient(90deg, #4E44B5, #3a3192)"
     : "linear-gradient(90deg, #4985ed, #538cef)";
@@ -28,7 +31,12 @@ const ComplaintsPage = ({ comps }: any) => {
     return arr2;
   };
 
-  const compList = (): { title: string; time: string; detail: string }[] => {
+  const compList = (): {
+    id: string;
+    title: string;
+    time: string;
+    detail: string;
+  }[] => {
     const data = comps.map(
       (x: {
         title: string;
@@ -37,12 +45,14 @@ const ComplaintsPage = ({ comps }: any) => {
         time: string;
         description: string;
         date_filed: string;
+        id: string;
       }) => {
         const xx = {
           title: x.title,
           name: `${x.student_first_name} ${x.student_last_name}`,
           time: x.date_filed,
           detail: x.description,
+          id: x.id,
         };
         return xx;
       }
@@ -51,7 +61,7 @@ const ComplaintsPage = ({ comps }: any) => {
   };
   const [active, setActive] = useState(compList() ? compList()[0]?.title : []);
   const [displayData, setDisplayData] = useState<
-    { title: string; detail: string; time: string }[]
+    { title: string; detail: string; time: string; id: string }[]
   >(compList());
   const handleFilter = (category: string) => {
     // if (category === active) return;
@@ -68,6 +78,10 @@ const ComplaintsPage = ({ comps }: any) => {
     setTimeout(() => {
       setDisplayData(filteredData);
     }, 300);
+  };
+
+  const getCompDetail = (id: string) => {
+    router.push("/details/" + id);
   };
 
   return (
@@ -114,31 +128,41 @@ const ComplaintsPage = ({ comps }: any) => {
           <div></div>
         </div>
         <div style={{ overflow: "scroll" }}>
-          <table id="customers">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Date filed</th>
-              </tr>
-            </thead>
-            <tbody>
-              {displayData.map((x, i) => (
-                <tr key={i}>
-                  <td>{x.title}</td>
-                  <td>{x.detail}</td>
-                  <td>{x.time}</td>
+          {comps === "error" ? (
+            <div style={{ color: "red" }}>
+              There was an error loading complaints
+            </div>
+          ) : (
+            <table id="customers">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Description</th>
+                  <th>Date filed</th>
                 </tr>
-              ))}
-            </tbody>
-            <thead>
-              <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
-          </table>
+              </thead>
+              <tbody>
+                {displayData.map((x, i) => (
+                  <tr onClick={() => getCompDetail(x.id)} key={i}>
+                    <td>{x.title}</td>
+                    <td>
+                      {x.detail.length > 25
+                        ? Helpers.firstTen(x.detail, 25, 0) + "..."
+                        : x.detail}
+                    </td>
+                    <td>{x.time}</td>
+                  </tr>
+                ))}
+              </tbody>
+              <thead>
+                <tr>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+            </table>
+          )}
         </div>
       </div>
     </div>

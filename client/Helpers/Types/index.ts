@@ -166,6 +166,9 @@ export class Helpers {
       },
     });
   };
+  static firstTen = (word: string, n: number, s: number): string => {
+    return word.slice(s, n);
+  };
   static getRefreshClient = async (session: Session) => {
     const url =
       "https://hostelcomplaintsmanagementsystem.onrender.com/api/auth/login/refresh/";

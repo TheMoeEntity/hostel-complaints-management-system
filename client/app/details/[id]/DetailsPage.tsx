@@ -1,14 +1,11 @@
 "use client";
 import Image from "next/image";
-import man from "../../public/images/user.jpeg";
-import { useRouter } from "next/navigation";
-import styles from "../../components/index.module.css";
+import man from "../../../public/images/user.jpeg";
+import styles from "../../../components/index.module.css";
+import { Helpers } from "@/Helpers/Types";
 
-const DetailsPage = () => {
-  const router = useRouter();
-  const linkAction = (to: string) => {
-    router.push("/" + to);
-  };
+const DetailsPage = ({ detail }: any) => {
+  console.log(detail);
   return (
     <div className={styles.main}>
       <div className={styles.lodge}>
@@ -20,14 +17,15 @@ const DetailsPage = () => {
             <b>Categories</b>
             <ul className={styles.collapse}>
               <li>
-                <i className="fa-solid fa-droplet"></i> <span>Water</span>
+                <i className="fa-solid fa-droplet"></i> <span>Plumbing</span>
               </li>
               <li>
                 <i className="fa-solid fa-person-through-window"></i>{" "}
                 <span>Theft</span>
               </li>
               <li>
-                <i className="fa-solid fa-lightbulb"></i> <span>No Light</span>
+                <i className="fa-solid fa-lightbulb"></i>{" "}
+                <span>Electricity</span>
               </li>
               <li>
                 <i className="fa-solid fa-bug"></i> <span>Bed bug</span>
@@ -57,33 +55,32 @@ const DetailsPage = () => {
               </div>
               <div className={styles.name}>
                 <span>
-                  <b>Mr Ogechukwu</b>
+                  <b style={{ fontSize: "19px" }}>
+                    {detail.student_first_name + " " + detail.student_last_name}
+                  </b>
                 </span>
-                <span>23 May, 2023</span>
+                <span>
+                  {Helpers.firstTen(
+                    detail.date_filed,
+                    detail.date_filed.indexOf("-"),
+                    0
+                  )}
+                </span>
               </div>
             </div>
           </div>
           <div className={styles.compTitle}>
             <div>
-              <h3>A collection of textile samples lay spread</h3>
+              <h3>{detail.title}</h3>
             </div>
-            <div>07:30 AM</div>
+            <div>
+              {detail.date_filed.substring(
+                detail.date_filed.indexOf("- ") + 1,
+                detail.date_filed.length
+              )}
+            </div>
           </div>
-          <p className={styles.comp}>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa
-            excepturi eveniet cumque cupiditate repellat impedit corporis sed
-            ullam sapiente rerum ut a nisi blanditiis ad illum quis praesentium
-            hic labore, fugit quos consectetur quo placeat perspiciatis
-            necessitatibus. Reiciendis aliquam natus saepe voluptates vitae
-            necessitatibus at unde ex doloribus. Odio, voluptas?
-            <br /><br />
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa
-            excepturi eveniet cumque cupiditate repellat impedit corporis sed
-            ullam sapiente rerum ut a nisi blanditiis ad illum quis praesentium
-            hic labore, fugit quos consectetur quo placeat perspiciatis
-            necessitatibus. Reiciendis aliquam natus saepe voluptates vitae
-            necessitatibus at unde ex doloribus. Odio, voluptas?
-          </p>
+          <p className={styles.comp}>{detail.description}</p>
         </div>
       </div>
     </div>

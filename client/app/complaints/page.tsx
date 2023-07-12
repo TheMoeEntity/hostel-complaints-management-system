@@ -15,7 +15,9 @@ const getComplaints = async (resr: any) => {
       Authorization: "Bearer " + resr,
     },
   });
-
+  if (!res.ok) {
+    return undefined;
+  }
   return res.json();
 };
 
@@ -30,7 +32,7 @@ const Complaints = async () => {
   }
   return (
     <main className={styles.main}>
-      <ComplaintsPage comps={comps.data} />
+      <ComplaintsPage comps={comps.data ?? "error"} />
     </main>
   );
 };

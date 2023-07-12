@@ -21,9 +21,9 @@ const Dashboard = ({ dashCount, comps, error }: any | undefined) => {
     const search = searchparams.get("notFound");
     if (search === "true") {
       enqueueSnackbar(
-        "Requested resource not found! User may be deleted or transferred",
+        "Requested resource not found! User/complaint may be deleted or transferred",
         {
-          variant: "info",
+          variant: "warning",
         }
       );
     }
