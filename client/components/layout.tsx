@@ -9,7 +9,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <SnackbarProvider
       classes={{ containerRoot: "z-alert" }}
-      anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
+      anchorOrigin={{ horizontal: "left", vertical: "top" }}
     >
       <NextAuthProvider>
         <div className="container">
@@ -26,7 +26,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
             ></Script>
           </>
         </div>
-        </NextAuthProvider>
+      </NextAuthProvider>
     </SnackbarProvider>
   );
 };

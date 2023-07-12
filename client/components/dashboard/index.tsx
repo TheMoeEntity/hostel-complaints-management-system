@@ -5,14 +5,29 @@ import styles from "../index.module.css";
 import CalendarComponent from "./Calendar";
 import Charts from "./Charts";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useSnackbar } from "notistack";
 
 const Dashboard = ({ dashCount, comps, error }: any | undefined) => {
+  const searchparams = useSearchParams();
   const { data: session } = useSession();
+  const { enqueueSnackbar } = useSnackbar();
   const [latest, setLatest] = useState(
     comps.data ? comps.data.slice(0, 3) : comps.data
   );
 
+  useEffect(() => {
+    const search = searchparams.get("notFound");
+    if (search === "true") {
+      enqueueSnackbar(
+        "Requested resource not found! User may be deleted or transferred",
+        {
+          variant: "info",
+        }
+      );
+    }
+  }, []);
 
   return (
     <div className={styles.dashboard}>

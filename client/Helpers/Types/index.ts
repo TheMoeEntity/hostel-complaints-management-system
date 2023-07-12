@@ -2,6 +2,7 @@ import { authOptions } from "@/lib/auth";
 import axios from "axios";
 import { getServerSession } from "next-auth";
 import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 import { useSnackbar } from "notistack";
 type myFunc = (message: string, sucess: boolean) => void;
 export interface Session {
@@ -149,6 +150,8 @@ export class Helpers {
         },
       });
       return res.json();
+    } else if (res.status === 404) {
+      redirect("/?notFound=true");
     }
 
     return res.json();
