@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import man from "../../../public/images/user.jpeg";
+import man from "../../../public/images/avatar-stud.webp";
 import styles from "../../../components/index.module.css";
 import { Helpers } from "@/Helpers/Types";
 
