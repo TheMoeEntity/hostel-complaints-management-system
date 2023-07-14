@@ -55,8 +55,17 @@ const DetailsPage = ({ detail }: any) => {
               </div>
               <div className={styles.name}>
                 <span>
-                  <b style={{ fontSize: "19px" }}>
-                    {detail.student_first_name + " " + detail.student_last_name}
+                  <b
+                    style={{
+                      fontSize: "19px",
+                      color: detail === "error" ? "red" : "black",
+                    }}
+                  >
+                    {detail === "error"
+                      ? "Error"
+                      : detail.student_first_name +
+                        " " +
+                        detail.student_last_name}
                   </b>
                 </span>
                 <span>

@@ -15,7 +15,7 @@ const SignupPage = ({ hostels }: propType) => {
   const [isPorter, setPorter] = useState<boolean>(false);
   const { enqueueSnackbar } = useSnackbar();
   const [status, setStatus] = useState("Register");
-    const router = useRouter()
+  const router = useRouter();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -93,14 +93,13 @@ const SignupPage = ({ hostels }: propType) => {
               }
             }, 1300);
           }
-      
+
           return Promise.reject(error);
         } else if (res.ok || res.status === 201 || res.status === 200) {
-       
           enqueueSnackbar("User successfully created ", {
             variant: "success",
           });
-          router.push(`/login${isPorter?'?porter=true':''}`)
+          router.push(`/login${isPorter ? "?porter=true" : ""}`);
         }
       })
       .catch((err) => {
@@ -295,6 +294,10 @@ const SignupPage = ({ hostels }: propType) => {
           Already have an account? &#160;{" "}
           <Link href={`/login?porter=false`}>
             <span>Login</span>
+          </Link>
+          &#160;or&#160;
+          <Link href={`/`}>
+            <span> Go to Homepage</span>
           </Link>
         </div>
       </form>

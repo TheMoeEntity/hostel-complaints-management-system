@@ -144,7 +144,11 @@ const LoginPage = () => {
         <div className={styles.formGroup}>
           {`Don't`} have an account? &#160;{" "}
           <Link href={`/register?porter=false`}>
-            <span>Register</span>
+            <span>Register</span>&#160;
+          </Link>
+          or&#160;
+          <Link href={`/`}>
+            <span> Go to Homepage</span>
           </Link>
         </div>
       </form>

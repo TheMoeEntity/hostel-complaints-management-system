@@ -3,12 +3,16 @@ import Image from "next/image";
 import count1 from "../../../public/images/avatar.png";
 import count2 from "../../../public/images/avatar-stud.webp";
 import Link from "next/link";
-import { useSession, getSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
 
 const Profile = (props: { profileOpen: boolean; forceClose: () => void }) => {
   const { data: session } = useSession();
-
+  const signOutAction = () => {
+    setTimeout(() => {
+      signOut();
+    }, 1000);
+  };
   return (
     <section
       style={{
@@ -72,7 +76,7 @@ const Profile = (props: { profileOpen: boolean; forceClose: () => void }) => {
               </div>
             </Link>
           </li>
-          <li onClick={() => signOut()}>
+          <li onClick={signOutAction}>
             <div>
               <i className="fa-solid fa-arrow-right-from-bracket"></i> Log out
             </div>
