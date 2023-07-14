@@ -3,28 +3,14 @@ import { getServerSession } from "next-auth";
 import styles from "../page.module.css";
 import ComplaintsPage from "./ComplaintsPage";
 import { redirect } from "next/navigation";
-
-const getComplaints = async (resr: any) => {
-  const url =
-    "https://hostelcomplaintsmanagementsystem.onrender.com/api/dashboard/complaints/";
-  const res = await fetch(url, {
-    method: "GET",
-    headers: {
-      Accept: "application/json, text/plain, */*",
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + resr,
-    },
-  });
-  if (!res.ok) {
-    return undefined;
-  }
-  return res.json();
-};
+import { Helpers } from "@/Helpers/Types";
 
 const Complaints = async () => {
   const session = await getServerSession(authOptions);
-  // const newToken = await getResources();
-  const comps = await getComplaints(session?.user.access);
+  const comps =
+    (await Helpers.fetchData(
+      "https://hostelcomplaintsmanagementsystem.onrender.com/api/dashboard/complaints/"
+    )) || undefined;
 
   const user = session?.user;
   if (!user) {

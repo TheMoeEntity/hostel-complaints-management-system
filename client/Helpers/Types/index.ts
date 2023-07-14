@@ -1,7 +1,7 @@
 import { authOptions } from "@/lib/auth";
 import axios from "axios";
 import { getServerSession } from "next-auth";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { useSnackbar } from "notistack";
 type myFunc = (message: string, sucess: boolean) => void;
@@ -129,32 +129,34 @@ export class Helpers {
   }
   static fetchData = async (url: string) => {
     const session = await getServerSession(authOptions);
-    const res = await fetch(url, {
-      method: "GET",
-      headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + session?.user.access,
-      },
-    });
-
-    if (res.status === 401) {
-      const refresh = await this.getRefresh();
-      this.setNewToken(refresh.access);
+    try {
       const res = await fetch(url, {
         method: "GET",
         headers: {
           Accept: "application/json, text/plain, */*",
           "Content-Type": "application/json",
-          Authorization: "Bearer " + refresh.access,
+          Authorization: "Bearer " + session?.user.access,
         },
       });
+      if (res.status === 401) {
+        const refresh = await this.getRefresh();
+        this.setNewToken(refresh.access);
+        const res = await fetch(url, {
+          method: "GET",
+          headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + refresh.access,
+          },
+        });
+        return res.json();
+      } else if (res.status === 404) {
+        redirect("/?notFound=true");
+      }
       return res.json();
-    } else if (res.status === 404) {
-      redirect("/?notFound=true");
+    } catch (error) {
+      redirect("/serverError?error=" + error);
     }
-
-    return res.json();
   };
   static setNewToken = async (token: string) => {
     const { data: session, update } = useSession();
@@ -180,7 +182,7 @@ export class Helpers {
       },
       body: JSON.stringify({ refresh: session?.user.refresh }),
     });
-    if (res.status === 401) {
+    if (res.status === 401 || !res.ok) {
       location.href = "/login";
     }
 
@@ -198,9 +200,9 @@ export class Helpers {
       },
       body: JSON.stringify({ refresh: session?.user.refresh }),
     });
-    // if (res.status === 401) {
-    //   signIn;
-    // }
+    if (res.status === 401 || !res.ok) {
+      signIn();
+    }
 
     return res.json();
   };

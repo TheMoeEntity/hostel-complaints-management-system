@@ -6,6 +6,19 @@ import { SnackbarProvider } from "notistack";
 import { NextAuthProvider } from "@/app/providers";
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
+  console.log(pathname.slice(8, pathname.length));
+  const validRoutes: string[] = [
+    "/",
+    "/account",
+    "/complaints",
+    "/details" + pathname.slice(8, pathname.length),
+    "/lodge-complaint",
+    "/porters",
+    "/students",
+  ];
+  const checkValid = (pathname: string): boolean => {
+    return validRoutes.includes(pathname);
+  };
   return (
     <SnackbarProvider
       classes={{ containerRoot: "z-alert" }}
@@ -13,7 +26,9 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
     >
       <NextAuthProvider>
         <div className="container">
-          {pathname == "/login" || pathname == "/register" ? (
+          {pathname == "/login" ||
+          pathname == "/register" ||
+          !checkValid(pathname) ? (
             <></>
           ) : (
             <Sidebar />
