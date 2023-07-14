@@ -47,7 +47,7 @@ const LodgePage = () => {
           },
           body: JSON.stringify({
             title: cat,
-            description: textarea.current.value.slice(0, 9),
+            description: textarea.current.value,
             is_resolved: false,
           }),
         }).then(async (res) => {
@@ -56,7 +56,7 @@ const LodgePage = () => {
             ?.includes("application/json");
           const data = isJson ? await res.json() : null;
           if (res.status == 401) {
-            if (session) {
+            if (session && textarea.current) {
               const newToken = await Helpers.getRefreshClient(session);
 
               await update({
@@ -75,7 +75,7 @@ const LodgePage = () => {
                 },
                 body: JSON.stringify({
                   title: cat,
-                  description: textarea.current?.value.slice(0, 9),
+                  description: textarea.current.value,
                   is_resolved: false,
                 }),
               });

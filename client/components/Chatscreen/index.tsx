@@ -71,53 +71,6 @@ const Chatscreen = ({ show, close }: any) => {
     }
     if (messages.length > 0 && found !== undefined) {
       close();
-      // try {
-      //   await fetch(
-      //     "https://hostelcomplaintsmanagementsystem.onrender.com/api/dashboard/complaints/create/",
-      //     {
-      //       method: "POST",
-      //       headers: {
-      //         Accept: "application/json, text/plain, */*",
-      //         "Content-Type": "application/json",
-      //         Authorization: "Bearer " + session?.user.access,
-      //       },
-      //       body: JSON.stringify({
-      //         title: "plumbing",
-      //         description: messages[messages.length - 2].text,
-      //         is_resolved: false,
-      //       }),
-      //     }
-      //   ).then(async (res) => {
-      //     const isJson = res.headers
-      //       .get("content-type")
-      //       ?.includes("application/json");
-      //     const data = isJson ? await res.json() : null;
-      //     if (!res.ok) {
-      //       const error = (data && data.message) || res.statusText;
-
-      //       enqueueSnackbar(
-      //         "Failed to send complaints: " + JSON.parse(data).message,
-      //         {
-      //           variant: "error",
-      //         }
-      //       );
-      //       return Promise.reject(error);
-      //     } else if (res.ok || res.status === 201 || res.status === 200) {
-      //       enqueueSnackbar(
-      //         "Your complaints have been successfully lodged and is being processed.",
-      //         {
-      //           variant: "success",
-      //         }
-      //       );
-      //       close();
-      //     }
-      //   });
-      // } catch (error) {
-      //   enqueueSnackbar("Failed to send complaints: " + error, {
-      //     variant: "error",
-      //   });
-      //   close();
-      // }
       let accessToken;
 
       try {
