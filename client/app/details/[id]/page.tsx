@@ -15,7 +15,11 @@ const Details = async ({ params }: any) => {
     "https://hostelcomplaintsmanagementsystem.onrender.com/api/dashboard/complaints/" +
       params.id
   );
-  console.log(params);
+
+  if (detail === undefined) {
+    redirect("/dashboard?notFound=true");
+  }
+
   return (
     <main className={styles.main}>
       <DetailsPage detail={detail.data} />

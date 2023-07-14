@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useSnackbar } from "notistack";
 
-const Dashboard = ({ dashCount, comps, error }: any | undefined) => {
+const DashboardPage = ({ dashCount, comps, error }: any | undefined) => {
   const searchparams = useSearchParams();
   const { data: session } = useSession();
   const { enqueueSnackbar } = useSnackbar();
@@ -150,4 +150,4 @@ const Dashboard = ({ dashCount, comps, error }: any | undefined) => {
   );
 };
 
-export default Dashboard;
+export default DashboardPage;

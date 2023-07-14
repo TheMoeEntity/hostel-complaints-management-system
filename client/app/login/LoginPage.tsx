@@ -18,7 +18,7 @@ const LoginPage = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const callbackUrl = "/";
+    const callbackUrl = "/dashboard";
     const userDetails = {
       matric_number: matricRef.current?.value,
       password: passRef.current?.value,
@@ -42,11 +42,9 @@ const LoginPage = () => {
       });
 
       if (!res?.error) {
-     
         router.push(callbackUrl);
         enqueueSnackbar("Login success", { variant: "success" });
       } else {
-       
         enqueueSnackbar("Invalid credentials: " + res?.error, {
           variant: "error",
         });
@@ -59,7 +57,7 @@ const LoginPage = () => {
 
   useEffect(() => {
     const search = searchparams.get("porter");
-   
+
     if (search == "true") {
       setPorter(true);
     } else {
@@ -75,7 +73,7 @@ const LoginPage = () => {
       <form action="" onSubmit={handleSubmit}>
         <div className={styles.header}>
           <h2>Login</h2>
-          <h4 style={{paddingBottom:'8px'}}>
+          <h4 style={{ paddingBottom: "8px" }}>
             {isPorter ? "Login as porter" : "Login to your student portal"}
           </h4>
         </div>
@@ -93,13 +91,6 @@ const LoginPage = () => {
             <div>
               <input
                 ref={mailRef}
-                // defaultValue={"komodo@icloud.com"}
-                // value={data.email}
-                // onChange={(e) =>
-                //   setData((x) => {
-                //     return { ...x, email: e.target.value };
-                //   })
-                // }
                 placeholder="Email address"
                 type="email"
                 name=""
@@ -114,12 +105,6 @@ const LoginPage = () => {
             </div>
             <div>
               <input
-                // value={data.matric_number}
-                // onChange={(e) =>
-                //   setData((x) => {
-                //     return { ...x, email: e.target.value };
-                //   })
-                // }
                 ref={matricRef}
                 placeholder="Matric number"
                 type="text"
@@ -136,12 +121,6 @@ const LoginPage = () => {
           </div>
           <div>
             <input
-              // value={data.password}
-              // onChange={(e) =>
-              //   setData((x) => {
-              //     return { ...x, email: e.target.value };
-              //   })
-              // }
               ref={passRef}
               placeholder="Password"
               type="password"

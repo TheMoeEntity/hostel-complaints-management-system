@@ -14,6 +14,9 @@ export default async function Profile() {
     }/${id}/`
   );
 
+  if (details === undefined) {
+    redirect("/dashboard?notFound=true");
+  }
 
   const user = session?.user;
   if (!user) {

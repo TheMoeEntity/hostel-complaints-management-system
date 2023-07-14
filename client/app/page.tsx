@@ -1,20 +1,18 @@
-import Dashboard from "@/components/dashboard";
 import styles from "./page.module.css";
-import { Helpers } from "@/Helpers/Types";
+import HomePage from "@/components/Homepage";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
 export default async function Home() {
-  const dashCount =
-    (await Helpers.fetchData(
-      "https://hostelcomplaintsmanagementsystem.onrender.com/api/dashboard/dashboard-count/"
-    )) || undefined;
-  const comps =
-    (await Helpers.fetchData(
-      "https://hostelcomplaintsmanagementsystem.onrender.com/api/dashboard/complaints/"
-    )) || undefined;
-
+  const session = await getServerSession(authOptions);
+  const user = session?.user;
+  if (user) {
+    redirect("/dashboard");
+  }
   return (
     <main className={styles.main}>
-      <Dashboard dashCount={dashCount ?? false} comps={comps ?? "error"} />
+      <HomePage />
     </main>
   );
 }

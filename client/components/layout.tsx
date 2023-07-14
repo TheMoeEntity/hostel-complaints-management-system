@@ -8,8 +8,10 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
   console.log(pathname.slice(8, pathname.length));
   const validRoutes: string[] = [
-    "/",
+    "/localhost:3000",
+    "/crawfordcomplaints.vercel.app",
     "/account",
+    "/dashboard",
     "/complaints",
     "/details" + pathname.slice(8, pathname.length),
     "/lodge-complaint",

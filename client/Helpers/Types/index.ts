@@ -138,6 +138,9 @@ export class Helpers {
           Authorization: "Bearer " + session?.user.access,
         },
       });
+      if (res.status === 404) {
+        return undefined;
+      }
       if (res.status === 401) {
         const refresh = await this.getRefresh();
         this.setNewToken(refresh.access);
@@ -149,9 +152,10 @@ export class Helpers {
             Authorization: "Bearer " + refresh.access,
           },
         });
+        if (!res.ok) {
+          redirect("/login");
+        }
         return res.json();
-      } else if (res.status === 404) {
-        redirect("/?notFound=true");
       }
       return res.json();
     } catch (error) {

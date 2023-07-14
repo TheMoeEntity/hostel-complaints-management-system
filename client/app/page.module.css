@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 .main {
   overflow: scroll;
   max-height: auto;
@@ -7,12 +7,18 @@
 .register {
   width: 100%;
   min-height: 100vh;
-  background-image: url('/images/background2.jpeg');
+  background-image: url("/images/background2.jpeg");
   background-size: cover;
   background-position: center;
   display: flex;
   background-repeat: no-repeat;
   justify-content: center;
+}
+.welcome {
+  text-align: center;
+  margin-bottom: 50px;
+  font-weight: 300;
+  line-height: 1.6;
 }
 .rotate {
   animation: rotation 1.5s infinite linear;
@@ -21,17 +27,16 @@
 
 @keyframes rotation {
   0% {
-      transform: rotate(0deg) scale(1);
+    transform: rotate(0deg) scale(1);
   }
   50% {
-    transform:  rotate(180deg) scale(1.5);
+    transform: rotate(180deg) scale(1.5);
   }
-100% {
-      transform: rotate(360deg) scale(1.0);
+  100% {
+    transform: rotate(360deg) scale(1);
   }
 }
 .formGroup button i {
-
 }
 .register form {
   width: 380px;
@@ -53,9 +58,10 @@
   padding: 20px 30px;
   color: white;
   margin-bottom: 40px;
-  background: linear-gradient(90deg,#007bff,#0052ea);
+  background: linear-gradient(90deg, #007bff, #0052ea);
 }
-.header h2, .header h4 {
+.header h2,
+.header h4 {
   text-align: center;
   margin: 13px;
 }
@@ -64,24 +70,24 @@
   height: 40px;
   display: flex;
   flex-flow: row wrap;
-  margin:25px auto;
+  margin: 25px auto;
   font-size: 12px;
   align-items: center;
 }
-.formGroup> div:nth-child(1) {
+.formGroup > div:nth-child(1) {
   width: 12%;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
-  background: linear-gradient(90deg,#007bff,#0052ea);
+  background: linear-gradient(90deg, #007bff, #0052ea);
 }
-.formGroup> div:nth-child(2) {
+.formGroup > div:nth-child(2) {
   width: 88%;
   height: 100%;
   margin-left: 0;
 }
-.formGroup> div:nth-child(1) i {
+.formGroup > div:nth-child(1) i {
   color: white;
 }
 .formGroup input {
@@ -95,9 +101,8 @@
   border-radius: none;
   border-bottom: 1px solid rgba(128, 128, 128, 0.404);
 }
-.formGroup{
+.formGroup {
   color: #8c8e90;
-  
 }
 
 .formGroup span {
@@ -105,7 +110,7 @@
   cursor: pointer;
 }
 .formGroup button {
-  background: linear-gradient(90deg,#007bff,#0052ea);
+  background: linear-gradient(90deg, #007bff, #0052ea);
   height: 40px;
   color: white;
   border: none;
@@ -114,5 +119,4 @@
 }
 
 @media screen and (max-width: 550px) {
-
 }
