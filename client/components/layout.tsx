@@ -24,7 +24,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <SnackbarProvider
       classes={{ containerRoot: "z-alert" }}
-      anchorOrigin={{ horizontal: "left", vertical: "top" }}
+      anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
     >
       <NextAuthProvider>
         <div className="container">
