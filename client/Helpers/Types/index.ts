@@ -91,7 +91,7 @@ export const assets: {
   {
     icon: "fa-solid fa-gauge",
     title: "Dashboard",
-    link: "/",
+    link: "/dashboard",
   },
   {
     icon: "fa-solid fa-person",
