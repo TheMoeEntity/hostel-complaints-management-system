@@ -1,8 +1,10 @@
 "use client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import styles from "../../app/page.module.css";
 
 const HomePage = () => {
+  const router = useRouter();
   return (
     <div className={styles.register}>
       <form action="">
@@ -13,26 +15,13 @@ const HomePage = () => {
         <h3 className={styles.welcome}>
           Welcome to Crawford University Hostel Complaints Management
         </h3>
-        {/* <div className={styles.formGroup}>
-          <div>
-            <i className="fa-solid fa-lock"></i>
-          </div>
-          <div>
-            <input
-
-              ref={passRef}
-              placeholder="Password"
-              type="password"
-              name=""
-              id=""
-            />
-          </div>
-        </div> */}
         <div className={styles.formGroup}>
-          <button style={{ borderRadius: "3px" }} type="button">
-            <Link href={`/login?porter=false`}>
-              Login to your student portal
-            </Link>
+          <button
+            onClick={() => router.push(`/login?porter=false`)}
+            style={{ borderRadius: "3px" }}
+            type="button"
+          >
+            Login to your student portal
           </button>
         </div>
         <div className={styles.formGroup}>

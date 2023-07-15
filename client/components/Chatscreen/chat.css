@@ -20,6 +20,7 @@
   top: 0;
   font-size: 40px;
   color: white;
+  cursor: pointer;
 }
 .chat-container .chat-header {
   padding: 10px;

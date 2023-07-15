@@ -87,7 +87,10 @@ body {
   overflow-x: hidden;
   max-height: auto;
 }
-
+.goHome {
+  font-weight: 400;
+  text-decoration: underline;
+}
 body {
   color: black;
   background-color: #e6ebee;
@@ -95,6 +98,7 @@ body {
 button {
   border: none;
   outline: none;
+  cursor: pointer;
 }
 a {
   color: inherit;
