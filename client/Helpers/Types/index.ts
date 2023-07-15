@@ -86,7 +86,7 @@ export type porterType = {
 export const assets: {
   icon: string;
   title: string;
-  link: `/` | "/students" | "/complaints" | "/porters";
+  link: `/dashboard` | "/students" | "/complaints" | "/porters";
 }[] = [
   {
     icon: "fa-solid fa-gauge",
