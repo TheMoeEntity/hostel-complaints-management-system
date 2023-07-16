@@ -9,7 +9,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
   const validRoutes: string[] = [
     "/localhost:3000",
     "/",
-    "/hostelcomplaints.netlify.app/",
+    "/hostelcomplaints.netlify.app",
     "/crawfordcomplaints.vercel.app",
     "/account",
     "/dashboard",
