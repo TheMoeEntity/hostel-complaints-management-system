@@ -19,6 +19,12 @@ const DashboardPage = ({ dashCount, comps, hostelList }: any | undefined) => {
 
   useEffect(() => {
     const search = searchparams.get("notFound");
+    const student = searchparams.get("student");
+    if (student === "true") {
+      enqueueSnackbar("Students not authorized!", {
+        variant: "info",
+      });
+    }
     if (search === "true") {
       enqueueSnackbar(
         "Requested resource not found! User/complaint may be deleted or transferred",

@@ -11,14 +11,17 @@ const Details = async ({ params }: any) => {
   if (!user) {
     redirect("/login");
   }
-  const detail =
-    (await Helpers.fetchData(
-      "https://hostelcomplaintsmanagementsystem.onrender.com/api/dashboard/complaints/" +
-        params.id
-    )) || undefined;
+  let detail: any;
+  if (user) {
+    detail =
+      (await Helpers.fetchData(
+        "https://hostelcomplaintsmanagementsystem.onrender.com/api/dashboard/complaints/" +
+          params.id
+      )) || undefined;
 
-  if (detail === undefined) {
-    redirect("/dashboard?notFound=true");
+    if (detail === undefined) {
+      redirect("/dashboard?notFound=true");
+    }
   }
 
   return (

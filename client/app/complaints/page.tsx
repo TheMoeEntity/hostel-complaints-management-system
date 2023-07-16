@@ -8,13 +8,15 @@ import { Helpers } from "@/Helpers/Types";
 const Complaints = async () => {
   const session = await getServerSession(authOptions);
   const user = session?.user;
+  let comps: any;
   if (!user) {
     redirect("/login");
+  } else if (user) {
+    comps =
+      (await Helpers.fetchData(
+        "https://hostelcomplaintsmanagementsystem.onrender.com/api/dashboard/complaints/"
+      )) || undefined;
   }
-  const comps =
-    (await Helpers.fetchData(
-      "https://hostelcomplaintsmanagementsystem.onrender.com/api/dashboard/complaints/"
-    )) || undefined;
 
   return (
     <main className={styles.main}>

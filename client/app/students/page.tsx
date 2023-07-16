@@ -8,13 +8,18 @@ import StudentsPage from "./StudentsPage";
 const Students = async () => {
   const session = await getServerSession(authOptions);
   const user = session?.user;
+  let students: any;
   if (!user) {
     redirect("/login");
   }
-  const students = await Helpers.fetchData(
-    "https://hostelcomplaintsmanagementsystem.onrender.com/api/dashboard/students/"
-  );
-
+  if (user) {
+    students = await Helpers.fetchData(
+      "https://hostelcomplaintsmanagementsystem.onrender.com/api/dashboard/students/"
+    );
+  }
+  if (user && user.is_student === true) {
+    redirect("/dashboard?student=true");
+  }
   return (
     <main className={styles.main}>
       <StudentsPage students={students.data} />

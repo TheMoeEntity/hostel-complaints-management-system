@@ -11,21 +11,23 @@ export default async function Dashboard() {
   if (!user) {
     redirect("/login");
   }
-  const dashCount =
-    (await Helpers.fetchData(
-      "https://hostelcomplaintsmanagementsystem.onrender.com/api/dashboard/dashboard-count/"
-    )) || undefined;
-  const comps =
-    (await Helpers.fetchData(
-      "https://hostelcomplaintsmanagementsystem.onrender.com/api/dashboard/complaints/"
-    )) || undefined;
+  let dashCount, comps, hostelList: any;
 
-  const hostelList =
-    (await Helpers.fetchData(
-      "https://hostelcomplaintsmanagementsystem.onrender.com/api/dashboard/hostels/"
-    )) || undefined;
+  if (user) {
+    dashCount =
+      (await Helpers.fetchData(
+        "https://hostelcomplaintsmanagementsystem.onrender.com/api/dashboard/dashboard-count/"
+      )) || undefined;
+    comps =
+      (await Helpers.fetchData(
+        "https://hostelcomplaintsmanagementsystem.onrender.com/api/dashboard/complaints/"
+      )) || undefined;
 
-  // console.log(hostelList);
+    hostelList =
+      (await Helpers.fetchData(
+        "https://hostelcomplaintsmanagementsystem.onrender.com/api/dashboard/hostels/"
+      )) || undefined;
+  }
 
   return (
     <main className={styles.main}>
