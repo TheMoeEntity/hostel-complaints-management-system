@@ -10,7 +10,6 @@ import { useRouter } from "next/navigation";
 const ComplaintsPage = ({ comps }: any) => {
   const router = useRouter();
   const { data: session } = useSession();
-  console.log(comps);
   const backgroundMode: string = session?.user.is_porter
     ? "linear-gradient(90deg, #4E44B5, #3a3192)"
     : "linear-gradient(90deg, #4985ed, #538cef)";
@@ -27,7 +26,6 @@ const ComplaintsPage = ({ comps }: any) => {
       (a: { text: string }, b: { text: string }) => a.text === b.text
     );
 
-    console.log(unique);
     return arr2;
   };
 

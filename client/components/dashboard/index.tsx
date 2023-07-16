@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useSnackbar } from "notistack";
 
-const DashboardPage = ({ dashCount, comps, error }: any | undefined) => {
+const DashboardPage = ({ dashCount, comps, hostelList }: any | undefined) => {
   const searchparams = useSearchParams();
   const { data: session } = useSession();
   const { enqueueSnackbar } = useSnackbar();

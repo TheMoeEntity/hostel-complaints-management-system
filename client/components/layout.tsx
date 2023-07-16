@@ -6,7 +6,6 @@ import { SnackbarProvider } from "notistack";
 import { NextAuthProvider } from "@/app/providers";
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
-  console.log(pathname.slice(8, pathname.length));
   const validRoutes: string[] = [
     "/localhost:3000",
     "/",

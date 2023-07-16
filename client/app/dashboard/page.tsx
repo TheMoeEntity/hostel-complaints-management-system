@@ -12,6 +12,13 @@ export default async function Dashboard() {
       "https://hostelcomplaintsmanagementsystem.onrender.com/api/dashboard/complaints/"
     )) || undefined;
 
+  const hostelList =
+    (await Helpers.fetchData(
+      "https://hostelcomplaintsmanagementsystem.onrender.com/api/dashboard/hostels/"
+    )) || undefined;
+
+  // console.log(hostelList);
+
   return (
     <main className={styles.main}>
       <DashboardPage dashCount={dashCount ?? false} comps={comps ?? "error"} />

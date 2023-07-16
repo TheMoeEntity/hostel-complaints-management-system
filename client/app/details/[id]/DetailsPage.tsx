@@ -5,7 +5,6 @@ import styles from "../../../components/index.module.css";
 import { Helpers } from "@/Helpers/Types";
 
 const DetailsPage = ({ detail }: any) => {
-  console.log(detail);
   return (
     <div className={styles.main}>
       <div className={styles.lodge}>
