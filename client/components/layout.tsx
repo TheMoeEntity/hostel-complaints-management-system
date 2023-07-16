@@ -9,6 +9,8 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
   console.log(pathname.slice(8, pathname.length));
   const validRoutes: string[] = [
     "/localhost:3000",
+    "/",
+    "/hostelcomplaints.netlify.app/",
     "/crawfordcomplaints.vercel.app",
     "/account",
     "/dashboard",
