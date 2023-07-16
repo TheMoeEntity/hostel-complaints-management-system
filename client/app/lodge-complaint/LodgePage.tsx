@@ -5,9 +5,11 @@ import Chatscreen from "@/components/Chatscreen/";
 import { useSnackbar } from "notistack";
 import { useSession } from "next-auth/react";
 import { Helpers } from "@/Helpers/Types";
+import { useRouter } from "next/navigation";
 
 const LodgePage = () => {
   const { data: session, update } = useSession();
+  const router = useRouter();
   const inputFile = useRef<null | HTMLInputElement>(null);
   const { enqueueSnackbar } = useSnackbar();
   const [show, setShow] = useState(false);
@@ -83,7 +85,7 @@ const LodgePage = () => {
           }
           if (!res.ok) {
             const error = (data && data.message) || res.statusText;
-    
+
             enqueueSnackbar(
               "Failed to send complaints: " + JSON.parse(data).message,
               {
@@ -92,12 +94,16 @@ const LodgePage = () => {
             );
             return Promise.reject(error);
           } else if (res.ok || res.status === 201 || res.status === 200) {
+            if (textarea.current) textarea.current.value == "";
             enqueueSnackbar(
               "Your complaints have been successfully lodged and is being processed.",
               {
                 variant: "success",
               }
             );
+            setTimeout(() => {
+              router.push("/dashboard");
+            }, 750);
           }
         });
       } catch (error) {
