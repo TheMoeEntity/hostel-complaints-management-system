@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import cookie from "cookie";
 import { NextApiResponse } from "next";
 
 export async function POST(req: NextRequest, res: NextApiResponse) {
@@ -28,15 +27,14 @@ export async function POST(req: NextRequest, res: NextApiResponse) {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: porter === 'true' ? porterDetails : userDetails,
+      body: porter === "true" ? porterDetails : userDetails,
     });
 
     const data = await apiRes.json();
-    
-    if (apiRes.status === 201 || apiRes.status === 200) {
 
+    if (apiRes.status === 201 || apiRes.status === 200) {
       return NextResponse.json(
-        { error: "All Done: " +JSON.stringify(data)},
+        { error: "All Done: " + JSON.stringify(data) },
         { status: 200 }
       );
     } else {
