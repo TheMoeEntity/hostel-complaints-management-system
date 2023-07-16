@@ -8,7 +8,6 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
   const validRoutes: string[] = [
     "/localhost:3000",
-    "/",
     "/hostelcomplaints.netlify.app",
     "/crawfordcomplaints.vercel.app",
     "/account",
@@ -19,6 +18,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
     "/porters",
     "/students",
   ];
+  console.log(pathname);
   const checkValid = (pathname: string): boolean => {
     return validRoutes.includes(pathname);
   };
