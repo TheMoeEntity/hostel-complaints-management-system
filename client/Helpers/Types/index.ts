@@ -143,7 +143,8 @@ export class Helpers {
       }
       if (res.status === 401) {
         const refresh = await this.getRefresh();
-        this.setNewToken(refresh.access);
+        if (session) session.user.access = refresh.access;
+        // this.setNewToken(refresh.access);
         const res = await fetch(url, {
           method: "GET",
           headers: {
@@ -164,6 +165,7 @@ export class Helpers {
   };
   static setNewToken = async (token: string) => {
     const { data: session, update } = useSession();
+
     await update({
       ...session,
       user: {

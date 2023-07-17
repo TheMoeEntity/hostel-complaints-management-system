@@ -45,7 +45,7 @@ const LoginPage = () => {
         router.push(callbackUrl);
         enqueueSnackbar("Login success", { variant: "success" });
       } else {
-        enqueueSnackbar("Invalid credentials: " + res?.error, {
+        enqueueSnackbar(res?.error.slice(11, res?.error.length - 2), {
           variant: "error",
         });
       }

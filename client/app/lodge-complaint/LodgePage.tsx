@@ -9,8 +9,8 @@ import { useRouter } from "next/navigation";
 
 const LodgePage = () => {
   const { data: session, update } = useSession();
-  const router = useRouter();
   const inputFile = useRef<null | HTMLInputElement>(null);
+  const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
   const [show, setShow] = useState(false);
   const [cat, setCat] = useState("Category: ");
@@ -57,32 +57,6 @@ const LodgePage = () => {
             .get("content-type")
             ?.includes("application/json");
           const data = isJson ? await res.json() : null;
-          if (res.status == 401) {
-            if (session && textarea.current) {
-              const newToken = await Helpers.getRefreshClient(session);
-
-              await update({
-                ...session,
-                user: {
-                  ...session?.user,
-                  access: newToken.access,
-                },
-              });
-              await fetch("./api/create/", {
-                method: "POST",
-                headers: {
-                  Accept: "application/json, text/plain, */*",
-                  "Content-Type": "application/json",
-                  Authorization: "Bearer " + newToken.access,
-                },
-                body: JSON.stringify({
-                  title: cat,
-                  description: textarea.current.value,
-                  is_resolved: false,
-                }),
-              });
-            }
-          }
           if (!res.ok) {
             const error = (data && data.message) || res.statusText;
 
@@ -94,6 +68,16 @@ const LodgePage = () => {
             );
             return Promise.reject(error);
           } else if (res.ok || res.status === 201 || res.status === 200) {
+            const newAccessToken = data.newToken;
+            if (newAccessToken !== undefined) {
+              await update({
+                ...session,
+                user: {
+                  ...session?.user,
+                  access: newAccessToken,
+                },
+              });
+            }
             if (textarea.current) textarea.current.value == "";
             enqueueSnackbar(
               "Your complaints have been successfully lodged and is being processed.",
