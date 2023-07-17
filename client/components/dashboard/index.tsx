@@ -8,16 +8,36 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useSnackbar } from "notistack";
+import { getCookie } from "cookies-next";
 
 const DashboardPage = ({ dashCount, comps, hostelList }: any | undefined) => {
   const searchparams = useSearchParams();
-  const { data: session } = useSession();
+  const { data: session, update } = useSession();
   const { enqueueSnackbar } = useSnackbar();
   const [latest, setLatest] = useState(
     comps.data ? comps.data.slice(0, 3) : comps.data
   );
-
+  const updateToken = async (newToken: string | null | boolean) => {
+    await update({
+      ...session,
+      user: {
+        ...session?.user,
+        access: newToken,
+      },
+    });
+  };
   useEffect(() => {
+    if (session) {
+      const isNewToken = getCookie("newToken");
+      console.log(isNewToken);
+      // if (isNewToken !== undefined && isNewToken === session.user.access) {
+      //   deleteCookie("newToken");
+      // }
+      // if (isNewToken !== undefined && isNewToken !== session.user.access) {
+      //   updateToken(isNewToken);
+      //   console.log("updated token")
+      // }
+    }
     const search = searchparams.get("notFound");
     const student = searchparams.get("student");
     if (student === "true") {

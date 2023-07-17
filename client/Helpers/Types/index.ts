@@ -1,9 +1,9 @@
 import { authOptions } from "@/lib/auth";
-import axios from "axios";
+import Cookies from "js-cookie";
 import { getServerSession } from "next-auth";
 import { signIn, useSession } from "next-auth/react";
+import { Cookie } from "next/font/google";
 import { redirect } from "next/navigation";
-import { useSnackbar } from "notistack";
 type myFunc = (message: string, sucess: boolean) => void;
 export interface Session {
   user: {
@@ -135,7 +135,7 @@ export class Helpers {
         headers: {
           Accept: "application/json, text/plain, */*",
           "Content-Type": "application/json",
-          Authorization: "Bearer " + session?.user.access,
+          Authorization: "Bearer " + session?.user.access + "dkkjkjfd",
         },
       });
       if (res.status === 404) {
@@ -144,7 +144,7 @@ export class Helpers {
       if (res.status === 401) {
         const refresh = await this.getRefresh();
         if (session) session.user.access = refresh.access;
-        // this.setNewToken(refresh.access);
+        const newToken = refresh.access;
         const res = await fetch(url, {
           method: "GET",
           headers: {
