@@ -17,7 +17,6 @@ const Sidebar = () => {
     : "linear-gradient(90deg, #4985ed, #538cef)";
 
   const searchparams = useSearchParams();
-  const router = useRouter();
   const pathname = usePathname();
   const [profileOpen, setProfileOpen] = useState<boolean>(false);
   const sideBarRef = useRef<null | HTMLInputElement>(null);

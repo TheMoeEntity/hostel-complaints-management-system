@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth";
 import { signIn, useSession } from "next-auth/react";
 import { Cookie } from "next/font/google";
 import { redirect } from "next/navigation";
+import { cache } from "react";
 type myFunc = (message: string, sucess: boolean) => void;
 export interface Session {
   user: {
@@ -127,7 +128,7 @@ export class Helpers {
       });
     return hostels;
   }
-  static fetchData = async (url: string) => {
+  static fetchData = cache(async (url: string) => {
     const session = await getServerSession(authOptions);
     try {
       const res = await fetch(url, {
@@ -135,7 +136,7 @@ export class Helpers {
         headers: {
           Accept: "application/json, text/plain, */*",
           "Content-Type": "application/json",
-          Authorization: "Bearer " + session?.user.access + "dkkjkjfd",
+          Authorization: "Bearer " + session?.user.access,
         },
       });
       if (res.status === 404) {
@@ -162,7 +163,7 @@ export class Helpers {
     } catch (error) {
       redirect("/serverError?error=" + error);
     }
-  };
+  });
   static setNewToken = async (token: string) => {
     const { data: session, update } = useSession();
 

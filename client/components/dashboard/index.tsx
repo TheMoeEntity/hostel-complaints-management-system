@@ -2,13 +2,20 @@
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import styles from "../index.module.css";
-import CalendarComponent from "./Calendar";
-import Charts from "./Charts";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useSnackbar } from "notistack";
 import { getCookie } from "cookies-next";
+import dynamic from "next/dynamic";
+const CalendarComponent = dynamic(() => import("./Calendar"), {
+  suspense: true,
+  loading: () => <p>Loading...</p>,
+});
+const Charts = dynamic(() => import("./Charts"), {
+  suspense: true,
+  loading: () => <p>Loading...</p>,
+});
 
 const DashboardPage = ({ dashCount, comps, hostelList }: any | undefined) => {
   const searchparams = useSearchParams();
@@ -17,27 +24,19 @@ const DashboardPage = ({ dashCount, comps, hostelList }: any | undefined) => {
   const [latest, setLatest] = useState(
     comps.data ? comps.data.slice(0, 3) : comps.data
   );
-  const updateToken = async (newToken: string | null | boolean) => {
-    await update({
-      ...session,
-      user: {
-        ...session?.user,
-        access: newToken,
-      },
-    });
+  // const updateToken = async (newToken: string | null | boolean) => {
+  //   await update({
+  //     ...session,
+  //     user: {
+  //       ...session?.user,
+  //       access: newToken,
+  //     },
+  //   });
+  // };
+  const showName = (): string => {
+    return session ? session.user.first_name : "";
   };
   useEffect(() => {
-    if (session) {
-      const isNewToken = getCookie("newToken");
-      console.log(isNewToken);
-      // if (isNewToken !== undefined && isNewToken === session.user.access) {
-      //   deleteCookie("newToken");
-      // }
-      // if (isNewToken !== undefined && isNewToken !== session.user.access) {
-      //   updateToken(isNewToken);
-      //   console.log("updated token")
-      // }
-    }
     const search = searchparams.get("notFound");
     const student = searchparams.get("student");
     if (student === "true") {
@@ -77,7 +76,7 @@ const DashboardPage = ({ dashCount, comps, hostelList }: any | undefined) => {
           }}
         >
           <h2 style={{ color: "#303973" }}>
-            {`Welcome${", " + session?.user.first_name ?? ""}`}
+            {`Welcome${", " + showName() ?? ""}`}
           </h2>
         </motion.div>
         <div className={styles.bar}>
