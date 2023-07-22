@@ -34,7 +34,7 @@ const DashboardPage = ({ dashCount, comps, hostelList }: any | undefined) => {
   //   });
   // };
   const showName = (): string => {
-    return session ? session.user.first_name : "";
+    return session ? `, ${session.user.first_name}` : "";
   };
   useEffect(() => {
     const search = searchparams.get("notFound");
@@ -75,9 +75,7 @@ const DashboardPage = ({ dashCount, comps, hostelList }: any | undefined) => {
             },
           }}
         >
-          <h2 style={{ color: "#303973" }}>
-            {`Welcome${", " + showName() ?? ""}`}
-          </h2>
+          <h2 style={{ color: "#303973" }}>{`Welcome${showName() ?? ""}`}</h2>
         </motion.div>
         <div className={styles.bar}>
           <div className={styles.first}>

@@ -6,28 +6,28 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 
 export default async function Dashboard() {
-  const session = await getServerSession(authOptions);
-  const user = session?.user;
-  if (!user) {
-    redirect("/login");
-  }
+  // const session = await getServerSession(authOptions);
+  // const user = session?.user;
+  // if (!user) {
+  //   redirect("/login");
+  // }
   let dashCount, comps, hostelList: any;
 
-  if (user) {
-    dashCount =
-      (await Helpers.fetchData(
-        "https://hostelcomplaintsmanagementsystem.onrender.com/api/dashboard/dashboard-count/"
-      )) || undefined;
-    comps =
-      (await Helpers.fetchData(
-        "https://hostelcomplaintsmanagementsystem.onrender.com/api/dashboard/complaints/"
-      )) || undefined;
+  // if (user) {
+  dashCount =
+    (await Helpers.fetchData(
+      "https://hostelcomplaintsmanagementsystem.onrender.com/api/dashboard/dashboard-count/"
+    )) || undefined;
+  comps =
+    (await Helpers.fetchData(
+      "https://hostelcomplaintsmanagementsystem.onrender.com/api/dashboard/complaints/"
+    )) || undefined;
 
-    hostelList =
-      (await Helpers.fetchData(
-        "https://hostelcomplaintsmanagementsystem.onrender.com/api/dashboard/hostels/"
-      )) || undefined;
-  }
+  hostelList =
+    (await Helpers.fetchData(
+      "https://hostelcomplaintsmanagementsystem.onrender.com/api/dashboard/hostels/"
+    )) || undefined;
+  // }
 
   return (
     <main className={styles.main}>

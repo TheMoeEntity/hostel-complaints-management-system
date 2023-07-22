@@ -4,7 +4,6 @@ import { assets } from "@/Helpers/Types";
 import { Profile } from "../dashboard/Profile";
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 import logo from "../../public/images/crawford-logo.png";
 import { useSearchParams } from "next/navigation";
