@@ -24,14 +24,15 @@ const Sidebar = () => {
   const [filteredAssets, setFiltered] =
     useState<{ title: string; icon: string; link: string }[]>(assets);
 
-  const checkPorter = (): { title: string; icon: string; link: string }[] => {
-    session?.user.is_student === true || session?.user.is_student === undefined
-      ? setFiltered(assets.filter((x) => x.title !== "Students"))
-      : setFiltered(assets);
-
-    return filteredAssets;
-  };
   useEffect(() => {
+    const checkPorter = (): { title: string; icon: string; link: string }[] => {
+      session?.user.is_student === true ||
+      session?.user.is_student === undefined
+        ? setFiltered(assets.filter((x) => x.title !== "Students"))
+        : setFiltered(assets);
+
+      return filteredAssets;
+    };
     const search = searchparams.get("porter");
     if (search == "true") {
       setPorter(true);
@@ -39,7 +40,7 @@ const Sidebar = () => {
       setPorter(false);
     }
     checkPorter();
-  }, []);
+  }, [filteredAssets, searchparams, session?.user.is_student]);
 
   return (
     <div>
