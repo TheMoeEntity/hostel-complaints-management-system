@@ -2,7 +2,9 @@ import DashboardPage from "@/components/dashboard";
 import styles from "../page.module.css";
 import { Helpers } from "@/Helpers/Types";
 
-export const runtime = "edge";
+export const config = {
+  runtime: "edge", // this is a pre-requisite
+};
 
 export default async function Dashboard() {
   // const session = await getServerSession(authOptions);
