@@ -8,13 +8,10 @@ import { useSearchParams } from "next/navigation";
 import { useSnackbar } from "notistack";
 import { getCookie } from "cookies-next";
 import dynamic from "next/dynamic";
+import Charts from "./Charts";
 const CalendarComponent = dynamic(() => import("./Calendar"), {
   loading: () => <p>Loading...</p>,
   ssr: false,
-});
-const Charts = dynamic(() => import("./Charts"), {
-  ssr: false,
-  loading: () => <p>Loading...</p>,
 });
 
 const DashboardPage = ({ dashCount, comps, hostelList }: any | undefined) => {
