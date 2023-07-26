@@ -9,11 +9,11 @@ import { useSnackbar } from "notistack";
 import { getCookie } from "cookies-next";
 import dynamic from "next/dynamic";
 const CalendarComponent = dynamic(() => import("./Calendar"), {
-  suspense: true,
   loading: () => <p>Loading...</p>,
+  ssr: false,
 });
 const Charts = dynamic(() => import("./Charts"), {
-  suspense: true,
+  ssr: false,
   loading: () => <p>Loading...</p>,
 });
 
