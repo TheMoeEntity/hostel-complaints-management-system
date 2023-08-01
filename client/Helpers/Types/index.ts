@@ -6,6 +6,9 @@ import { Cookie } from "next/font/google";
 import { redirect } from "next/navigation";
 import { cache } from "react";
 type myFunc = (message: string, sucess: boolean) => void;
+export const config = {
+  runtime: "edge",
+};
 export interface Session {
   user: {
     access: string;
