@@ -36,6 +36,7 @@
     "react-apexcharts": "^1.4.0",
     "react-calendar": "^4.3.0",
     "react-dom": "18.2.0",
+    "sharp": "^0.32.4",
     "typescript": "5.1.5"
   },
   "devDependencies": {

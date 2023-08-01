@@ -108,7 +108,7 @@ const SignupPage = ({ hostels }: propType) => {
     setStatus("Register");
   };
   const [selectedOption, setSelectedOption] = useState<String>(hostels[0].name);
-  const [gender, setGender] = useState(hostels[0].gender);
+  const [gender, setGender] = useState(hostels[0].gender ?? "male");
   const [data, setData] = useState({
     first_name: "",
     last_name: "",

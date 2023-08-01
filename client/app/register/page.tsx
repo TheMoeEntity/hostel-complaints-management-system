@@ -1,3 +1,4 @@
+import { Helpers } from "@/Helpers/Types";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
@@ -19,7 +20,11 @@ async function getData() {
 }
 
 const Register = async () => {
-  const data = await getData();
+  // const data = await getData();
+  const data =
+    (await Helpers.fetchData(
+      "https://hostelcomplaintsmanagementsystem.onrender.com/api/dashboard/dashboard-count/"
+    )) || undefined;
   const session = await getServerSession(authOptions);
   const user = session?.user;
   if (user) {
@@ -27,7 +32,7 @@ const Register = async () => {
   }
   return (
     <>
-      <SignupPage hostels={data.data} />
+      <SignupPage hostels={data.data ?? "error"} />
     </>
   );
 };
