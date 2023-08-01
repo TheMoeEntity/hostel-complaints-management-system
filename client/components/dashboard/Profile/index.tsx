@@ -5,6 +5,7 @@ import count2 from "../../../public/images/avatar-stud.webp";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const Profile = (props: { profileOpen: boolean; forceClose: () => void }) => {
   const { data: session } = useSession();
@@ -13,6 +14,7 @@ const Profile = (props: { profileOpen: boolean; forceClose: () => void }) => {
       signOut();
     }, 1000);
   };
+  const router = useRouter();
   return (
     <section
       style={{
@@ -69,12 +71,10 @@ const Profile = (props: { profileOpen: boolean; forceClose: () => void }) => {
               <i className="fa-solid fa-circle-half-stroke"></i>Dark mode
             </div>
           </li>
-          <li>
-            <Link href={`/complaints`}>
-              <div>
-                <i className="fa-solid fa-person-harassing"></i>Complaints
-              </div>
-            </Link>
+          <li onClick={() => (location.href = "/complaints")}>
+            <div>
+              <i className="fa-solid fa-person-harassing"></i>Complaints
+            </div>
           </li>
           <li onClick={signOutAction}>
             <div>

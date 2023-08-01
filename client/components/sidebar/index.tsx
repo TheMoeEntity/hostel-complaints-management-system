@@ -62,12 +62,10 @@ const Sidebar = () => {
         <ul>
           {filteredAssets.map((x, i) => (
             <li key={i}>
-              <Link href={`${x.link}`}>
-                <div>
-                  <i style={{ marginRight: "10px" }} className={x.icon}></i>
-                  {x.title}
-                </div>
-              </Link>
+              <div onClick={() => (location.href = "/" + x.link)}>
+                <i style={{ marginRight: "10px" }} className={x.icon}></i>
+                {x.title}
+              </div>
             </li>
           ))}
         </ul>

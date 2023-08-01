@@ -11,7 +11,7 @@ const Complaints = async () => {
   let comps: any;
   if (!user) {
     redirect("/login");
-  } else if (user) {
+  } else if (user && !comps) {
     comps =
       (await Helpers.fetchData(
         "https://hostelcomplaintsmanagementsystem.onrender.com/api/dashboard/complaints/"
